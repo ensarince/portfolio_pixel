@@ -1,0 +1,30 @@
+$primary: #122128;
+$secondary: #5187C4;
+$third: #8C6853;
+$fourth: #A9C5B9;
+$fifth: #D7C795;
+
+
+.header{
+    height: 1.8em;
+    background: $primary;
+    border-top: 1px solid $fourth;
+    border-bottom: 1px solid $fourth;
+    display: flex;
+    padding: 1em;
+    gap: 1em;
+    color: $fourth;
+    justify-content: center;
+    align-items: center;
+}
+
+.header h4{
+    font-weight: 550;
+    cursor: pointer;
+    font-size:x-large;
+    text-decoration: none;
+
+    &:hover{
+        color: $fifth;
+    }
+}
