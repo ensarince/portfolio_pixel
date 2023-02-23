@@ -53,7 +53,7 @@ export default function HomePage({}: Props) {
                 <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://www.linkedin.com/in/ensar-ince-67a580155/' />
                 <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g'/>
               </div>
-
+{/* added env variable to netflify, redeploying push */}
               <div>
                 {
                   !nowPlaying ? (
