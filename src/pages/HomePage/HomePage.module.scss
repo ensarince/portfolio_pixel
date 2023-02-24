@@ -4,84 +4,91 @@ $third: #8C6853;
 $fourth: #A9C5B9;
 $fifth: #D7C795;
 
-
 $xs: 320px;
 $sm: 481px;
 $md: 769px;
 $lg: 1025px;
 $xl: 1201px;
 
-.home__container{
+.div__homeContainer{
     display: flex;
-    padding: 3em;
+    padding: 2em;
     align-items: center;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 1.5em;
+    justify-content: center;
+    gap: 1em;
     border-radius: 3em;
     border: 1px solid $fourth;
     height: fit-content;
 }
-.info__container{
+.div__infoContainer{
     color: $fourth;
     font-size: 1.5em;
     font-weight: 300;
 }
 
-.info__text{
- height: 1.5em;
+.p__infoText{
+    height: 1.5em;
 }
 
 .video{
-    width: 25%;
     border-radius: 20em;
     flex-shrink: 0;
 }
+.div__socials{
+    display: flex;
+    gap: 0.5em;
+}
 
-.noPlayingSection{
+.div__spotify{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div__noPlayingScreen{
     color: white;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 15em;
 }
 
-.noPlayingSection h3{
+.div__noPlayingScreen h3{
     font-weight: 420;
 }
 
-.noPlayingSection img{
+.div__noPlayingScreen img{
     width: 5em;
     border-radius: 100%;
 }
 
-.playingSection{
+.div__playingScreen{
     background-color: $primary;
     border-radius: 10%;
-    display: flex;
     padding: 0.3em;
-    flex-direction: column;
+    color: $fourth;
+    flex-shrink: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
-    color: $fourth;
+    flex-direction: column;
+    gap: 0.2em;
 }
 
-.playingSection img{
+.div__playingScreen img{
     width: 75%;
     border-radius: 15%;
 }
 
-.playingSection h3{
+.div__playingScreen h3{
     font-weight: 420;
 }
 
-.socials{
-    display: flex;
-    gap: 0.5em;
-}
 
 
-.home__container{
+.div__homeContainer{
     @media screen and (min-width: $xs) {
         width: 85%;
     }
@@ -116,22 +123,22 @@ $xl: 1201px;
     @media screen and (min-width: $xl) {
         width: 35%;
     }
+}
 
-    .playingSection{
+    .div__playingScreen{
         @media screen and (min-width: $xs) {
-            width: 35%;
+            width: 75%;
         }
         @media screen and (min-width: $sm) {
-            width: 45%;
+            width: 55%;
         }
         @media screen and (min-width: $md) {
-            width: 35%;
+            width: 45%;
         }
         @media screen and (min-width: $lg) {
-            width: 25%;
+            width: 35%;
         }
         @media screen and (min-width: $xl) {
-            width: 25%;
+            width: 35%;
         }
     }
-}

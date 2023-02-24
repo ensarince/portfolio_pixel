@@ -14,3 +14,17 @@ body{
 a {
   all: unset;
 }
+
+
+html::-webkit-scrollbar {
+  width: 15px;
+}
+ 
+html::-webkit-scrollbar-track {
+  background: black;
+}
+ 
+html::-webkit-scrollbar-thumb {
+  background: $fourth;
+  border: 3px solid $primary;
+}

@@ -30,8 +30,8 @@ export default function HomePage({}: Props) {
   return (
     <>
     <Header />
-    <div style={{display:"flex", flexDirection:"column", justifyContent:"center", padding:"2.5em", alignItems:"center"}}>
-        <div className={styles.home__container}>
+    <div style={{display:"flex", flexDirection:"column", justifyContent:"center", padding:"2em", alignItems:"center"}}>
+        <div className={styles.div__homeContainer}>
             <video 
                 autoPlay
                 loop 
@@ -41,29 +41,29 @@ export default function HomePage({}: Props) {
                 <source src="./video1.mp4" type="video/mp4" />
             </video>
 
-            <div className={styles.info__container}>
-                <div className={styles.info__text}>
+            <div className={styles.div__infoContainer}>
+                <div className={styles.p__infoText}>
                   <span>{text}</span>
                 </div>
             </div>
 
-            <div className={styles.socials}>
+            <div className={styles.div__socials}>
                 <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://www.instagram.com/'/>
                 <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://github.com/ensarince'/>
                 <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://www.linkedin.com/in/ensar-ince-67a580155/' />
                 <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g'/>
               </div>
-{/* added env variable to netflify, redeploying push */}
-              <div>
+
+              <div className={styles.div__spotify}>
                 {
                   !nowPlaying ? (
-                    <div className={styles.noPlayingSection}>                
+                    <div className={styles.div__noPlayingScreen}>                
                       <h3>No track playing</h3>
                       <img src="https://media.tenor.com/RJeWfFKBnOUAAAAM/listening-to-music-jamming.gif" alt="" />
                     </div>
                   ) : 
                   (
-                  <div className={styles.playingSection}>
+                  <div className={styles.div__playingScreen}>
                     <h3>Now playing: {nowPlaying.item.name}</h3>
                     <h3>Artist: {nowPlaying.item.album.artists[0].name}</h3>
                     <img src={nowPlaying.item.album.images[0].url} alt={nowPlaying.item.album.name} />
