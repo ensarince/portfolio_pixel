@@ -1,0 +1,62 @@
+$primary: #122128;
+$secondary: #5187C4;
+$third: #8C6853;
+$fourth: #A9C5B9;
+$fifth: #D7C795;
+
+$xs: 320px;
+$sm: 481px;
+$md: 769px;
+$lg: 1025px;
+$xl: 1201px;
+
+.container{
+    padding: 2em;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, 20em);
+    gap: 5%;
+
+}
+
+.project{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    color: $fifth;
+    border: 1px solid $fourth;
+    border-radius: 1.3em;
+    padding: 0.5em;
+
+}
+
+.projectImage{
+    width: 100%;
+    border-radius: 1em;
+}
+
+.technology{
+    width: 100%;
+    border-radius: 20em;
+}
+
+.container{
+    @media screen and (min-width: $xs) {
+        gap: 1%;
+    }
+    @media screen and (min-width: $sm) {
+        gap: 2%;
+    }
+    @media screen and (min-width: $md) {
+        gap: 4%;
+    }
+    @media screen and (min-width: $lg) {
+        gap: 4%;
+    }
+    @media screen and (min-width: $xl) {
+        gap: 4%;
+    }
+}

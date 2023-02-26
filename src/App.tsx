@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.scss'
 import Blog from './pages/Blog/Blog'
@@ -6,15 +7,48 @@ import Contact from './pages/Contact/Contact'
 import HomePage from './pages/HomePage/HomePage'
 import Projects from './pages/Projects/Projects'
 import Skills from './pages/Skills/Skills'
+import getBlogPosts from './services/getBlog'
+import getPageInfo from './services/getPageInfo'
+import getProjects from './services/getProjects'
+import getSkills from './services/getSkills'
+import getSocials from './services/getSocials'
+import { getNowPlaying, SpotifyData } from './services/spotify'
+import { BlogPost, PageInfo, Project, Skill, Social } from './typings'
 
 function App() {
+  const [nowPlaying, setNowPlaying] = useState<SpotifyData | null>(null);
+
+  const [posts, setPosts] = useState<BlogPost[]>()
+  const [projects, setProjects] = useState<Project[]>()
+  const [skills, setSkills] = useState<Skill[]>()
+  const [pageInfo, setPageInfo] = useState<PageInfo[]>()
+  const [socials, setSocials] = useState<Social[]>()
+  
+  useEffect(() => {
+    getBlogPosts().then((data: any) => setPosts(data));
+    getProjects().then((data: any) => setProjects(data.projects));
+    getSkills().then((data: any) => setSkills(data));
+    getPageInfo().then((data: any) => setPageInfo(data));
+    getSocials().then((data: any) => setSocials(data));
+  }, []);
+
+  
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      const data = await getNowPlaying();
+      setNowPlaying(data);
+    }, 5000);
+          
+    return () => clearInterval(intervalId);
+
+  }, []);
 
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/projects' element={<Projects />} />
+          <Route path='/' element={<HomePage nowPlaying={nowPlaying} />} />
+          <Route path='/projects' element={<Projects projects={projects} />} />
           <Route path='/skills' element={<Skills />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/contact' element={<Contact />} />
@@ -24,4 +58,4 @@ function App() {
   )
 }
 
-export default App
+export default App  

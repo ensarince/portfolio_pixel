@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from 'react'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import styles from "./HomePage.module.scss"
 import {Cursor, useTypewriter} from "react-simple-typewriter"
-import { getAccessToken, getNowPlaying, SpotifyData } from '../../services/spotify'
 import { SocialIcon } from 'react-social-icons';
+import { SpotifyData } from '../../services/spotify';
 
-type Props = {}
+type Props = {
+  nowPlaying: SpotifyData | null
+}
 
-export default function HomePage({}: Props) {
+export default function HomePage({nowPlaying}: Props) {
   
   const [text] = useTypewriter({
     words: [`Hi, I am Ensar Ince`, "<developer👨‍💻/>", "climber🧗‍♂️"],
     loop: true,
     delaySpeed: 3000,
   })
-    const [nowPlaying, setNowPlaying] = useState<SpotifyData | null>(null);
-  
-    useEffect(() => {
-      const intervalId = setInterval(async () => {
-        const data = await getNowPlaying();
-        setNowPlaying(data);
-      }, 5000);
-            
-      return () => clearInterval(intervalId);
-
-    }, []);
 
   return (
     <>
