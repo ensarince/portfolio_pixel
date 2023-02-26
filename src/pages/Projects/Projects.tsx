@@ -33,7 +33,7 @@ console.log(projects)
                     <img className={styles.technology} src={urlFor((skill)?.image).url()} alt="tech image" />
                 </div>
               ))} */}
-              <p>{item.linkToBuild}</p>
+              <p className={styles.linkToBuild}>{item.linkToBuild}</p>
           </div>
         ))}
 
