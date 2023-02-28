@@ -1,4 +1,3 @@
-import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import styles from "./HomePage.module.scss"
 import {Cursor, useTypewriter} from "react-simple-typewriter"
@@ -12,7 +11,7 @@ type Props = {
 export default function HomePage({nowPlaying}: Props) {
   
   const [text] = useTypewriter({
-    words: [`Hi, I am Ensar Ince`, "<developer👨‍💻/>", "climber🧗‍♂️"],
+    words: [`Hi, I am Ensar`, "<developer👨‍💻/>", "climber🧗‍♂️"],
     loop: true,
     delaySpeed: 3000,
   })
@@ -64,7 +63,6 @@ export default function HomePage({nowPlaying}: Props) {
 
         </div>
 
-        <Footer />
     </div>
     </>
   )
