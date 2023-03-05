@@ -26,8 +26,8 @@ export default function Blog({posts}: Props) {
       <div className={styles.container}>
       {posts?.map((item, index) => (
           <div key={item._id} className={styles.post}>
-            <img className={styles.postImage} src={urlFor(item?.mainImage)?.url()} alt="post image" />              
-              <h3>{item.title}</h3>
+{/*             <img className={styles.postImage} src={urlFor(item?.mainImage)?.url()} alt="post image" />              
+ */}              <h3>{item.title}</h3>
               {/* <p>{item.summary}</p> */}
 {/*               {item.technologies.map((skill, index) => (        
                 <div key={skill._id}  className={styles.project_technologies}>
