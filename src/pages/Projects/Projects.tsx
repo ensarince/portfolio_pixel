@@ -4,6 +4,7 @@ import { Project } from '../../typings'
 import styles from "./Projects.module.scss"
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../../sanity'
+import Skill from '../../components/Skill'
 
 type Props = {
   projects: Project[] | undefined
@@ -17,7 +18,6 @@ export default function Projects({projects}: Props) {
     return builder.image(source)
   }
 
-console.log(projects)
   return (
     <>
       <Header />
@@ -28,11 +28,11 @@ console.log(projects)
               <img className={styles.projectImage} src={urlFor((item)?.image).url()} alt="project image" />              
               <h3>{item.title}</h3>
               <p>{item.summary}</p>
-{/*               {item.technologies.map((skill, index) => (        
-                <div key={skill._id}  className={styles.project_technologies}>
-                    <img className={styles.technology} src={urlFor((skill)?.image).url()} alt="tech image" />
-                </div>
-              ))} */}
+              <div className={styles.skills}>
+              {item.technologies.map((skill, index) => (   
+                  <Skill key={index} skill={skill} />
+              ))}
+              </div>
               <p className={styles.linkToBuild}>{item.linkToBuild}</p>
           </div>
         ))}

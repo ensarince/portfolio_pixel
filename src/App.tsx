@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.scss'
 import Blog from './pages/Blog/Blog'
+import BlogPostPage from './pages/BlogPost/BlogPostPage'
 import Contact from './pages/Contact/Contact'
 import HomePage from './pages/HomePage/HomePage'
 import Projects from './pages/Projects/Projects'
@@ -25,7 +26,7 @@ function App() {
   const [socials, setSocials] = useState<Social[]>()
   
   useEffect(() => {
-    getBlogPosts().then((data: any) => setPosts(data));
+    getBlogPosts().then((data: any) => setPosts(data.posts));
     getProjects().then((data: any) => setProjects(data.projects));
     getSkills().then((data: any) => setSkills(data));
     getPageInfo().then((data: any) => setPageInfo(data));
@@ -50,7 +51,8 @@ function App() {
           <Route path='/' element={<HomePage nowPlaying={nowPlaying} />} />
           <Route path='/projects' element={<Projects projects={projects} />} />
           <Route path='/skills' element={<Skills />} />
-          <Route path='/blog' element={<Blog />} />
+          <Route path='/blog' element={<Blog posts={posts}/>} />
+          <Route path='/blog/:id' element={<BlogPostPage/>} />
           <Route path='/contact' element={<Contact />} />
         </Routes>
       </BrowserRouter>

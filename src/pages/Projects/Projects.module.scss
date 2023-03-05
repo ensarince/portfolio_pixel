@@ -49,6 +49,10 @@ $xl: 1201px;
     cursor: pointer;
 }
 
+.skills{
+    display: flex;
+}
+
 .container{
     @media screen and (min-width: $xs) {
         gap: 2%;
