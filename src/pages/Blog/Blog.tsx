@@ -34,7 +34,7 @@ export default function Blog({posts}: Props) {
                     <img className={styles.technology} src={urlFor((skill)?.image).url()} alt="tech image" />
                 </div>
               ))} */}
-              <p className={styles.linkToBuild}>{item._createdAt}</p>
+              <p className={styles.date}>{item.summary}</p>
           </div>
         ))}
 
