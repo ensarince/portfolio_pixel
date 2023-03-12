@@ -1,21 +1,9 @@
-$primary: #122128;
-$secondary: #5187C4;
-$third: #8C6853;
-$fourth: #A9C5B9;
-$fifth: #D7C795;
-
-$xs: 320px;
-$sm: 481px;
-$md: 769px;
-$lg: 1025px;
-$xl: 1201px;
-
+@import "../../assets/variables";
 
 .container{
     display: grid;
     grid-template-columns: repeat(auto-fill, 35%);
     height: 100vh;
-
 }
 
 .postImage{

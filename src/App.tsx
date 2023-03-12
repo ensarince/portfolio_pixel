@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     getBlogPosts().then((data: any) => setPosts(data.posts));
     getProjects().then((data: any) => setProjects(data.projects));
-    getSkills().then((data: any) => setSkills(data));
+    getSkills().then((data: any) => setSkills(data.skills));
     getPageInfo().then((data: any) => setPageInfo(data));
     getSocials().then((data: any) => setSocials(data));
   }, []);
@@ -50,7 +50,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage nowPlaying={nowPlaying} />} />
           <Route path='/projects' element={<Projects projects={projects} />} />
-          <Route path='/skills' element={<Skills />} />
+          <Route path='/skills' element={<Skills skills={skills} />} />
           <Route path='/blog' element={<Blog posts={posts}/>} />
           <Route path='/blog/:id' element={<BlogPostPage/>} />
           <Route path='/contact' element={<Contact />} />

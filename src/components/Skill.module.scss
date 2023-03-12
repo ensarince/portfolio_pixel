@@ -1,15 +1,66 @@
-$primary: #122128;
-$secondary: #5187C4;
-$third: #8C6853;
-$fourth: #A9C5B9;
-$fifth: #D7C795;
-
-.skillImage{
-    width: 5rem;
-}
+@import "../assets/variables";
 
 .skillContainer{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: $fifth;
+    padding: 0.5em;
+}
+
+.relative{
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    cursor: pointer;
+    align-items:center;
+    justify-content: center;
+}
+
+.skillImage{
+    width: 5rem;
+    overflow: hidden;
+    object-fit: cover;
+    width: 100%;
+    height: 8rem;
+    border-radius: 10rem;
+    transition: all;
+    transition-duration: 350ms;
+    transition-timing-function: ease-in-out;
+}
+
+.skillImage:hover{
+    filter: grayscale(100);
+}
+
+.absolute{
+    position: absolute;
+    border-radius: 10rem;
+    opacity: 0;
+    transition: all;
+    width: 5rem;
+    height: 6rem;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    z-index: 0;
+    padding: 2rem;
+}
+
+.absolute:hover{
+    opacity: 0.8;
+    background: white;
+}
+
+
+.flex{
+    display: flex;
+    align-items: center;
+    word-break:break-all;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    height: 100%;
 }
 
 .skillContainer > p{
@@ -17,6 +68,10 @@ $fifth: #D7C795;
 }
 
 .skillTitle{
-    color: $fourth;
+    color: $primary;
     text-decoration: dashed;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: $fourth;
+    opacity: 1;
 }

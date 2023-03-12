@@ -4,6 +4,7 @@ import styles from "./BlogPostPage.module.scss"
 type Props = {}
 
 function BlogPostPage({}: Props) {
+
   return (
     <div>BlogPost</div>
   )

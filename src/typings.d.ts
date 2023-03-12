@@ -62,10 +62,12 @@ export interface Category extends SanityBody{
 }
 
 export interface BlogPost extends SanityBody{
+    _id: string
+    mainImage: any;
     title: string
+    body: mainImage
     _type: "blog"
     image: Image
-    text: string
     summary: string
     category: Category[]
 }

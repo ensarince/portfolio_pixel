@@ -11,7 +11,6 @@ type Props = {
 
 export default function Skill({skill}: Props) {
   
-      //needed to show sanity images
   const builder = imageUrlBuilder(sanityClient)
 
   function urlFor(source:any) {
@@ -19,12 +18,20 @@ export default function Skill({skill}: Props) {
   }
   
     //console.log(urlFor(skill?.image).url())
+    //console.log(skill)
 
   return (
     <div className={styles.skillContainer}>
-      <p className={styles.skillTitle}>{skill?.title}</p>
-      {/* <p>{skill?.progress}</p> */}
-   {/*    <img className={styles.skillImage} src={urlFor(skill?.image).width(200).url()} alt="skill image" /> 
-     */}</div>
+      <div className={styles.relative}>
+        <img className={styles.skillImage} src={urlFor((skill)?.image).url()} alt="" />
+        <div className={styles.absolute}>
+          <div className={styles.flex}>
+            <p className={styles.skillTitle}>{skill?.title}</p>
+            <p className={styles.skillTitle}>{skill.progress}%</p>
+          </div>
+        </div>
+
+      </div>
+    </div> 
   )
 }

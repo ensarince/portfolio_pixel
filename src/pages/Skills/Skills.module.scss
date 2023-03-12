@@ -1,0 +1,11 @@
+.container{
+    padding: 2em;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, 10rem);
+    gap: 5%;
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
+}

@@ -29,9 +29,9 @@ export default function Projects({projects}: Props) {
               <h3>{item.title}</h3>
               <p>{item.summary}</p>
               <div className={styles.skills}>
-              {item.technologies.map((skill, index) => (   
+{/*               {item.technologies.map((skill, index) => (   
                   <Skill key={index} skill={skill} />
-              ))}
+              ))} */}
               </div>
               <p className={styles.linkToBuild}>{item.linkToBuild}</p>
           </div>
