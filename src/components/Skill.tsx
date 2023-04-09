@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Technology } from '../typings'
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../sanity'
@@ -10,28 +10,38 @@ type Props = {
 
 
 export default function Skill({skill}: Props) {
-  
-  const builder = imageUrlBuilder(sanityClient)
 
-  function urlFor(source:any) {
-    return builder.image(source)
-  }
+  const builder = imageUrlBuilder(sanityClient);
   
-    //console.log(urlFor(skill?.image).url())
-    //console.log(skill)
+  function urlFor(source?: any) {
+    return builder.image(source);
+  }
+
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
+
+  useEffect(() => {
+    async function getUrl() {
+      const url = await urlFor(skill?.image)?.url();
+      setImageUrl(url);
+    }
+    getUrl();
+  }, [skill]);
 
   return (
     <div className={styles.skillContainer}>
       <div className={styles.relative}>
-        <img className={styles.skillImage} src={urlFor((skill)?.image).url()} alt="" />
+        <img
+          className={styles.skillImage}
+          src={imageUrl}
+          alt="skill"
+        />
         <div className={styles.absolute}>
           <div className={styles.flex}>
             <p className={styles.skillTitle}>{skill?.title}</p>
-            <p className={styles.skillTitle}>{skill.progress}%</p>
+            <p className={styles.skillTitle}>{skill?.progress}%</p>
           </div>
         </div>
-
       </div>
-    </div> 
+    </div>
   )
 }

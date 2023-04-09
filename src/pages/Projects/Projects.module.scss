@@ -40,6 +40,16 @@
 
 .skills{
     display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+    overflow: hidden;
+}
+
+.skillImage{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
 }
 
 .container{
