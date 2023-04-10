@@ -1,44 +1,74 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Header from '../../components/Header'
-import { BlogPost } from '../../typings'
+import { BlogPost, Category } from '../../typings'
 import styles from "./Blog.module.scss"
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../../sanity'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 type Props = {
-  posts: BlogPost[] | undefined
+  posts: BlogPost[] 
 }
 
 export default function Blog({posts}: Props) {
 
-    //needed to show sanity images
-  const builder = imageUrlBuilder(sanityClient)
+  //const [preferredCategory, setPreferredCategory] = useState<string | undefined>();
+/*   const [filteredPosts, setFilteredPosts] = useState<BlogPost[] | undefined>(posts);
 
-  function urlFor(source:any) {
+  const filterPosts = (preferredCategory: string | undefined): void => {
+    const filtered = posts.filter(post => post.categories[0]._ref === preferredCategory);
+    setFilteredPosts(filtered);
+  }; */
+
+  //needed to show sanity images
+  const builder = imageUrlBuilder(sanityClient)
+  
+  function urlFor(source: SanityImageSource) {
     return builder.image(source)
   }
 
-  console.log(posts)
+  //console.log(filteredPosts)
+
   return (
     <>
       <Header />
+    <div className={styles.buttonContainer}>
+      <button /* onClick={() => filterPosts('91e45e40-f3a0-4488-85e9-fb87eafac059')} */ className={styles.categoryButton}>Climbing</button>
+      <button /* onClick={() => filterPosts('807d499a-f06d-4ef5-a1e9-c4413d9be7eb')} */ className={styles.categoryButton}>Coding</button>
+      <button /* onClick={() => filterPosts("85ab035c-ede8-4700-8c9b-c9eddf6199d5")} */ className={styles.categoryButton}>Other</button>
+    </div>
 
-      <div style={{display:"flex", height:"80vh", justifyContent:"center", alignItems:"center"}}>
-          <img style={{width:"45%", borderRadius:"3rem", border:"1px solid #A9C5B9", padding:"2rem"}} src="https://giffiles.alphacoders.com/158/158667.gif" alt="" />
-        </div>
-        
-{/*       <div className={styles.container}>
-      {posts?.map((item, index) => (
-          <div key={item._id} className={styles.post}>
-            <img className={styles.postImage} src={urlFor(item?.mainImage)?.url()} alt="post image" />              
-              <h3>{item.title}</h3>
-                <p style={{textOverflow:"ellipsis",  whiteSpace: "nowrap", overflow: "hidden"}}>{item.body}</p>
-                <p className={styles.date}>{item.summary}</p>
-          </div>
-        ))}
+      <div className={styles.container}>
+        {posts?.map((item, index) => {
+          const categoryRef = item.categories[0];
+          const [category, setCategory] = useState("");
 
-      </div> */}
+          useEffect(() => {
+            sanityClient
+              .fetch(`*[_id == "${categoryRef._ref}"][0].title`)
+              .then((data) => setCategory(data));
+          }, [categoryRef]);
+
+          return (
+            <div key={item._id} className={styles.post}>
+              <img
+                className={styles.postImage}
+                src={urlFor(item?.mainImage)?.url()}
+                alt="post image"
+              />
+              <h3 className={styles.postTitle}>{item.title}</h3>
+              <div className={styles.postSummary}><h4>Summary</h4>: {item.summary}</div>
+              <p className={styles.postText}>
+                {item.body}
+              </p>
+              <div style={{display:"flex", justifyContent:"center", alignItems:"center", gap:"1rem"}}>
+                <div className={styles.postCategory}><h4>Category</h4>: {category}</div>
+                <p className={styles.postDate}>{new Date(item._createdAt).toLocaleDateString('en-GB')}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </>
-      
-  )
+  );
 }

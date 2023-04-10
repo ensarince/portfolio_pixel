@@ -59,6 +59,7 @@ export interface Social extends SanityBody{
 export interface Category extends SanityBody{
     _type: "category";
     title: string;
+    _ref: string;
 }
 
 export interface BlogPost extends SanityBody{
@@ -69,5 +70,5 @@ export interface BlogPost extends SanityBody{
     _type: "blog"
     image: Image
     summary: string
-    category: Category[]
+    categories: Category[]
 }

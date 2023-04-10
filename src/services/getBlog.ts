@@ -4,8 +4,8 @@ import { sanityClient } from "../sanity";
 import { BlogPost } from "../typings";
 
 const query = groq`
-    *[_type == "post"]
-`
+  *[_type == "post"] | order(_createdAt desc)
+`;
 type Data = {
     posts: BlogPost[]
 }

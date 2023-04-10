@@ -3,12 +3,11 @@ import { sanityClient } from "../sanity";
 import { Project } from "../typings";
 
 const query = groq`
-*[_type == "project"] {
-    ...,
-    technologies[]->
-}
-`;
-
+    *[_type == "project"] {
+        ...,
+        technologies[]->
+    } | order(_createdAt desc)
+`
 type Data = {
     projects: Project[]
 }

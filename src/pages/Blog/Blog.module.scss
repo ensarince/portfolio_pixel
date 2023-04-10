@@ -1,9 +1,37 @@
 @import "../../assets/variables";
 
 .container{
+    padding: 1em;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 35%);
-    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, 20em);
+    gap: 5%;
+    margin: 1rem;
+}
+
+
+.post{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30rem;
+    color: $fifth;
+    border: 1px solid $fourth;
+    border-radius: 1.3em;
+    padding: 0.8em;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .5s ease-out;
+}
+
+.post:hover,
+.post:focus{
+    background-color: $secondary;
+    color: $primary;
+    border: $primary;
 }
 
 .postImage{
@@ -11,12 +39,86 @@
     border-radius: 1em;
 }
 
-.post{
-    color: $fifth;
-    margin: 1rem;
-    padding: 0.5rem;
-    height: fit-content;
+.postTitle{
+    font-size: larger;
+    margin-block-start: 1;
+    margin-block-end: 0;
+}
+
+.postText{
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.postText::after {
+    content: "...";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.postSummary{
+    display: flex;
+    align-items: center;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-weight: 400;
+}
+
+.postCategory{
+    display: flex;
+    align-items: center;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-weight: 400;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 1rem 0 0 0;
+}
+
+.categoryButton {
+    background-color: $primary;
+    color: $fourth;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
     border: 1px solid $fourth;
-    border-radius: 1.3em;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.categoryButton:hover {
+    background-color: $secondary;
+    cursor: pointer;
+    color: $primary;
+    border: 1px solid $primary;
+}
+
+.container{
+    @media screen and (min-width: $xs) {
+        gap: 2%;
+    }
+    @media screen and (min-width: $sm) {
+        gap: 2%;
+    }
+    @media screen and (min-width: $md) {
+        gap: 4%;
+    }
+    @media screen and (min-width: $lg) {
+        gap: 4%;
+    }
+    @media screen and (min-width: $xl) {
+        gap: 4%;
+    }
 }
 

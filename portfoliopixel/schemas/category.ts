@@ -10,5 +10,5 @@ export default {
       title:"Title",
       type: "string",
     }
-   ],
+  ],
 }

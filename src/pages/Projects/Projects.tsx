@@ -30,13 +30,12 @@ export default function Projects({projects}: Props) {
               <p>{item.summary}</p>
               <div className={styles.skills}>
               {item.technologies.map((skill, index) => (
-                  <img className={styles.skillImage} src={urlFor(skill.image).url()} alt="" />
+                  <img key={index} className={styles.skillImage} src={urlFor(skill.image).url()} alt="" />
               ))}
               </div>
               <p className={styles.linkToBuild}>{item.linkToBuild}</p>
           </div>
         ))}
-
       </div>
     </>
       
