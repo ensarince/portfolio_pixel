@@ -53,7 +53,6 @@ function App() {
           <Route path='/skills' element={<Skills skills={skills} />} />
           <Route path='/blog' element={<Blog posts={posts}/>} />
           <Route path='/blog/:id' element={<BlogPostPage/>} />
-          <Route path='/contact' element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </div>

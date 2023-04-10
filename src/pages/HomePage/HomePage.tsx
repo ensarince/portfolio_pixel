@@ -37,10 +37,11 @@ export default function HomePage({nowPlaying}: Props) {
             </div>
 
             <div className={styles.div__socials}>
-                <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://www.instagram.com/'/>
-                <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://github.com/ensarince'/>
-                <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://www.linkedin.com/in/ensar-ince-67a580155/' />
-                <SocialIcon fgColor='#A9C5B9' style={{cursor:"pointer"}} bgColor='#122128' url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g'/>
+                <SocialIcon fgColor='#A9C5B9' className={styles.icon__social} bgColor='#122128' url='mailto:ensrnce@gmail.com'/>
+                <SocialIcon fgColor='#A9C5B9' className={styles.icon__social} bgColor='#122128' url='https://github.com/ensarince'/>
+                <SocialIcon fgColor='#A9C5B9' className={styles.icon__social} bgColor='#122128' url='https://www.linkedin.com/in/ensar-ince-67a580155/' />
+                <SocialIcon fgColor='#A9C5B9' className={styles.icon__social} bgColor='#122128' url='https://www.instagram.com/'/>
+                <SocialIcon fgColor='#A9C5B9' className={styles.icon__social} bgColor='#122128' url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g'/>
               </div>
 
               <div className={styles.div__spotify}>

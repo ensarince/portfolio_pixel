@@ -19,9 +19,6 @@ export default function Header({}: Props) {
         <Link to="/blog">
             <h4>Blog</h4>
         </Link>
-        <Link to="/contact">
-            <h4>Contact</h4>
-        </Link>
     </div>
   )
 }

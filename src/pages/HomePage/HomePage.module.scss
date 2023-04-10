@@ -86,6 +86,16 @@ $xl: 1201px;
     font-weight: 420;
 }
 
+.icon__social{
+    cursor: pointer;
+    transition: all .3s ease-out;
+}
+
+.icon__social:hover,
+.icon__social:focus{
+    transform: translateY(-20%)
+}
+
 
 
 .div__homeContainer{
