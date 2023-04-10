@@ -7,7 +7,7 @@ import { sanityClient } from '../../sanity'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 type Props = {
-  posts: BlogPost[] 
+  posts: BlogPost[] | undefined
 }
 
 export default function Blog({posts}: Props) {
