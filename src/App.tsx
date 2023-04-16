@@ -51,7 +51,7 @@ function App() {
           <Route path='/projects' element={<Projects projects={projects} />} />
           <Route path='/skills' element={<Skills skills={skills} />} />
           <Route path='/blog' element={<Blog posts={posts}/>} />
-          <Route path='/blog/:id' element={<BlogPostPage/>} />
+          <Route path='/blog/:id' element={<BlogPostPage posts={posts}/>} />
         </Routes>
       </BrowserRouter>
     </div>

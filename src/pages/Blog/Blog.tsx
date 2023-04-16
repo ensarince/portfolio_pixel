@@ -5,6 +5,7 @@ import styles from "./Blog.module.scss"
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../../sanity'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
   posts: BlogPost[] | undefined
@@ -12,11 +13,11 @@ type Props = {
 
 export default function Blog({posts}: Props) {
 
-  //const [preferredCategory, setPreferredCategory] = useState<string | undefined>();
-/*   const [filteredPosts, setFilteredPosts] = useState<BlogPost[] | undefined>(posts);
+  //const [filteredPosts, setFilteredPosts] = useState<BlogPost[] | undefined>([]);
+  const navigate = useNavigate()
 
-  const filterPosts = (preferredCategory: string | undefined): void => {
-    const filtered = posts.filter(post => post.categories[0]._ref === preferredCategory);
+/*   const filterPosts = (preferredCategory: string | undefined): void => {
+    const filtered = posts?.filter(post => post.categories[0]._ref === preferredCategory);
     setFilteredPosts(filtered);
   }; */
 
@@ -41,7 +42,7 @@ export default function Blog({posts}: Props) {
       <div className={styles.container}>
         {posts?.map((item, index) => {
           const categoryRef = item.categories[0];
-          const [category, setCategory] = useState("");
+          const [category, setCategory] = useState("")
 
           useEffect(() => {
             sanityClient
@@ -50,7 +51,7 @@ export default function Blog({posts}: Props) {
           }, [categoryRef]);
 
           return (
-            <div key={item._id} className={styles.post}>
+            <div onClick={() => navigate(`/blog/${item._id}`)} key={item._id} className={styles.post}>
               <img
                 className={styles.postImage}
                 src={urlFor(item?.mainImage)?.url()}
