@@ -58,10 +58,10 @@ export default function Blog({posts}: Props) {
                 alt="post image"
               />
               <h3 className={styles.postTitle}>{item.title}</h3>
-              <div className={styles.postSummary}><h4>Summary</h4>: {item.summary}</div>
-              <p className={styles.postText}>
+              <h4 className={styles.postSummary}>{item.summary}</h4>
+{/*               <p className={styles.postText}>
                 {item.body}
-              </p>
+              </p> */}
               <div style={{display:"flex", justifyContent:"center", alignItems:"center", gap:"1rem"}}>
                 <div className={styles.postCategory}><h4>Category</h4>: {category}</div>
                 <p className={styles.postDate}>{new Date(item._createdAt).toLocaleDateString('en-GB')}</p>

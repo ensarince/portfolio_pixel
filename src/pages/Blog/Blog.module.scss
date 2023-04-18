@@ -42,7 +42,10 @@
     font-size: larger;
     margin-block-start: 1;
     margin-block-end: 0;
+    text-transform: uppercase;
+    text-align: center;
 }
+
 
 .postText{
     display: -webkit-box;
@@ -52,6 +55,7 @@
     text-overflow: ellipsis; 
     margin-block-start: 0;
     margin-block-end: 0;
+    font-size: medium;
 }
 
 .postText::after {
@@ -67,6 +71,8 @@
     margin-block-start: 0;
     margin-block-end: 0;
     font-weight: 400;
+    font-size: large;
+    text-align: center;
 }
 
 .postCategory{

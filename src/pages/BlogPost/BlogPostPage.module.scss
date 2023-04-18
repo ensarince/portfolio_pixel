@@ -44,6 +44,7 @@
     margin-block-start: 1;
     margin-block-end: 0;
     color: $fifth;
+    text-transform: uppercase;
 }
 
 .postText{
@@ -54,10 +55,13 @@
 .postSummary{
     display: flex;
     align-items: center;
+    flex-direction: column;
     margin-block-start: 0;
     margin-block-end: 0;
+    font-size: medium;
     font-weight: 400;
     color: $fifth;
+    text-align: center;
 }
 
 .postCategory{
