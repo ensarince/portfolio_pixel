@@ -22,7 +22,7 @@
     font-weight: 100;
     border: 1px solid $fourth;
     border-radius: 1.3em;
-    padding: 0.8em;
+    padding: 1rem 10rem;
     overflow: hidden;
     transition: all .5s ease-out;
 }
@@ -45,6 +45,7 @@
     margin-block-end: 0;
     color: $fifth;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .postText{
@@ -106,6 +107,11 @@
         .postImage{
             width: 75%;
         }
+        .post{
+            padding: 1rem 1.5rem;
+
+        }
+
         
     }
     @media screen and (min-width: $sm) {
@@ -114,6 +120,10 @@
         }
         .postImage{
             width: 75%;
+        }
+        .post{
+            padding: 1rem 1.5rem;
+
         }
         
     }
@@ -124,6 +134,10 @@
         .postImage{
             width: 60%;
         }
+        .post{
+            padding: 1rem 3rem;
+
+        }
     }
     @media screen and (min-width: $lg) {
         .container{
@@ -132,6 +146,10 @@
         .postImage{
             width: 55%;
         }
+        .post{
+            padding: 1rem 5rem;
+
+        }
     }
     @media screen and (min-width: $xl) {
         .container{
@@ -139,6 +157,10 @@
         }
         .postImage{
             width: 50%;
+        }
+        .post{
+            padding: 1rem 7.5rem;
+
         }
     }
 
