@@ -33,7 +33,7 @@ export default function Projects({projects}: Props) {
                   <img key={index} className={styles.skillImage} src={urlFor(skill.image).url()} alt="" />
               ))}
               </div>
-              <p className={styles.linkToBuild}>{item.linkToBuild}</p>
+              <a href={item.linkToBuild} className={styles.linkToBuild}>Link to Build🔗</a>
           </div>
         ))}
       </div>

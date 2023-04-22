@@ -33,11 +33,11 @@ export default function Blog({posts}: Props) {
   return (
     <>
       <Header />
-    <div className={styles.buttonContainer}>
-      <button /* onClick={() => filterPosts('91e45e40-f3a0-4488-85e9-fb87eafac059')} */ className={styles.categoryButton}>Climbing</button>
-      <button /* onClick={() => filterPosts('807d499a-f06d-4ef5-a1e9-c4413d9be7eb')} */ className={styles.categoryButton}>Coding</button>
-      <button /* onClick={() => filterPosts("85ab035c-ede8-4700-8c9b-c9eddf6199d5")} */ className={styles.categoryButton}>Other</button>
-    </div>
+{/*     <div className={styles.buttonContainer}>
+      <button onClick={() => filterPosts('91e45e40-f3a0-4488-85e9-fb87eafac059')} className={styles.categoryButton}>Climbing</button>
+      <button onClick={() => filterPosts('807d499a-f06d-4ef5-a1e9-c4413d9be7eb')} className={styles.categoryButton}>Coding</button>
+      <button onClick={() => filterPosts("85ab035c-ede8-4700-8c9b-c9eddf6199d5")} className={styles.categoryButton}>Other</button>
+    </div> */}
 
       <div className={styles.container}>
         {posts?.map((item, index) => {
