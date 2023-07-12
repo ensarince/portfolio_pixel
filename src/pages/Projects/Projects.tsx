@@ -5,6 +5,7 @@ import styles from "./Projects.module.scss"
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../../sanity'
 import Skill from '../../components/Skill'
+import { CircularProgress } from '@mui/material'
 
 type Props = {
   projects: Project[] | undefined
@@ -21,23 +22,24 @@ export default function Projects({projects}: Props) {
   return (
     <>
       <Header />
+      {projects ? (
+        <div className={styles.container}>
+          {projects?.map((item, index) => (
+            <div key={item._id} className={styles.project}>
+              <img className={styles.projectImage} src={urlFor((item)?.image).url()} alt="project image" />          
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+                <div className={styles.skills}>
+                {item.technologies.map((skill, index) => (
+                    <img key={index} className={styles.skillImage} src={urlFor(skill.image).url()} alt="" />
+                ))}
+                </div>
+                <a href={item.linkToBuild} className={styles.linkToBuild}>Link to Build🔗</a>
+            </div>
+          ))}
+        </div>
+      ): <CircularProgress />}
 
-      <div className={styles.container}>
-        {projects?.map((item, index) => (
-          <div key={item._id} className={styles.project}>
-              <img className={styles.projectImage} src={urlFor((item)?.image).url()} alt="project image" />              
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              <div className={styles.skills}>
-              {item.technologies.map((skill, index) => (
-                  <img key={index} className={styles.skillImage} src={urlFor(skill.image).url()} alt="" />
-              ))}
-              </div>
-              <a href={item.linkToBuild} className={styles.linkToBuild}>Link to Build🔗</a>
-          </div>
-        ))}
-      </div>
-    </>
-      
+      </>
   )
 }

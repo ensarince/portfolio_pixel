@@ -19,7 +19,7 @@ $xl: 1201px;
     gap: 1em;
     border-radius: 3em;
     border: 1px solid $fourth;
-    height: fit-content;
+    height: 80vh;
 }
 .div__infoContainer{
     color: $fourth;
@@ -52,7 +52,7 @@ $xl: 1201px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 15em;
+    height: 100%;
 }
 
 .div__noPlayingScreen h3{

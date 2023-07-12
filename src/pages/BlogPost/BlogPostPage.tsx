@@ -8,6 +8,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import fifth from "../../assets/_variables.scss"
 import { PortableText } from '@portabletext/react'
+import { CircularProgress } from '@mui/material'
 
 type Props = {
   posts: BlogPost[] | undefined
@@ -35,14 +36,9 @@ useEffect(() => {
   return (
     <>
       <Header />
-          {post &&
+          {post ?
           <div className={styles.container}>
             <div className={styles.post}>
-              <img
-                  className={styles.postImage}
-                  src={urlFor(post[0]?.mainImage)?.url()}
-                  alt="post image"
-                />
                 <h3 className={styles.postTitle}>{post[0]?.title}</h3>
                 <div className={styles.postSummary}>
                   <div style={{ width: '100%', backgroundColor: '#A9C5B9', height: '1px', marginTop:"0.8rem" }}></div>
@@ -60,6 +56,8 @@ useEffect(() => {
               </div>
             </div>
           </div>
+          : 
+                <CircularProgress />
           }
     </>
   )
