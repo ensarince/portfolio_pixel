@@ -54,9 +54,9 @@ export default function HomePage({nowPlaying}: Props) {
                   ) : 
                   (
                   <div className={styles.div__playingScreen}>
-                    <h3>Now playing: {nowPlaying.item.name}</h3>
-                    <h3>Artist: {nowPlaying.item.album.artists[0].name}</h3>
-                    <img src={nowPlaying.item.album.images[0].url} alt={nowPlaying.item.album.name} />
+                    <h3>Now playing: {nowPlaying.item?.name}</h3>
+                    <h3>Artist: {nowPlaying.item?.album.artists[0]?.name}</h3>
+                    <img src={nowPlaying.item?.album.images[0]?.url} alt={nowPlaying.item.album.name} />
                   </div>
                   )
                 }

@@ -58,7 +58,6 @@
     align-items: center;
     word-break:break-all;
     flex-direction: column;
-    gap: 0.5rem;
     justify-content: center;
     height: 100%;
 }
@@ -70,8 +69,8 @@
 .skillTitle{
     color: $primary;
     text-decoration: dashed;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    color: $fourth;
+    color: #111;
     opacity: 1;
 }

@@ -38,8 +38,10 @@ export default function Projects({projects}: Props) {
             </div>
           ))}
         </div>
-      ): <CircularProgress />}
-
+      ): <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"50vh"}}>
+            <CircularProgress  sx={{color:"#5187C4"}} size={100}/>
+        </div>
+        }
       </>
   )
 }
