@@ -14,6 +14,7 @@ import getSkills from './services/getSkills'
 import getSocials from './services/getSocials'
 import { getNowPlaying, SpotifyData } from './services/spotify'
 import { BlogPost, PageInfo, Project, Skill, Social } from './typings'
+import Gallery from './pages/Gallery/Gallery'
 
 function App() {
   const [nowPlaying, setNowPlaying] = useState<SpotifyData | null>(null);
@@ -21,15 +22,15 @@ function App() {
   const [posts, setPosts] = useState<BlogPost[]>()
   const [projects, setProjects] = useState<Project[]>()
   const [skills, setSkills] = useState<Skill[]>()
-  const [pageInfo, setPageInfo] = useState<PageInfo[]>()
-  const [socials, setSocials] = useState<Social[]>()
+  //const [pageInfo, setPageInfo] = useState<PageInfo[]>()
+  //const [socials, setSocials] = useState<Social[]>()
   
   useEffect(() => {
     getBlogPosts().then((data: any) => setPosts(data.posts));
     getProjects().then((data: any) => setProjects(data.projects));
     getSkills().then((data: any) => setSkills(data.skills));
-    getPageInfo().then((data: any) => setPageInfo(data));
-    getSocials().then((data: any) => setSocials(data));
+    //getPageInfo().then((data: any) => setPageInfo(data));
+    //getSocials().then((data: any) => setSocials(data));
   }, []);
 
   
@@ -52,6 +53,7 @@ function App() {
           <Route path='/skills' element={<Skills skills={skills} />} />
           <Route path='/blog' element={<Blog posts={posts}/>} />
           <Route path='/blog/:id' element={<BlogPostPage posts={posts}/>} />
+          {/* <Route path='/gallery' element={<Gallery skills={skills} />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

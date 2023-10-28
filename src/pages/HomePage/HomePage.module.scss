@@ -19,7 +19,7 @@ $xl: 1201px;
     gap: 1em;
     border-radius: 3em;
     border: 1px solid $fourth;
-    height: 80vh;
+    height: 75vh;
 }
 .div__infoContainer{
     color: $fourth;
@@ -110,6 +110,7 @@ $xl: 1201px;
     }
     @media screen and (min-width: $lg) {
         width: 65%;
+        height: 70vh;
     }
     @media screen and (min-width: $xl) {
         width: 55%;
