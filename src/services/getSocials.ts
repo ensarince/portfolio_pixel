@@ -1,5 +1,4 @@
 import { groq } from "next-sanity";
-import { useEffect, useState } from "react";
 import { sanityClient } from "../sanity"
 import {Social} from "../typings"
 

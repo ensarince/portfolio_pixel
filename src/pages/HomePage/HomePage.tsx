@@ -1,6 +1,6 @@
 import Header from '../../components/Header'
 import styles from "./HomePage.module.scss"
-import {Cursor, useTypewriter} from "react-simple-typewriter"
+import {useTypewriter} from "react-simple-typewriter"
 import { SocialIcon } from 'react-social-icons';
 import { SpotifyData } from '../../services/spotify';
 
