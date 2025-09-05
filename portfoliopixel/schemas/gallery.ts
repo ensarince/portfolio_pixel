@@ -6,25 +6,13 @@ export default defineType({
   type: 'document',
   fields: [
     {
-      name:"categories",
-      title:"Categories",
-      type: "array",
-      of: [{ type: "reference", to: {type: "category"}}]
-    },
-    {
         name: 'images',
         title: 'Images',
         type: 'array',
         of: [
           {
             type: 'object',
-            fields: [
-              defineField({
-                name: 'category',
-                title: 'Category',
-                type: 'reference',
-                to: [{ type: 'category' }],
-              }),              
+            fields: [       
               defineField({
                 name: 'image',
                 title: 'Image',
@@ -32,7 +20,13 @@ export default defineType({
                 options: {
                   hotspot: true,
                 },
-              })
+              }),
+              {
+                name:"categories",
+                title:"Categories",
+                type: "array",
+                of: [{ type: "reference", to: {type: "category"}}]
+              },
             ],
           },
         ],

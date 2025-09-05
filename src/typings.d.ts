@@ -72,3 +72,8 @@ export interface BlogPost extends SanityBody{
     summary: string
     categories: Category[]
 }
+
+export interface Gallery extends SanityBody{
+    images: Image[]
+    categories: Category[]
+}

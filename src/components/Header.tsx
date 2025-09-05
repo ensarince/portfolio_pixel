@@ -18,9 +18,9 @@ export default function Header({}: Props) {
         <Link to="/blog">
             <h4>Blog</h4>
         </Link>
-{/*         <Link to="/gallery">
+        <Link to="/gallery">
             <h4>Gallery</h4>
-        </Link> */}
+        </Link>
     </div>
   )
 }
