@@ -21,12 +21,12 @@ export default defineType({
                   hotspot: true,
                 },
               }),
-              {
-                name:"categories",
-                title:"Categories",
-                type: "array",
-                of: [{ type: "reference", to: {type: "category"}}]
-              },
+              defineField({
+                name: 'description',
+                title: 'Description',
+                type: 'text',
+                description: 'Add a description for this image',
+              }),
             ],
           },
         ],

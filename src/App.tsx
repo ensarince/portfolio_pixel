@@ -23,7 +23,7 @@ function App() {
   const [posts, setPosts] = useState<BlogPost[]>()
   const [projects, setProjects] = useState<Project[]>()
   const [skills, setSkills] = useState<Skill[]>()
-  const [gallery, setGallery] = useState<Gallery>()
+  const [gallery, setGallery] = useState<Gallery[]>()
   //const [pageInfo, setPageInfo] = useState<PageInfo[]>()
   //const [socials, setSocials] = useState<Social[]>()
   

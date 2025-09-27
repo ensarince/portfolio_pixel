@@ -1,72 +1,248 @@
 @import "../../assets/variables";
 
-.container{
-    padding: 2em;
+.pageContainer {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 120px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $fourth;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: $third;
+    margin: 0;
+}
+
+.container {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2.5rem;
     justify-content: center;
-    align-items: center;
-    grid-template-columns: repeat(auto-fit, 20em);
-    gap: 1rem;
-    margin: 1rem;
 }
 
-.project{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 50vh;
-    color: $fifth;
-    border: 1px solid $fourth;
-    border-radius: 1.3em;
-    padding: 0.5em;
+.project {
+    background: $primary;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #E5E7EB;
+    position: relative;
+    animation: slideUp 0.6s ease-out forwards;
+    animation-delay: var(--delay, 0s);
+    opacity: 0;
+    transform: translateY(30px);
 }
 
-.projectImage{
-    width: 80%;
-    border-radius: 1em;
+.project:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: $secondary;
 }
 
-.technology{
-    width: 100%;
-    border-radius: 20em;
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.linkToBuild{
-    color: $secondary;
-    text-decoration: none;
-    cursor: pointer;
-    margin-top: 0.5rem;
-}
-
-.skills{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    gap: 0.5rem;
+.projectImageContainer {
+    position: relative;
+    height: 240px;
     overflow: hidden;
 }
 
-.skillImage{
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
+.projectImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
 }
 
-.container{
-    @media screen and (min-width: $xs) {
-        gap: 2%;
+.project:hover .projectImage {
+    transform: scale(1.1);
+}
+
+.projectOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(37, 99, 235, 0.9), rgba(16, 185, 129, 0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.project:hover .projectOverlay {
+    opacity: 1;
+}
+
+.viewProject {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.75rem 2rem;
+    border: 2px solid white;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    transform: translateY(20px);
+}
+
+.project:hover .viewProject {
+    transform: translateY(0);
+    background: white;
+    color: $secondary;
+}
+
+.projectContent {
+    padding: 2rem;
+}
+
+.projectTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $fourth;
+    margin: 0 0 1rem 0;
+    line-height: 1.3;
+}
+
+.projectSummary {
+    font-size: 1rem;
+    color: $third;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+}
+
+.technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.techBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: $fifth;
+    padding: 0.5rem 0.75rem;
+    border-radius: 25px;
+    border: 1px solid #E5E7EB;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    color: $fourth;
+    font-weight: 500;
+}
+
+.techBadge:hover {
+    background: $secondary;
+    color: white;
+    border-color: $secondary;
+    transform: translateY(-2px);
+}
+
+.techIcon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.techName {
+    font-size: 0.875rem;
+}
+
+.moreTechs {
+    background: linear-gradient(45deg, $secondary, #3B82F6);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 25px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    gap: 1rem;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #E5E7EB;
+    border-top: 4px solid $secondary;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loadingContainer p {
+    color: $third;
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+@media screen and (max-width: $md) {
+    .pageContainer {
+        padding: 2rem 1rem;
     }
-    @media screen and (min-width: $sm) {
-        gap: 2%;
+    
+    .title {
+        font-size: 2rem;
     }
-    @media screen and (min-width: $md) {
-        gap: 4%;
+    
+    .container {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
     }
-    @media screen and (min-width: $lg) {
-        gap: 4%;
+    
+    .projectContent {
+        padding: 1.5rem;
     }
-    @media screen and (min-width: $xl) {
-        gap: 4%;
+}
+
+@media screen and (max-width: $sm) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .projectImageContainer {
+        height: 200px;
+    }
+    
+    .projectContent {
+        padding: 1.25rem;
+    }
+    
+    .projectTitle {
+        font-size: 1.25rem;
     }
 }

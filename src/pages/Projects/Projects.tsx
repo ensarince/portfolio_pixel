@@ -4,15 +4,12 @@ import { Project } from '../../typings'
 import styles from "./Projects.module.scss"
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../../sanity'
-import Skill from '../../components/Skill'
-import { CircularProgress } from '@mui/material'
 
 type Props = {
   projects: Project[] | undefined
 }
 
 export default function Projects({projects}: Props) {
-  //needed to show sanity images
   const builder = imageUrlBuilder(sanityClient)
 
   function urlFor(source:any) {
@@ -22,26 +19,61 @@ export default function Projects({projects}: Props) {
   return (
     <>
       <Header />
-      {projects ? (
-        <div className={styles.container}>
-          {projects?.map((item, index) => (
-            <div key={item._id} className={styles.project}>
-              <img className={styles.projectImage} src={urlFor((item)?.image).url()} alt="project image" />          
-                <h3>{item.title}</h3>
-                <p>{item.summary}</p>
-                <div className={styles.skills}>
-                {item.technologies.map((skill, index) => (
-                    <img key={index} className={styles.skillImage} src={urlFor(skill.image).url()} alt="" />
-                ))}
+      <div className={styles.pageContainer}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Featured Projects</h1>
+        </div>
+        
+        {projects ? (
+          <div className={styles.container}>
+            {projects?.map((project, index) => (
+              <div key={project._id} className={styles.project} style={{'--delay': `${index * 0.1}s`} as React.CSSProperties}>
+                <div className={styles.projectImageContainer}>
+                  <img
+                    className={styles.projectImage}
+                    src={urlFor(project.image).url()}
+                    alt={project.title}
+                  />
+                  <div className={styles.projectOverlay}>
+                    <a href={project.linkToBuild} target="_blank" rel="noopener noreferrer" className={styles.viewProject}>
+                      View Project →
+                    </a>
+                  </div>
                 </div>
-                <a href={item.linkToBuild} className={styles.linkToBuild}>Link to Build🔗</a>
-            </div>
-          ))}
-        </div>
-      ): <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"50vh"}}>
-            <CircularProgress  sx={{color:"#5187C4"}} size={100}/>
-        </div>
-        }
-      </>
+                
+                <div className={styles.projectContent}>
+                  <h3 className={styles.projectTitle}>{project.title}</h3>
+                  <p className={styles.projectSummary}>{project.summary}</p>
+                  
+                  <div className={styles.technologies}>
+                    {project.technologies?.slice(0, 4).map((tech, techIndex) => (
+                      <div key={techIndex} className={styles.techBadge}>
+                        <img
+                          className={styles.techIcon}
+                          src={urlFor(tech.image).url()}
+                          alt={tech.title}
+                          title={tech.title}
+                        />
+                        <span className={styles.techName}>{tech.title}</span>
+                      </div>
+                    ))}
+                    {project.technologies && project.technologies.length > 4 && (
+                      <div className={styles.moreTechs}>
+                        +{project.technologies.length - 4} more
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className={styles.loadingContainer}>
+            <div className={styles.loader}></div>
+            <p>Loading projects...</p>
+          </div>
+        )}
+      </div>
+    </>
   )
 }

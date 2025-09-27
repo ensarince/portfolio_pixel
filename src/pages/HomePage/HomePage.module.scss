@@ -1,104 +1,309 @@
-$primary: #122128;
-$secondary: #5187C4;
-$third: #8C6853;
-$fourth: #A9C5B9;
-$fifth: #D7C795;
-
-$xs: 320px;
-$sm: 481px;
-$md: 769px;
-$lg: 1025px;
-$xl: 1201px;
+@import "../../assets/variables";
 
 .div__homeContainer{
     display: flex;
-    padding: 2em;
+    padding: 4rem 3rem;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1em;
-    border-radius: 3em;
-    border: 1px solid $fourth;
+    gap: 3rem;
+    background: $primary;
+    border-radius: 24px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     height: fit-content;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.8s ease-out;
 }
+
+.div__homeContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $secondary, #3B82F6, #10B981);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.profileSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+.videoContainer {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #E5E7EB;
+    transition: all 0.3s ease;
+}
+
+.videoContainer:hover {
+    border-color: $secondary;
+    transform: scale(1.05);
+}
+
+.video {
+    border-radius: 50%;
+    flex-shrink: 0;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.videoOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+    border-radius: 50%;
+    pointer-events: none;
+}
+
 .div__infoContainer{
     color: $fourth;
-    font-size: 1.5em;
-    font-weight: 300;
+    text-align: center;
 }
 
 .p__infoText{
-    height: 1.5em;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, $secondary, #3B82F6, #10B981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.video{
-    border-radius: 20em;
-    flex-shrink: 0;
+.introduction {
+    font-size: 1.125rem;
+    color: $third;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0;
 }
+
+.socialSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $fourth;
+    margin: 0;
+    position: relative;
+}
+
+.sectionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, $secondary, #3B82F6);
+}
+
 .div__socials{
     display: flex;
-    gap: 0.5em;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.icon__social{
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    position: relative;
+}
+
+.icon__social:hover{
+    transform: translateY(-6px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.icon__social::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, $secondary, #3B82F6, #10B981);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.icon__social:hover::before {
+    opacity: 1;
+}
+
+.musicSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
 }
 
 .div__spotify{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 400px;
 }
 
 .div__noPlayingScreen{
-    color: white;
-    display:flex;
+    color: $third;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 15rem;
+    background: $fifth;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+    border: 1px solid #E5E7EB;
 }
 
-.div__noPlayingScreen h3{
-    font-weight: 420;
+.musicIcon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
 }
 
-.div__noPlayingScreen img{
-    width: 5em;
-    border-radius: 100%;
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.div__noPlayingScreen h4{
+    font-weight: 600;
+    color: $fourth;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.125rem;
+}
+
+.div__noPlayingScreen p {
+    margin: 0;
+    font-size: 0.875rem;
+    opacity: 0.8;
 }
 
 .div__playingScreen{
-    background-color: $primary;
-    border-radius: 10%;
-    padding: 0.3em;
+    background: linear-gradient(135deg, $fifth, #E5E7EB);
+    border-radius: 16px;
+    padding: 2rem;
     color: $fourth;
-    flex-shrink: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    gap: 0.2em;
+    gap: 1.5rem;
+    border: 1px solid #E5E7EB;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .div__playingScreen img{
-    width: 75%;
-    border-radius: 15%;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.div__playingScreen h3{
-    font-weight: 420;
+.trackInfo {
+    flex: 1;
+    min-width: 0;
 }
 
-.icon__social{
-    cursor: pointer;
-    transition: all .3s ease-out;
+.trackInfo h4{
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.icon__social:hover,
-.icon__social:focus{
-    transform: translateY(-20%)
+.trackInfo p {
+    margin: 0 0 0.5rem 0;
+    color: $third;
+    font-size: 0.875rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
+.liveIndicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #10B981;
+    font-weight: 600;
+}
 
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
 
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+// Responsive Design
 .div__homeContainer{
+    @media screen and (max-width: $xs) {
+        padding: 1.5rem;
+        width: 90%;
+    }
     @media screen and (min-width: $xs) {
         width: 85%;
     }
@@ -110,46 +315,40 @@ $xl: 1201px;
     }
     @media screen and (min-width: $lg) {
         width: 65%;
-        //height: 70vh;
     }
     @media screen and (min-width: $xl) {
         width: 55%;
     }
 }
 
+.div__infoContainer{
+    @media screen and (max-width: $sm) {
+        font-size: 1.8rem;
+    }
+}
 
 .video{
     @media screen and (min-width: $xs) {
-        width: 75%;
+        width: 200px;
+        height: 200px;
     }
     @media screen and (min-width: $sm) {
-        width: 55%;
+        width: 250px;
+        height: 250px;
     }
     @media screen and (min-width: $md) {
-        width: 45%;
+        width: 300px;
+        height: 300px;
     }
     @media screen and (min-width: $lg) {
-        width: 35%;
-    }
-    @media screen and (min-width: $xl) {
-        width: 35%;
+        width: 300px;
+        height: 300px;
     }
 }
 
-    .div__playingScreen{
-        @media screen and (min-width: $xs) {
-            width: 75%;
-        }
-        @media screen and (min-width: $sm) {
-            width: 55%;
-        }
-        @media screen and (min-width: $md) {
-            width: 45%;
-        }
-        @media screen and (min-width: $lg) {
-            width: 35%;
-        }
-        @media screen and (min-width: $xl) {
-            width: 35%;
-        }
+.div__playingScreen{
+    @media screen and (max-width: $sm) {
+        width: 100%;
+        max-width: 280px;
     }
+}

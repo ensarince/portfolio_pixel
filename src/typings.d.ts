@@ -74,6 +74,8 @@ export interface BlogPost extends SanityBody{
 }
 
 export interface Gallery extends SanityBody{
-    images: Image[]
-    categories: Category[]
+    images: {
+        image: Image;
+        description: string
+    }[]
 }
