@@ -9,8 +9,8 @@ export default function Header({}: Props) {
         <Link to="/">
             <h4>About</h4>
         </Link>
-        <Link to="/projects">
-            <h4>Projects</h4>
+        <Link to="/portfolio">
+            <h4>Portfolio</h4>
         </Link>
         <Link to="/skills">
             <h4>Skills</h4>
@@ -20,6 +20,9 @@ export default function Header({}: Props) {
         </Link>
         <Link to="/gallery">
             <h4>Gallery</h4>
+        </Link>
+        <Link to="/climbs">
+            <h4>Climbs</h4>
         </Link>
     </div>
   )

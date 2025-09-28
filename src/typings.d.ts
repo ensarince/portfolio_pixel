@@ -46,8 +46,17 @@ export interface Project extends SanityBody{
     _type: "project"
     image: Image
     linkToBuild: string
+    githubUrl?: string
     summary: string
+    description?: string
+    category: "personal" | "academic" | "professional" | "opensource"
     technologies: Technology[]
+    impact?: string
+    role?: string
+    teamSize?: number
+    duration?: string
+    featured?: boolean
+    ndaRestricted?: boolean
 }
 
 export interface Social extends SanityBody{
@@ -78,4 +87,20 @@ export interface Gallery extends SanityBody{
         image: Image;
         description: string
     }[]
+}
+
+export interface Climb extends SanityBody{
+    _type: "climb"
+    title: string
+    image: Image
+    location?: string
+    difficulty: string
+    category: "boulder" | "sport" | "trad" | "alpine";
+    description?: string
+    dateCompleted?: string
+    elevation?: string
+    duration?: string
+    partners?: string
+    featured?: boolean
+    firstAscent?: boolean
 }
