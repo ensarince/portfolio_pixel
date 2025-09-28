@@ -1,6 +1,6 @@
 @import "../../assets/variables";
 
-.div__homeContainer{
+.div__homeContainer {
     display: flex;
     padding: 4rem 3rem;
     align-items: center;
@@ -12,7 +12,7 @@
     border: 1px solid #E5E7EB;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     height: fit-content;
-    max-width: 900px;
+    max-width: 1400px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -35,6 +35,7 @@
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -42,8 +43,15 @@
 }
 
 @keyframes shimmer {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
 .profileSection {
@@ -86,16 +94,15 @@
     pointer-events: none;
 }
 
-.div__infoContainer{
+.div__infoContainer {
     color: $fourth;
     text-align: center;
 }
 
-.p__infoText{
+.p__infoText {
     font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    height: 4rem;
+    height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -140,21 +147,21 @@
     background: linear-gradient(90deg, $secondary, #3B82F6);
 }
 
-.div__socials{
+.div__socials {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.icon__social{
+.icon__social {
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 50%;
     position: relative;
 }
 
-.icon__social:hover{
+.icon__social:hover {
     transform: translateY(-6px) scale(1.1);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -185,15 +192,15 @@
     width: 100%;
 }
 
-.div__spotify{
+.div__spotify {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
 }
 
-.div__noPlayingScreen{
+.div__noPlayingScreen {
     color: $third;
     display: flex;
     flex-direction: column;
@@ -214,11 +221,18 @@
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
-.div__noPlayingScreen h4{
+.div__noPlayingScreen h4 {
     font-weight: 600;
     color: $fourth;
     margin: 0 0 0.5rem 0;
@@ -231,7 +245,7 @@
     opacity: 0.8;
 }
 
-.div__playingScreen{
+.div__playingScreen {
     background: linear-gradient(135deg, $fifth, #E5E7EB);
     border-radius: 16px;
     padding: 2rem;
@@ -244,7 +258,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.div__playingScreen img{
+.div__playingScreen img {
     width: 80px;
     height: 80px;
     border-radius: 12px;
@@ -258,7 +272,7 @@
     min-width: 0;
 }
 
-.trackInfo h4{
+.trackInfo h4 {
     font-weight: 600;
     margin: 0 0 0.25rem 0;
     font-size: 1rem;
@@ -294,59 +308,76 @@
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
 }
 
 // Responsive Design
-.div__homeContainer{
+.div__homeContainer {
     @media screen and (max-width: $xs) {
         padding: 1.5rem;
         width: 90%;
     }
+
     @media screen and (min-width: $xs) {
         width: 85%;
     }
+
     @media screen and (min-width: $sm) {
         width: 85%;
     }
+
     @media screen and (min-width: $md) {
         width: 75%;
     }
+
     @media screen and (min-width: $lg) {
         width: 65%;
     }
+
     @media screen and (min-width: $xl) {
         width: 55%;
     }
 }
 
-.div__infoContainer{
+.div__infoContainer {
     @media screen and (max-width: $sm) {
         font-size: 1.8rem;
     }
 }
 
-.video{
+.video {
     @media screen and (min-width: $xs) {
+        width: 100px;
+        height: 100px;
+    }
+
+    @media screen and (min-width: $sm) {
+        width: 150px;
+        height: 150px;
+    }
+
+    @media screen and (min-width: $md) {
         width: 200px;
         height: 200px;
     }
-    @media screen and (min-width: $sm) {
+
+    @media screen and (min-width: $lg) {
         width: 250px;
         height: 250px;
     }
-    @media screen and (min-width: $md) {
-        width: 300px;
-        height: 300px;
-    }
-    @media screen and (min-width: $lg) {
-        width: 300px;
-        height: 300px;
-    }
 }
 
-.div__playingScreen{
+.div__playingScreen {
     @media screen and (max-width: $sm) {
         width: 100%;
         max-width: 280px;
