@@ -20,7 +20,14 @@ export default function HomePage({ nowPlaying }: Props) {
   return (
     <>
       <Header />
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "2rem", alignItems: "center", minHeight: "calc(100vh - 120px)" }}>
+      <div style={{ 
+        display: "flex", 
+        flexDirection: "column", 
+        justifyContent: "center", 
+        padding: "1rem", 
+        alignItems: "center", 
+        minHeight: "calc(100vh - 80px)"
+      }}>
         <div className={styles.div__homeContainer}>
           <div className={styles.profileSection}>
             <div className={styles.videoContainer}>

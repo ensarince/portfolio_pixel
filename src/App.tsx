@@ -51,17 +51,19 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="app-container">
       <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<HomePage nowPlaying={nowPlaying} />} />
-          <Route path='/portfolio' element={<Projects projects={projects} />} />
-          <Route path='/skills' element={<Skills skills={skills} />} />
-          <Route path='/blog' element={<Blog posts={posts}/>} />
-          <Route path='/blog/:id' element={<BlogPostPage posts={posts}/>} />
-          <Route path='/gallery' element={<GalleryPage gallery={gallery} />} />
-          <Route path='/climbs' element={<Climbs climbs={climbs} />} />
-        </Routes>
+        <div className="content-area">
+          <Routes>
+            <Route path='/' element={<HomePage nowPlaying={nowPlaying} />} />
+            <Route path='/portfolio' element={<Projects projects={projects} />} />
+            <Route path='/skills' element={<Skills skills={skills} />} />
+            <Route path='/blog' element={<Blog posts={posts}/>} />
+            <Route path='/blog/:id' element={<BlogPostPage posts={posts}/>} />
+            <Route path='/gallery' element={<GalleryPage gallery={gallery} />} />
+            <Route path='/climbs' element={<Climbs climbs={climbs} />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   )
