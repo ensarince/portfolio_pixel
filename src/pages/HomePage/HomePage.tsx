@@ -3,7 +3,7 @@ import styles from "./HomePage.module.scss"
 import { useTypewriter } from "react-simple-typewriter"
 import { SocialIcon } from 'react-social-icons';
 import { SpotifyData } from '../../services/spotify';
-import img_1 from "../../assets/1.jpg"
+import img_1 from "../../assets/1.png"
 
 type Props = {
   nowPlaying: SpotifyData | null
