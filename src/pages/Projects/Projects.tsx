@@ -104,16 +104,6 @@ export default function Projects({projects}: Props) {
                         <span>🔗</span> Live Demo
                       </a>
                     )}
-                    {project.linkToBuild && !project.ndaRestricted && (
-                      <a 
-                        href={project.linkToBuild} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className={styles.actionButton}
-                      >
-                        <span>📚</span> Source Code
-                      </a>
-                    )}
                     {project.ndaRestricted && (
                       <span className={styles.ndaBadge}>
                         🔒 NDA Protected
