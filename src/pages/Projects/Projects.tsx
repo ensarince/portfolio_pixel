@@ -11,21 +11,21 @@ type Props = {
 
 type FilterType = 'all' | 'personal' | 'academic' | 'professional' | 'opensource' | 'featured'
 
-export default function Projects({projects}: Props) {
+export default function Projects({ projects }: Props) {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([])
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
-  
+
   const builder = imageUrlBuilder(sanityClient)
 
-  function urlFor(source:any) {
+  function urlFor(source: any) {
     return builder.image(source)
   }
 
   useEffect(() => {
     if (!projects) return
-    
+
     let filtered = projects
-    
+
     switch (activeFilter) {
       case 'featured':
         filtered = projects.filter(project => project.featured === true)
@@ -37,7 +37,7 @@ export default function Projects({projects}: Props) {
         filtered = projects.filter(project => project.category === activeFilter)
         break
     }
-    
+
     setFilteredProjects(filtered)
   }, [projects, activeFilter])
 
@@ -65,7 +65,7 @@ export default function Projects({projects}: Props) {
         <div className={styles.header}>
           <h1 className={styles.title}>My Portfolio</h1>
         </div>
-        
+
         <div className={styles.filterContainer}>
           {filters.map((filter) => (
             <button
@@ -87,17 +87,17 @@ export default function Projects({projects}: Props) {
           {filteredProjects?.map((project, i) => (
             <div key={project._id} className={styles.projectCard} style={{ animationDelay: `${i * 0.1}s` }}>
               <div className={styles.imageContainer}>
-                <img 
-                  src={urlFor(project.image).url()!} 
+                <img
+                  src={urlFor(project.image).url()!}
                   alt={project.title}
                   className={styles.projectImage}
                 />
                 <div className={styles.imageOverlay}>
                   <div className={styles.projectActions}>
                     {project.linkToBuild && (
-                      <a 
-                        href={project.linkToBuild} 
-                        target="_blank" 
+                      <a
+                        href={project.linkToBuild}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className={styles.actionButton}
                       >
@@ -112,7 +112,7 @@ export default function Projects({projects}: Props) {
                   </div>
                 </div>
               </div>
-              
+
               <div className={styles.projectContent}>
                 <div className={styles.projectHeader}>
                   <h3 className={styles.projectTitle}>{project.title}</h3>
@@ -120,7 +120,7 @@ export default function Projects({projects}: Props) {
                     {project.featured && (
                       <span className={styles.featuredBadge}>⭐ Featured</span>
                     )}
-                    <span 
+                    <span
                       className={styles.categoryBadge}
                       style={{ backgroundColor: getCategoryInfo(project.category || 'personal').color + '20' }}
                     >
@@ -128,9 +128,9 @@ export default function Projects({projects}: Props) {
                     </span>
                   </div>
                 </div>
-                
+
                 <p className={styles.projectSummary}>{project.summary}</p>
-                
+
                 {project.description && (
                   <p className={styles.projectDescription}>{project.description}</p>
                 )}
@@ -159,12 +159,12 @@ export default function Projects({projects}: Props) {
                     <p>{project.impact}</p>
                   </div>
                 )}
-                
+
                 <div className={styles.technologies}>
                   {project?.technologies?.map(technology => (
                     <span key={technology._id} className={styles.techTag}>
-                      <img 
-                        src={urlFor(technology.image).url()!} 
+                      <img
+                        src={urlFor(technology.image).url()!}
                         alt={technology.title}
                         className={styles.techIcon}
                       />
@@ -181,7 +181,7 @@ export default function Projects({projects}: Props) {
           <div className={styles.emptyState}>
             <div className={styles.emptyIcon}>📭</div>
             <h3>No projects found</h3>
-            <p>Try adjusting your filter to see more projects.</p>
+            <p>Looks like I haven't added anything yet.</p>
           </div>
         )}
       </div>

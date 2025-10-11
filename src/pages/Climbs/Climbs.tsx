@@ -195,7 +195,7 @@ export default function Climbs({ climbs }: Props) {
                     <div className={styles.emptyState}>
                         <div className={styles.emptyIcon}>🏔️</div>
                         <h3>No climbs found</h3>
-                        <p>Try adjusting your filter to see more climbing adventures.</p>
+                        <p>Looks like I haven't added anything yet.</p>
                     </div>
                 )}
             </div>
