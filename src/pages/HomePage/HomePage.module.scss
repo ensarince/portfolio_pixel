@@ -13,11 +13,9 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     height: fit-content;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 2rem auto;
     position: relative;
-    overflow: hidden;
     animation: slideUp 0.8s ease-out;
-    min-height: calc(100vh - 120px);
 }
 
 .div__homeContainer::before {
@@ -27,8 +25,6 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, $secondary, #3B82F6, #10B981);
-    animation: shimmer 3s infinite;
 }
 
 @keyframes slideUp {
