@@ -2,15 +2,20 @@ import React from 'react'
 import Header from '../../components/Header'
 import styles from "./About.module.scss"
 import { SocialIcon } from 'react-social-icons'
+import img_2 from '../../assets/2.jpg'
 
 export default function About() {
     return (
         <>
             <Header />
             <div className={styles.pageContainer}>
-                <div className={styles.header}>
-                    <h1 className={styles.title}>About Me</h1>
-                    <p className={styles.subtitle}>Developer, climber, and creative thinker</p>
+                <div className={styles.heroBanner}>
+                    <img src={img_2} alt="About me" className={styles.heroBannerImg} />
+                    <div className={styles.heroBannerOverlay}></div>
+                    <div className={styles.heroBannerContent}>
+                        <h1 className={styles.heroTitle}>About Me</h1>
+                        <p className={styles.heroSubtitle}>Developer • Climber • Creative Thinker</p>
+                    </div>
                 </div>
 
                 <div className={styles.content}>
