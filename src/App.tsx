@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.scss'
+import About from './pages/About/About'
 import Blog from './pages/Blog/Blog'
 import BlogPostPage from './pages/BlogPost/BlogPostPage'
 import Climbs from './pages/Climbs/Climbs'
@@ -56,6 +57,7 @@ function App() {
         <div className="content-area">
           <Routes>
             <Route path='/' element={<HomePage nowPlaying={nowPlaying} />} />
+            <Route path='/about' element={<About />} />
             <Route path='/portfolio' element={<Projects projects={projects} />} />
             <Route path='/skills' element={<Skills skills={skills} />} />
             <Route path='/blog' element={<Blog posts={posts}/>} />

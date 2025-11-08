@@ -1,0 +1,456 @@
+@import "../../assets/variables";
+
+.pageContainer {
+    padding: 3rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: calc(100vh - 120px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $fourth;
+    margin: 0 0 0.5rem 0;
+    background: linear-gradient(45deg, $secondary, #3B82F6, #10B981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: $third;
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+// Section Styles
+.section {
+    padding: 2rem;
+    background: linear-gradient(135deg, $fifth, rgba(255, 255, 255, 0.8));
+    border-radius: 16px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+}
+
+.sectionTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $fourth;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &::before {
+        content: '';
+        width: 4px;
+        height: 1.75rem;
+        background: linear-gradient(180deg, $secondary, #10B981);
+        border-radius: 2px;
+    }
+}
+
+.sectionText {
+    font-size: 1rem;
+    color: $third;
+    line-height: 1.8;
+    margin: 0;
+}
+
+// Timeline Styles
+.timelineContainer {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timelineContainer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, $secondary, #10B981, transparent);
+}
+
+.timelineItem {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+
+    &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+}
+
+.timelineMarker {
+    position: absolute;
+    left: -10px;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    background: $primary;
+    border: 3px solid $secondary;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.timelineItem:hover .timelineMarker {
+    background: $secondary;
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+    transform: scale(1.2);
+}
+
+.timelineContent {
+    margin-left: 1rem;
+}
+
+.timelineTitle {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: $fourth;
+    margin: 0 0 0.5rem 0;
+}
+
+.timelineDescription {
+    font-size: 0.95rem;
+    color: $third;
+    line-height: 1.6;
+    margin: 0;
+}
+
+// Interests Grid
+.interestsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.interestCard {
+    padding: 2rem;
+    background: $primary;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: $secondary;
+        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+        transform: translateY(-4px);
+    }
+
+    h3 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: $fourth;
+        margin: 0.75rem 0 0.5rem 0;
+    }
+
+    p {
+        font-size: 0.95rem;
+        color: $third;
+        line-height: 1.6;
+        margin: 0;
+    }
+}
+
+.interestEmoji {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+// Values Container
+.valuesContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.valueItem {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(16, 185, 129, 0.05));
+    border-left: 4px solid $secondary;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+        transform: translateX(4px);
+    }
+
+    h3 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: $fourth;
+        margin: 0 0 0.5rem 0;
+    }
+
+    p {
+        font-size: 0.95rem;
+        color: $third;
+        line-height: 1.6;
+        margin: 0;
+    }
+}
+
+// CTA Section
+.ctaSection {
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, $secondary, #10B981);
+    border-radius: 16px;
+    text-align: center;
+    color: $primary;
+    box-shadow: 0 8px 32px rgba(37, 99, 235, 0.2);
+}
+
+.ctaTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: $primary;
+}
+
+.ctaText {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 0 0 2rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.div__socials {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 0 2rem 0;
+}
+
+.icon__social {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    position: relative;
+
+    &:hover {
+        transform: translateY(-6px) scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.ctaLinks {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ctaButton {
+    padding: 0.75rem 2rem;
+    background: $primary;
+    color: $secondary;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid $primary;
+    display: inline-block;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    &.secondary {
+        background: transparent;
+        color: $primary;
+        border-color: $primary;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    }
+}
+
+// Responsive Design
+@media screen and (max-width: $md) {
+    .pageContainer {
+        padding: 2rem 1rem;
+        min-height: calc(100vh - 100px);
+    }
+
+    .header {
+        margin-bottom: 2rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .content {
+        gap: 2rem;
+    }
+
+    .section {
+        padding: 1.5rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.5rem;
+    }
+
+    .sectionText {
+        font-size: 0.95rem;
+    }
+
+    .interestsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .interestCard {
+        padding: 1.5rem;
+    }
+
+    .valuesContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ctaSection {
+        padding: 2rem 1.5rem;
+    }
+
+    .ctaTitle {
+        font-size: 1.5rem;
+    }
+
+    .ctaLinks {
+        gap: 1rem;
+    }
+
+    .ctaButton {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: $sm) {
+    .pageContainer {
+        padding: 1.5rem 1rem;
+    }
+
+    .header {
+        margin-bottom: 1.5rem;
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .section {
+        padding: 1.25rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.25rem;
+
+        &::before {
+            width: 3px;
+            height: 1.25rem;
+        }
+    }
+
+    .timelineContainer {
+        padding-left: 1.5rem;
+    }
+
+    .timelineContainer::before {
+        left: -3px;
+        width: 1px;
+    }
+
+    .timelineMarker {
+        left: -8px;
+        width: 14px;
+        height: 14px;
+    }
+
+    .interestsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .interestCard {
+        padding: 1.25rem;
+
+        h3 {
+            font-size: 1rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+    }
+
+    .interestEmoji {
+        font-size: 2rem;
+    }
+
+    .valuesContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .ctaSection {
+        padding: 1.5rem 1rem;
+    }
+
+    .ctaTitle {
+        font-size: 1.25rem;
+    }
+
+    .ctaText {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .ctaLinks {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .ctaButton {
+        width: 100%;
+        padding: 0.7rem 1.5rem;
+    }
+}
