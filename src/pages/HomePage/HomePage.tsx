@@ -4,6 +4,8 @@ import { useTypewriter } from "react-simple-typewriter"
 import { SocialIcon } from 'react-social-icons';
 import { SpotifyData } from '../../services/spotify';
 import img_1 from "../../assets/1.png"
+import CVFile from "../../assets/Ensar Ince_cv.pdf"
+import AIChat from '../../components/AIChat'
 
 type Props = {
   nowPlaying: SpotifyData | null
@@ -17,9 +19,19 @@ export default function HomePage({ nowPlaying }: Props) {
     delaySpeed: 3000,
   })
 
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = CVFile;
+    link.download = 'Ensar_Ince_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <>
       <Header />
+      <AIChat />
       <div style={{
         display: "flex",
         flexDirection: "column",
@@ -31,14 +43,6 @@ export default function HomePage({ nowPlaying }: Props) {
         <div className={styles.div__homeContainer}>
           <div className={styles.profileSection}>
             <div className={styles.videoContainer}>
-              {/* <video 
-                    autoPlay
-                    loop 
-                    muted 
-                    id='video'
-                    className={styles.video}>
-                    <source src="./video1.mp4" type="video/mp4" />
-                </video> */}
               <img src={img_1} alt="profile" className={styles.video} />
               <div className={styles.videoOverlay}></div>
             </div>
@@ -47,6 +51,13 @@ export default function HomePage({ nowPlaying }: Props) {
               <div className={styles.p__infoText}>
                 <span>{text}</span>
               </div>
+              <button 
+                className={styles.cvButton}
+                onClick={handleDownloadCV}
+                title="Download my CV"
+              >
+                📄 Download CV
+              </button>
             </div>
           </div>
 
