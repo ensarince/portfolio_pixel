@@ -93,6 +93,7 @@ export interface Climb extends SanityBody{
     _type: "climb"
     title: string
     image: Image
+    youtubeUrl?: string
     location?: string
     difficulty: string
     category: "boulder" | "sport" | "trad" | "alpine";

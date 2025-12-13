@@ -21,6 +21,31 @@ export default function Climbs({ climbs }: Props) {
         return builder.image(source)
     }
 
+    function getYouTubeId(url?: string) {
+        if (!url) return null
+        try {
+            const u = new URL(url)
+            // Handle shorts and normal watch URLs
+            // shorts: /shorts/{id}
+            const shortsMatch = u.pathname.match(/\/shorts\/([^/]+)/)
+            if (shortsMatch) return shortsMatch[1]
+            // watch: v param
+            const v = u.searchParams.get('v')
+            if (v) return v
+            // youtu.be/{id}
+            if (u.hostname.includes('youtu.be')) return u.pathname.replace('/', '')
+            return null
+        } catch {
+            return null
+        }
+    }
+
+    function getYouTubeThumbnail(url?: string) {
+        const id = getYouTubeId(url)
+        if (!id) return null
+        return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+    }
+
     useEffect(() => {
         if (!climbs) return
 
@@ -107,11 +132,21 @@ export default function Climbs({ climbs }: Props) {
                     {filteredClimbs?.map((climb, i) => (
                         <div key={climb._id} className={styles.climbCard} style={{ animationDelay: `${i * 0.1}s` }}>
                             <div className={styles.imageContainer}>
-                                <img
-                                    src={urlFor(climb.image).url()!}
-                                    alt={climb.title}
-                                    className={styles.climbImage}
-                                />
+                                {(['boulder','sport'].includes(climb.category) && getYouTubeThumbnail(climb.youtubeUrl)) ? (
+                                    <a href={climb.youtubeUrl} target="_blank" rel="noopener noreferrer">
+                                        <img
+                                            src={getYouTubeThumbnail(climb.youtubeUrl) as string}
+                                            alt={climb.title}
+                                            className={styles.climbImage}
+                                        />
+                                    </a>
+                                ) : (
+                                    <img
+                                        src={urlFor(climb.image).url()!}
+                                        alt={climb.title}
+                                        className={styles.climbImage}
+                                    />
+                                )}
                                 <div className={styles.imageOverlay}>
                                     <div className={styles.overlayContent}>
                                         {climb.firstAscent && (

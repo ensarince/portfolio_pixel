@@ -27,6 +27,13 @@ export default {
             ]
         },
         {
+            name: "youtubeUrl",
+            title: "YouTube Shorts URL",
+            description: "Link to a YouTube Shorts video showcasing this climb (used for Boulder and Sport)",
+            type: "url",
+            validation: (Rule: any) => Rule.uri({scheme: ['http','https']})
+        },
+        {
             name: "location",
             title: "Location",
             description: "Where the climb is located (e.g., 'Yosemite, California')",
