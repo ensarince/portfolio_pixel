@@ -43,9 +43,9 @@ export default function Climbs({ climbs }: Props) {
 
     const getCategoryInfo = (category: string) => {
         const categoryMap = {
-            boulder: { icon: '🪨', name: 'Bouldering', color: '#F97316', difficulty: 'V-Scale' },
-            sport: { icon: '🧗', name: 'Sport Climbing', color: '#3B82F6', difficulty: 'YDS' },
-            trad: { icon: '⚙️', name: 'Traditional', color: '#10B981', difficulty: 'YDS' },
+            boulder: { icon: '🪨', name: 'Bouldering', color: '#F97316', difficulty: 'French' },
+            sport: { icon: '🧗', name: 'Sport Climbing', color: '#3B82F6', difficulty: 'French' },
+            trad: { icon: '⚙️', name: 'Traditional', color: '#10B981', difficulty: 'French' },
             alpine: { icon: '🏔️', name: 'Alpine/Mountaineering', color: '#8B5CF6', difficulty: 'Alpine' },
         }
         return categoryMap[category as keyof typeof categoryMap] || { icon: '🧗', name: category, color: '#6B7280', difficulty: '' }
