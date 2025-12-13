@@ -140,12 +140,16 @@ export default function Climbs({ climbs }: Props) {
                                             className={styles.climbImage}
                                         />
                                     </a>
-                                ) : (
+                                ) : climb.image ? (
                                     <img
-                                        src={urlFor(climb.image).url()!}
+                                        src={urlFor(climb.image)?.url()!}
                                         alt={climb.title}
                                         className={styles.climbImage}
                                     />
+                                ) : (
+                                    <div className={styles.climbImage} style={{display:'flex',alignItems:'center',justifyContent:'center',background:'#f3f4f6',color:'#6b7280'}}>
+                                        {getCategoryInfo(climb.category).icon} No media
+                                    </div>
                                 )}
                                 <div className={styles.imageOverlay}>
                                     <div className={styles.overlayContent}>
@@ -163,10 +167,18 @@ export default function Climbs({ climbs }: Props) {
 
                             <div className={styles.climbContent}>
                                 <div className={styles.climbHeader}>
-                                    <h3 className={styles.climbTitle}>{climb.title}</h3>
+                                    <h3 className={styles.climbTitle}>
+                                        {climb.title}
+                                    </h3>
                                     <div className={styles.badges}>
                                         {climb.featured && (
                                             <span className={styles.featuredBadge}>⭐ Featured</span>
+                                        )}
+                                        {(['boulder','sport'].includes(climb.category) && climb.youtubeUrl) && (
+                                            <a className={styles.watchBadge} href={climb.youtubeUrl} target="_blank" rel="noopener noreferrer">
+                                                <span className={styles.youtubeIcon}>▶</span>
+                                                Watch
+                                            </a>
                                         )}
                                         <span
                                             className={styles.categoryBadge}

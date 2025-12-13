@@ -6,6 +6,7 @@ export const getClimbs = async (): Promise<Climb[]> => {
     _id,
     title,
     image,
+    youtubeUrl,
     location,
     difficulty,
     category,

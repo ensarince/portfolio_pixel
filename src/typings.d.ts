@@ -92,7 +92,7 @@ export interface Gallery extends SanityBody{
 export interface Climb extends SanityBody{
     _type: "climb"
     title: string
-    image: Image
+    image?: Image
     youtubeUrl?: string
     location?: string
     difficulty: string
