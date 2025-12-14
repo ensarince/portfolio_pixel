@@ -27,48 +27,46 @@
 
 .filterContainer {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
 }
 
 .categoryButton {
-    background: $fifth;
-    color: $fourth;
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
-    border: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: $primary;
+    border: 2px solid #E5E7EB;
+    color: $third;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    text-transform: none;
+    white-space: nowrap;
+    width: fit-content;
+    flex-shrink: 0;
 }
 
-.categoryButton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.categoryButton:hover::before {
-    left: 100%;
-}
-
-.categoryButton:hover,
-.categoryButton.active {
-    background: $secondary;
-    color: white;
+.categoryButton:hover {
+    background: $fifth;
     border-color: $secondary;
+    color: $fourth;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.categoryButton.active {
+    background: linear-gradient(45deg, #10B981, #3B82F6);
+    color: white;
+    border-color: #10B981;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .container {
@@ -234,47 +232,61 @@
     .pageContainer {
         padding: 2rem 1rem;
     }
-    
+
     .title {
         font-size: 2rem;
     }
-    
+
     .container {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 2rem;
     }
-    
+
     .filterContainer {
-        gap: 0.75rem;
+        gap: 0.5rem;
     }
-    
+
     .categoryButton {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+        padding: 0.625rem 1rem;
+        font-size: 0.8125rem;
+        white-space: normal;
     }
 }
 
 @media screen and (max-width: $sm) {
+    .pageContainer {
+        padding: 1.5rem 1rem;
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+
     .container {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .imageContainer {
         height: 200px;
     }
-    
+
     .postContent {
         padding: 1.5rem;
     }
-    
+
     .postTitle {
         font-size: 1.25rem;
     }
-    
+
     .filterContainer {
-        flex-direction: column;
-        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .categoryButton {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        white-space: normal;
+        flex-shrink: 1;
     }
 }
-

@@ -22,8 +22,6 @@ const AIChat: React.FC<ChatProps> = ({ isOpen: initialOpen = false, onClose }) =
     const [hasAutoOpened, setHasAutoOpened] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    console.log(portfolioContext)
-
     // Fetch portfolio data on mount
     useEffect(() => {
         const initializeContext = async () => {
