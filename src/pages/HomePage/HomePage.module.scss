@@ -1,5 +1,16 @@
 @import "../../assets/variables";
 
+.pageWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 1rem;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .div__homeContainer {
     display: flex;
     padding: 2rem 1.5rem;
@@ -350,12 +361,19 @@
 
 // Responsive Design
 @media screen and (max-width: 480px) {
+    .pageWrapper {
+        padding: 1rem 0.5rem;
+        min-height: auto;
+    }
+
     .div__homeContainer {
         padding: 1.5rem 1rem;
         gap: 1rem;
-        width: 95%;
-        margin: 1rem auto;
-        min-height: calc(100vh - 100px);
+        width: 100%;
+        margin: 0 auto;
+        min-height: auto;
+        max-width: calc(100% - 2rem);
+        border-radius: 16px;
     }
 
     .profileSection {
@@ -373,13 +391,13 @@
     }
 
     .div__socials {
-        gap: 1.5rem;
+        gap: 0.75rem;
     }
 
     .icon__social {
-        width: 50px !important;
-        height: 50px !important;
-        transform: scale(1.2);
+        width: 36px !important;
+        height: 36px !important;
+        transform: scale(1);
     }
 
     .div__spotify {
@@ -413,8 +431,10 @@
     .div__homeContainer {
         padding: 2rem 1.5rem;
         gap: 1.25rem;
-        width: 90%;
-        min-height: calc(100vh - 110px);
+        width: 100%;
+        max-width: calc(100% - 3rem);
+        margin: 0 auto;
+        min-height: auto;
     }
 
     .video {
@@ -428,13 +448,13 @@
     }
 
     .div__socials {
-        gap: 1.25rem;
+        gap: 1rem;
     }
 
     .icon__social {
-        width: 45px !important;
-        height: 45px !important;
-        transform: scale(1.1);
+        width: 40px !important;
+        height: 40px !important;
+        transform: scale(1);
     }
 
     .div__playingScreen {

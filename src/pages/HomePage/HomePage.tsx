@@ -32,14 +32,7 @@ export default function HomePage({ nowPlaying }: Props) {
     <>
       <Header />
       <AIChat />
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "1rem",
-        alignItems: "center",
-        minHeight: "calc(100vh - 80px)"
-      }}>
+      <div className={styles.pageWrapper}>
         <div className={styles.div__homeContainer}>
           <div className={styles.profileSection}>
             <div className={styles.videoContainer}>
@@ -51,7 +44,7 @@ export default function HomePage({ nowPlaying }: Props) {
               <div className={styles.p__infoText}>
                 <span>{text}</span>
               </div>
-              <button 
+              <button
                 className={styles.cvButton}
                 onClick={handleDownloadCV}
                 title="Download my CV"
