@@ -238,10 +238,18 @@
 }
 
 @media screen and (max-width: $sm) {
+    .container {
+        padding: 0.5rem 1rem;
+    }
+
     .gallery {
         columns: 1;
         column-gap: 0;
     }
+
+    .title {
+        font-size: 1.75rem;
+    }   
     
     .galleryItem {
         margin-bottom: 2rem;
