@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import styles from "./BlogPostPage.module.scss"
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Header from '../../components/Header'
 import { BlogPost } from '../../typings'
 import { sanityClient } from '../../sanity'
@@ -8,6 +8,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { PortableText } from '@portabletext/react'
 import { CircularProgress } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 type Props = {
   posts: BlogPost[] | undefined
@@ -16,6 +17,7 @@ type Props = {
 function BlogPostPage({ posts }: Props) {
 
   const { id } = useParams()
+  const navigate = useNavigate()
   const [post, setPost] = useState<any>()
 
   useEffect(() => {
@@ -32,6 +34,13 @@ function BlogPostPage({ posts }: Props) {
   return (
     <>
       <Header />
+      <button
+        className={styles.backButton}
+        onClick={() => navigate('/blog')}
+        aria-label="Back to blog posts"
+      >
+        <ArrowBackIcon />
+      </button>
       {post ?
         <div className={styles.container}>
           <div className={styles.post}>

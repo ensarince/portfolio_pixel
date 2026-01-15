@@ -57,10 +57,10 @@ export default function HomePage({ nowPlaying }: Props) {
           <div className={styles.socialSection}>
             <div className={styles.div__socials}>
               <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='mailto:ensrnce@gmail.com' />
-              <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='https://github.com/ensarince' />
-              <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='https://www.linkedin.com/in/ensar-ince-67a580155/' />
-              <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='https://www.instagram.com/rakionrocks' />
-              <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g' />
+              <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='https://github.com/ensarince' target='_blank' rel='noopener noreferrer' />
+              <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='https://www.linkedin.com/in/ensar-ince-67a580155/' target='_blank' rel='noopener noreferrer' />
+              <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='https://www.instagram.com/rakionrocks' target='_blank' rel='noopener noreferrer' />
+              <SocialIcon fgColor='#FFFFFF' className={styles.icon__social} bgColor='#1F2937' url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g' target='_blank' rel='noopener noreferrer' />
             </div>
           </div>
 
