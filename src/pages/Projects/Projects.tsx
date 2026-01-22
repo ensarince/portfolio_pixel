@@ -164,7 +164,7 @@ export default function Projects({ projects }: Props) {
                   {project?.technologies?.map(technology => (
                     <span key={technology._id} className={styles.techTag}>
                       <img
-                        src={urlFor(technology.image).url()!}
+                        src={urlFor(technology.image)?.url()!}
                         alt={technology.title}
                         className={styles.techIcon}
                       />
