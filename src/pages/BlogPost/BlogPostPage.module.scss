@@ -2,49 +2,43 @@
 
 .backButton {
     position: fixed;
-    top: 6rem;
-    left: 2rem;
-    background-color: $fifth;
-    color: $fourth;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #E5E7EB;
-    font-size: 1.5rem;
-    font-weight: 500;
+    top: 4.5rem;
+    left: 1.5rem;
+    background: rgba(244, 239, 230, 0.9);
+    color: rgba(28, 24, 20, 0.5);
+    padding: 0;
+    border-radius: 4px;
+    border: 1px solid rgba(28, 24, 20, 0.12);
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(12px);
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
 
     &:hover {
-        background-color: $secondary;
-        color: $primary;
-        border-color: $secondary;
-        transform: translateX(-3px);
+        background: rgba(192, 66, 27, 0.08);
+        border-color: rgba(192, 66, 27, 0.28);
+        color: $secondary;
+        transform: translateX(-2px);
     }
 }
 
-@media screen and (max-width: $sm) {
-    .backButton {
-        top: 5rem;
-        left: 1rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 1.25rem;
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-}
-
-.container {
-    padding: 2rem;
+.loading {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60vh;
+}
+
+.container {
+    padding: 3rem 2rem 6rem;
+    display: flex;
+    justify-content: center;
     margin: 0 auto;
     max-width: 1200px;
 }
@@ -52,109 +46,227 @@
 .post {
     display: flex;
     flex-direction: column;
-    background: $primary;
-    color: $fourth;
-    font-size: 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    border: 1px solid #E5E7EB;
-    border-radius: 12px;
-    padding: 3rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 800px;
+    max-width: 720px;
+}
+
+// ── Title & Meta ────────────────────────────────────────────────────────────
+
+.postTitle {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    font-style: italic;
+    margin: 0 0 1.25rem;
+    color: $fourth;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+}
+
+.postSummary {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.125rem;
+    font-style: italic;
+    color: $third;
+    line-height: 1.75;
+    margin: 0 0 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(28, 24, 20, 0.1);
 }
 
 .postImage {
     width: 100%;
-    max-width: 600px;
-    border-radius: 8px;
-    margin: 2rem auto;
+    border-radius: 4px;
+    margin: 0 0 2.5rem;
     object-fit: cover;
+    display: block;
+    filter: grayscale(8%);
+    box-shadow: 0 4px 24px rgba(28, 24, 20, 0.1);
 }
 
-.postTitle {
-    font-size: 2.25rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    color: $fourth;
-    line-height: 1.2;
-    text-align: left;
+// ── Body copy (PortableText output) ─────────────────────────────────────────
+
+.postBody {
+    // Paragraphs
+    p {
+        font-family: 'Lora', Georgia, serif;
+        font-size: 1.0625rem;
+        line-height: 1.9;
+        color: rgba(28, 24, 20, 0.8);
+        margin: 0 0 1.6rem;
+    }
+
+    // Headings
+    h1, h2, h3, h4, h5 {
+        font-family: 'Fraunces', Georgia, serif;
+        font-style: italic;
+        color: $fourth;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        margin: 2.5rem 0 0.875rem;
+    }
+
+    h1 { font-size: 2rem; font-weight: 700; }
+    h2 { font-size: 1.625rem; font-weight: 700; }
+    h3 { font-size: 1.3125rem; font-weight: 600; }
+    h4 { font-size: 1.125rem; font-weight: 600; }
+
+    // Blockquote
+    blockquote {
+        border-left: 2px solid $secondary;
+        padding: 0.875rem 1.5rem;
+        margin: 2rem 0;
+        background: rgba(192, 66, 27, 0.04);
+        border-radius: 0 3px 3px 0;
+
+        p {
+            font-style: italic;
+            color: $third;
+            margin: 0;
+            font-size: 1.0625rem;
+        }
+    }
+
+    // Lists
+    ul, ol {
+        padding-left: 1.625rem;
+        margin: 0 0 1.6rem;
+    }
+
+    li {
+        font-family: 'Lora', Georgia, serif;
+        font-size: 1.0625rem;
+        line-height: 1.8;
+        color: rgba(28, 24, 20, 0.8);
+        margin-bottom: 0.5rem;
+    }
+
+    ul li::marker { color: $secondary; }
+    ol li::marker {
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        font-size: 0.875rem;
+        color: $secondary;
+    }
+
+    // Links
+    a {
+        color: $secondary;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+        transition: opacity 0.15s ease;
+        cursor: pointer;
+
+        &:hover { opacity: 0.7; }
+    }
+
+    // Inline emphasis
+    strong { font-weight: 700; color: $fourth; }
+    em { font-style: italic; }
+
+    // Inline code
+    code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 0.875em;
+        background: rgba(28, 24, 20, 0.07);
+        padding: 0.15em 0.4em;
+        border-radius: 3px;
+        color: $secondary;
+    }
+
+    // Code block
+    pre {
+        background: #1C1814;
+        padding: 1.5rem 1.75rem;
+        border-radius: 4px;
+        overflow-x: auto;
+        margin: 1.75rem 0;
+
+        code {
+            background: none;
+            color: rgba(237, 232, 220, 0.85);
+            font-size: 0.9rem;
+            padding: 0;
+            border-radius: 0;
+        }
+    }
+
+    // Horizontal rule
+    hr {
+        border: none;
+        border-top: 1px solid rgba(28, 24, 20, 0.1);
+        margin: 2.5rem 0;
+    }
+
+    // Images inside body (Sanity portable text)
+    img {
+        max-width: 100%;
+        border-radius: 4px;
+        margin: 1.5rem 0;
+        display: block;
+    }
 }
 
-.postText {
-    white-space: pre-wrap;
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: $fourth;
-    margin: 1.5rem 0;
-}
+// ── Footer ──────────────────────────────────────────────────────────────────
 
-.postSummary {
+.postFooter {
     display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    margin: 0 0 2rem 0;
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: $third;
-    line-height: 1.5;
-}
-
-.postCategory {
-    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 1rem 0 0 0;
-    font-weight: 400;
-    font-size: 0.875rem;
-    color: $third;
-}
-
-.buttonContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1.5rem 0 0 0;
     flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgba(28, 24, 20, 0.08);
 }
 
-.categoryButton {
-    background-color: $fifth;
-    color: $fourth;
+.postDate {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $third;
+    opacity: 0.55;
+}
+
+.backLinkBottom {
+    background: transparent;
+    border: 1px solid rgba(28, 24, 20, 0.12);
+    color: $third;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: 1px solid #E5E7EB;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    border-radius: 3px;
     cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+        border-color: rgba(192, 66, 27, 0.28);
+        color: $secondary;
+        background: rgba(192, 66, 27, 0.05);
+    }
 }
 
-.categoryButton:hover {
-    background-color: $secondary;
-    color: $primary;
-    border-color: $secondary;
-}
+// ── Responsive ──────────────────────────────────────────────────────────────
 
 @media screen and (max-width: $sm) {
-    .container {
-        padding: 1rem;
+    .backButton { top: 4rem; left: 1rem; width: 2.25rem; height: 2.25rem; }
+    .container { padding: 2rem 1rem 4rem; }
+    .postTitle { font-size: 1.875rem; }
+    .postSummary { font-size: 1rem; padding: 1rem 1.25rem; }
+    .postBody {
+        p, li { font-size: 1rem; line-height: 1.85; }
+        h2 { font-size: 1.375rem; }
+        h3 { font-size: 1.1875rem; }
+        pre { padding: 1.25rem; }
     }
+}
 
-    .title {
-        font-size: 1.75rem;
-    }
-
-    .post {
-        padding: 2rem 1.5rem;
-    }
-
-    .postTitle {
-        font-size: 1.875rem;
-    }
-
-    .postText {
-        font-size: 1rem;
-    }
+@media screen and (max-width: $xs) {
+    .postTitle { font-size: 1.625rem; }
 }

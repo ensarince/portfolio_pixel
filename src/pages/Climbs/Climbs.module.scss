@@ -13,19 +13,25 @@
 }
 
 .title {
-    font-size: 2.5rem;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 3.25rem;
     font-weight: 700;
+    font-style: italic;
     color: $fourth;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+    line-height: 1;
 }
 
 .subtitle {
-    font-size: 1.125rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
     color: $third;
-    margin: 0;
-    max-width: 600px;
     margin: 0 auto;
+    max-width: 560px;
     line-height: 1.6;
+    letter-spacing: 0.04em;
+    opacity: 0.55;
 }
 
 .filterContainer {
@@ -33,273 +39,271 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
     padding: 0 1rem;
 }
 
 .filterButton {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background: $primary;
-    border: 2px solid #E5E7EB;
+    gap: 0.375rem;
+    background: transparent;
+    border: 1px solid rgba(28, 24, 20, 0.12);
     color: $third;
-    padding: 0.75rem 1.25rem;
-    border-radius: 50px;
-    font-size: 0.875rem;
-    font-weight: 600;
+    padding: 0.4375rem 1rem;
+    border-radius: 3px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: none;
+    transition: all 0.15s ease;
     white-space: nowrap;
-    width: fit-content;
-    flex-shrink: 0;
 
     &:hover {
-        background: $fifth;
-        border-color: $secondary;
+        background: rgba(28, 24, 20, 0.05);
+        border-color: rgba(28, 24, 20, 0.22);
         color: $fourth;
-        transform: translateY(-2px);
     }
 
     &.active {
-        background: linear-gradient(45deg, #10B981, #3B82F6);
-        color: white;
-        border-color: #10B981;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        background: rgba(78, 122, 87, 0.1);
+        color: #4E7A57;
+        border-color: rgba(78, 122, 87, 0.28);
     }
 }
 
-.filterIcon {
-    font-size: 1rem;
-}
+.filterIcon { font-size: 0.875rem; }
 
 .resultsInfo {
     text-align: center;
     margin-bottom: 2rem;
-
     p {
+        font-family: 'Syne', sans-serif;
         color: $third;
-        font-size: 0.875rem;
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
         margin: 0;
-        font-weight: 500;
+        opacity: 0.4;
     }
 }
 
 .climbsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2.5rem;
+    gap: 1.5rem;
     margin-bottom: 3rem;
 }
 
 .climbCard {
-    background: $primary;
-    border-radius: 20px;
+    background: $fifth;
+    border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid #E5E7EB;
+    border: 1px solid rgba(28, 24, 20, 0.08);
     position: relative;
-    animation: slideUp 0.6s ease-out forwards;
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(16px);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 
     &:hover {
-        transform: translateY(-12px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        border-color: #10B981;
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(28, 24, 20, 0.12);
+        border-color: rgba(78, 122, 87, 0.2);
     }
 }
 
 @keyframes slideUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .imageContainer {
     position: relative;
     height: 280px;
     overflow: hidden;
+    background: $primary;
 }
 
 .climbImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: transform 0.5s ease;
+    filter: grayscale(15%);
 }
 
 .climbCard:hover .climbImage {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    filter: grayscale(0%);
 }
 
 .imageOverlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(16, 185, 129, 0.9), rgba(59, 130, 246, 0.9));
+    inset: 0;
+    background: rgba(28, 24, 20, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: opacity 0.25s ease;
 }
 
-.climbCard:hover .imageOverlay {
-    opacity: 1;
-}
+.climbCard:hover .imageOverlay { opacity: 1; }
 
 .overlayContent {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
     align-items: center;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+    transform: translateY(12px);
+    transition: transform 0.25s ease;
 }
 
-.climbCard:hover .overlayContent {
-    transform: translateY(0);
-}
+.climbCard:hover .overlayContent { transform: translateY(0); }
 
 .firstAscentBadge {
-    color: white;
-    font-size: 0.875rem;
+    color: rgba(237, 232, 220, 0.75);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.5625rem;
     font-weight: 700;
-    padding: 0.5rem 1rem;
-    border: 2px solid white;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid rgba(237, 232, 220, 0.2);
+    border-radius: 2px;
+    background: rgba(237, 232, 220, 0.06);
 }
 
 .difficultyBadge {
-    color: white;
-    font-size: 1.25rem;
+    color: #EDE8DC;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.625rem;
     font-weight: 700;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    border: 3px solid white;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-style: italic;
+    padding: 0.5rem 1.375rem;
+    border-radius: 4px;
+    border: 1px solid rgba(78, 122, 87, 0.4);
+    background: rgba(78, 122, 87, 0.12);
+    letter-spacing: -0.01em;
 }
 
-.climbContent {
-    padding: 2rem;
-}
+.climbContent { padding: 1.75rem 2rem; }
 
-.climbHeader {
-    margin-bottom: 1.5rem;
-}
+.climbHeader { margin-bottom: 1.125rem; }
 
 .climbTitle {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.375rem;
+    font-weight: 600;
     color: $fourth;
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.875rem;
     line-height: 1.3;
+    letter-spacing: -0.01em;
 }
 
 .youtubeIcon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
-    border-radius: 3px;
-    background: #FFFFFF;
-    color: #FF0000;
-    font-size: 12px;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    background: rgba(255, 0, 0, 0.1);
+    color: #CC2200;
+    font-size: 9px;
     font-weight: 900;
-    line-height: 1;
+    border: 1px solid rgba(255, 0, 0, 0.18);
 }
 
 .badges {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.375rem;
     align-items: center;
 }
 
 .featuredBadge {
-    background: linear-gradient(45deg, #F59E0B, #F97316);
-    color: white;
-    padding: 0.375rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    background: rgba(176, 125, 41, 0.1);
+    color: #B07D29;
+    padding: 0.25rem 0.625rem;
+    border-radius: 2px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.5rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.12em;
+    border: 1px solid rgba(176, 125, 41, 0.22);
 }
 
 .categoryBadge {
-    padding: 0.375rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: $fourth;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.25rem 0.625rem;
+    border-radius: 2px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: $third;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid rgba(28, 24, 20, 0.1);
+    background: rgba(28, 24, 20, 0.04);
 }
 
 .watchBadge {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background: linear-gradient(45deg, #FF0000, #CC0000);
-    color: white;
-    padding: 0.375rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
+    gap: 4px;
+    background: rgba(204, 0, 0, 0.07);
+    color: #CC2200;
+    padding: 0.25rem 0.625rem;
+    border-radius: 2px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.5rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.1em;
     text-decoration: none;
-    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.25);
+    border: 1px solid rgba(204, 0, 0, 0.18);
 }
 
 .location {
-    font-size: 0.875rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     color: $third;
-    margin-bottom: 1rem;
-    font-weight: 500;
+    margin-bottom: 0.875rem;
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    opacity: 0.6;
 }
 
 .climbDescription {
+    font-family: 'Lora', Georgia, serif;
     font-size: 0.875rem;
     color: $third;
-    line-height: 1.6;
-    margin: 0 0 1.5rem 0;
+    line-height: 1.7;
+    margin: 0 0 1.125rem;
+    opacity: 0.75;
 }
 
 .climbDetails {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+    margin-bottom: 1.125rem;
 }
 
 .detail {
-    font-size: 0.875rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
     color: $third;
-
-    strong {
-        color: $fourth;
-        font-weight: 600;
-    }
+    opacity: 0.65;
+    strong { color: $fourth; font-weight: 700; opacity: 1; }
 }
 
 .gradeInfo {
@@ -307,165 +311,64 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1rem;
-    background: $fifth;
-    border-radius: 12px;
-    border: 1px solid #E5E7EB;
+    padding: 0.875rem 1.125rem;
+    background: rgba(28, 24, 20, 0.04);
+    border-radius: 3px;
+    border: 1px solid rgba(28, 24, 20, 0.07);
 }
 
 .gradeBadge {
-    color: white;
-    font-size: 1rem;
+    color: $fourth;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.0625rem;
     font-weight: 700;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 0.375rem 0.875rem;
+    border-radius: 3px;
+    letter-spacing: -0.01em;
 }
 
 .gradeSystem {
-    font-size: 0.875rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.5625rem;
+    font-weight: 700;
     color: $third;
-    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
 }
 
 .emptyState {
     text-align: center;
     padding: 4rem 2rem;
     color: $third;
-
-    .emptyIcon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-
+    .emptyIcon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.35; }
     h3 {
+        font-family: 'Fraunces', Georgia, serif;
         font-size: 1.5rem;
         color: $fourth;
-        margin: 0 0 0.5rem 0;
+        margin: 0 0 0.5rem;
         font-weight: 600;
+        letter-spacing: -0.01em;
     }
-
-    p {
-        margin: 0;
-        font-size: 1rem;
-    }
-}
-
-@media screen and (max-width: 640px) {
-    .filterContainer {
-        grid-template-columns: repeat(auto-fit, minmax(80px, max-content));
-        gap: 0.5rem;
-        padding: 0 0.5rem;
-    }
-
-    .filterButton {
-        padding: 0.625rem 1rem;
-        font-size: 0.75rem;
-    }
+    p { font-family: 'Lora', Georgia, serif; margin: 0; font-size: 0.9375rem; opacity: 0.65; }
 }
 
 @media screen and (max-width: $md) {
-    .pageContainer {
-        padding: 2rem 1rem;
-    }
-
-    .title {
-        font-size: 2rem;
-    }
-
-    .subtitle {
-        font-size: 1rem;
-    }
-
-    .filterContainer {
-        padding: 0;
-        gap: 0.5rem;
-    }
-
-    .filterButton {
-        padding: 0.625rem 1rem;
-        font-size: 0.8125rem;
-        white-space: normal;
-    }
-
-    .climbsGrid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-
-    .climbContent {
-        padding: 1.5rem;
-    }
-
-    .climbDetails {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
-
-    .imageContainer {
-        height: 240px;
-    }
+    .pageContainer { padding: 2rem 1rem; }
+    .title { font-size: 2.5rem; }
+    .filterContainer { padding: 0; }
+    .climbsGrid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+    .climbContent { padding: 1.5rem; }
+    .climbDetails { grid-template-columns: 1fr; }
+    .imageContainer { height: 240px; }
 }
 
 @media screen and (max-width: $sm) {
-    .pageContainer {
-        padding: 0.5rem 1rem;
-    }
-
-    .title {
-        font-size: 1.75rem;
-    }
-
-    .filterContainer {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .filterButton {
-        padding: 0.5rem 1rem;
-        font-size: 0.75rem;
-        white-space: normal;
-        flex-shrink: 1;
-    }
-
-    .climbsGrid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .imageContainer {
-        height: 200px;
-    }
-
-    .climbContent {
-        padding: 1.25rem;
-    }
-
-    .climbTitle {
-        font-size: 1.25rem;
-    }
-
-    .badges {
-        justify-content: center;
-    }
-
-    .overlayContent {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-    }
-
-    .difficultyBadge {
-        font-size: 1rem;
-        padding: 0.625rem 1.25rem;
-    }
-
-    .gradeInfo {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.75rem;
-    }
+    .pageContainer { padding: 1rem; }
+    .title { font-size: 2rem; }
+    .climbsGrid { grid-template-columns: 1fr; gap: 1rem; }
+    .imageContainer { height: 200px; }
+    .climbContent { padding: 1.25rem; }
+    .climbTitle { font-size: 1.25rem; }
+    .gradeInfo { flex-direction: column; text-align: center; gap: 0.5rem; }
 }

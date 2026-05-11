@@ -1,12 +1,11 @@
 @import "../assets/variables";
 
 .skillCard {
-    background: $primary;
-    border: 1px solid #E5E7EB;
-    border-radius: 16px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: $fifth;
+    border: 1px solid rgba(28, 24, 20, 0.08);
+    border-radius: 4px;
+    padding: 1.75rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
     position: relative;
     overflow: hidden;
 }
@@ -17,102 +16,100 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, $secondary, #3B82F6, #10B981);
+    height: 1.5px;
+    background: linear-gradient(90deg, $secondary, $gold);
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
     transform-origin: left;
 }
 
 .skillCard:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-    border-color: $secondary;
+    transform: translateY(-3px);
+    border-color: rgba(192, 66, 27, 0.18);
+    box-shadow: 0 6px 24px rgba(28, 24, 20, 0.08);
 }
 
-.skillCard:hover::before {
-    transform: scaleX(1);
-}
+.skillCard:hover::before { transform: scaleX(1); }
 
 .skillHeader {
     display: flex;
     align-items: center;
-    margin-bottom: 1.5rem;
-    gap: 1rem;
+    margin-bottom: 1.25rem;
+    gap: 0.875rem;
 }
 
 .skillIconContainer {
-    width: 60px;
-    height: 60px;
-    background: $fifth;
-    border-radius: 12px;
+    width: 52px;
+    height: 52px;
+    background: rgba(28, 24, 20, 0.04);
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    border: 1px solid rgba(28, 24, 20, 0.07);
 }
 
 .skillImage {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
 }
 
-.skillInfo {
-    flex: 1;
-    min-width: 0;
-}
+.skillInfo { flex: 1; min-width: 0; }
 
 .skillTitle {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 700;
     color: $fourth;
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.25rem;
+    letter-spacing: 0.01em;
 }
 
 .skillLevel {
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.5625rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.12em;
+    color: $third;
+    opacity: 0.55;
 }
 
 .skillPercentage {
-    font-size: 1.5rem;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.625rem;
     font-weight: 700;
     color: $fourth;
     flex-shrink: 0;
+    letter-spacing: -0.02em;
+    opacity: 0.85;
 }
 
-.progressContainer {
-    position: relative;
-}
+.progressContainer { position: relative; }
 
 .progressBackground {
     width: 100%;
-    height: 8px;
-    background: #F3F4F6;
-    border-radius: 4px;
+    height: 3px;
+    background: rgba(28, 24, 20, 0.09);
+    border-radius: 2px;
     overflow: hidden;
 }
 
 .progressBar {
     height: 100%;
-    border-radius: 4px;
-    transition: width 1s ease-out;
+    border-radius: 2px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    background: linear-gradient(90deg, currentColor, currentColor);
 }
 
 .progressBar::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer 2s infinite;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 2.5s infinite;
 }
 
 @keyframes shimmer {
@@ -120,32 +117,11 @@
     100% { transform: translateX(100%); }
 }
 
-// Responsive Design
 @media screen and (max-width: $sm) {
-    .skillCard {
-        padding: 1.5rem;
-    }
-    
-    .skillHeader {
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-    }
-    
-    .skillIconContainer {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .skillImage {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .skillTitle {
-        font-size: 1.125rem;
-    }
-    
-    .skillPercentage {
-        font-size: 1.25rem;
-    }
+    .skillCard { padding: 1.375rem; }
+    .skillHeader { gap: 0.75rem; margin-bottom: 1rem; }
+    .skillIconContainer { width: 44px; height: 44px; border-radius: 5px; }
+    .skillImage { width: 26px; height: 26px; }
+    .skillTitle { font-size: 0.875rem; }
+    .skillPercentage { font-size: 1.375rem; }
 }

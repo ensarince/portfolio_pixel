@@ -1,9 +1,11 @@
-// _variables.scss - Professional Minimal Design
-$primary: #FFFFFF;        // White background
-$secondary: #2563EB;      // Professional blue for accents
-$third: #6B7280;          // Gray for secondary text
-$fourth: #1F2937;         // Dark gray for main text
-$fifth: #F3F4F6;          // Light gray for subtle backgrounds
+// _variables.scss — Warm Stone Design System
+
+$primary: #F4EFE6;      // warm parchment background
+$secondary: #C0421B;    // burnt terracotta accent
+$third: #7A6E62;        // warm muted text
+$fourth: #1C1814;       // deep warm charcoal (primary text)
+$fifth: #EDE8DF;        // card / elevated surface
+$gold: #B07D29;         // warm gold accent
 
 $xs: 320px;
 $sm: 481px;
@@ -23,4 +25,3 @@ $xl: 1201px;
     lg: $lg;
     xl: $xl;
 }
-
