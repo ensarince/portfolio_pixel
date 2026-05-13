@@ -62,7 +62,7 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
   return (
     <>
       <Header />
-      <AIChat />
+    {/*   <AIChat /> */}
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className={styles.hero}>
