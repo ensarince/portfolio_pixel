@@ -4,7 +4,6 @@ import styles from "./Header.module.scss"
 
 const NAV_ITEMS = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
   { to: '/portfolio', label: 'Portfolio' },
   { to: '/skills', label: 'Skills' },
   { to: '/blog', label: 'Blog' },

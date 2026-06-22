@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.scss'
-import About from './pages/About/About'
 import Blog from './pages/Blog/Blog'
 import BlogPostPage from './pages/BlogPost/BlogPostPage'
 import Climbs from './pages/Climbs/Climbs'
@@ -57,7 +56,6 @@ function App() {
                 />
               }
             />
-            <Route path='/about' element={<About />} />
             <Route path='/portfolio' element={<Projects projects={projects} />} />
             <Route path='/skills' element={<Skills skills={skills} />} />
             <Route path='/blog' element={<Blog posts={posts} />} />

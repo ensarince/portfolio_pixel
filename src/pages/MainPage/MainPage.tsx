@@ -9,6 +9,7 @@ import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { BlogPost, Project, Skill as SkillType } from '../../typings'
 import { SpotifyData } from '../../services/spotify'
 import img_1 from '../../assets/1.png'
+import img_2 from '../../assets/2.jpg'
 import CVFile from '../../assets/Ensar Ince_cv.pdf'
 import styles from './MainPage.module.scss'
 
@@ -228,8 +229,9 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
                 "I build things that are fast, honest, and worth the user's time."
               </blockquote>
               <p className={styles.aboutBio}>
-                Full-stack developer with a background in TypeScript, React, and backend systems.
-                When I'm not writing code, I'm climbing rock faces and writing about both.
+                Full-stack developer based in Germany, building fast and thoughtful digital products.
+                I work across the stack — TypeScript, React, Node — and care about code that's clean and worth maintaining.
+                Outside of work I'm usually on a rock face somewhere.
               </p>
               <div className={styles.aboutTags}>
                 <span>Developer</span>
@@ -238,24 +240,10 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
                 <span className={styles.tagDot}>·</span>
                 <span>Writer</span>
               </div>
-              <Link to="/about" className={styles.viewAllLinkLight}>
-                Full story <span>→</span>
-              </Link>
             </div>
             <div className={styles.aboutRight} data-reveal="right">
-              <div className={styles.aboutExperience}>
-                <div className={styles.expItem}>
-                  <span className={styles.expNum}>3+</span>
-                  <span className={styles.expLabel}>Years building</span>
-                </div>
-                <div className={styles.expItem}>
-                  <span className={styles.expNum}>10+</span>
-                  <span className={styles.expLabel}>Projects shipped</span>
-                </div>
-                <div className={styles.expItem}>
-                  <span className={styles.expNum}>∞</span>
-                  <span className={styles.expLabel}>Routes climbed</span>
-                </div>
+              <div className={styles.aboutImageWrap}>
+                <img src={img_2} alt="Ensar Ince" className={styles.aboutImage} />
               </div>
             </div>
           </div>
