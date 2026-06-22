@@ -2,14 +2,13 @@
 
 .pageContainer {
     padding: 3rem 2rem;
-    max-width: 1400px;
+    max-width: 960px;
     margin: 0 auto;
     min-height: calc(100vh - 120px);
 }
 
 .header {
-    text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .title {
@@ -18,39 +17,45 @@
     font-weight: 700;
     font-style: italic;
     color: $fourth;
-    margin-bottom: 0.5rem;
+    margin: 0;
     letter-spacing: -0.025em;
     line-height: 1;
 }
 
-.subtitle {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.75rem;
-    color: $third;
-    margin: 0;
-    letter-spacing: 0.08em;
-    opacity: 0.6;
-    text-transform: uppercase;
+.sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 1.25rem;
-    justify-content: center;
+.section {}
+
+.domainLabel {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $third;
+    opacity: 0.55;
+    margin: 0 0 1rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid rgba(28, 24, 20, 0.08);
+}
+
+.tagGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
 }
 
 @media screen and (max-width: $md) {
-    .pageContainer { padding: 2rem 1rem; }
+    .pageContainer { padding: 2rem 1.5rem; }
     .title { font-size: 2.5rem; }
-    .container {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1rem;
-    }
 }
 
 @media screen and (max-width: $sm) {
-    .pageContainer { padding: 1rem; }
-    .container { grid-template-columns: 1fr; gap: 1rem; }
+    .pageContainer { padding: 1.5rem 1rem; }
     .title { font-size: 2rem; }
+    .sections { gap: 2rem; }
 }

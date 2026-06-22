@@ -10,11 +10,22 @@ export default {
         type: "string",
       },
       {
-        name:"progress",
-        title:"Progress",
-        type:"number",
-        description:"Progress of skill from 0 to 100",
-        validation: (Rule: any) => Rule.min(0).max(100),
+        name:"domain",
+        title:"Domain",
+        description: "Category this skill belongs to",
+        type: "string",
+        options: {
+          list: [
+            { title: 'Frontend', value: 'Frontend' },
+            { title: 'Backend', value: 'Backend' },
+            { title: 'Database', value: 'Database' },
+            { title: 'DevOps', value: 'DevOps' },
+            { title: 'Tools', value: 'Tools' },
+            { title: 'Languages', value: 'Languages' },
+            { title: 'Mobile', value: 'Mobile' },
+            { title: 'Other', value: 'Other' },
+          ]
+        }
       },
       {
         name:"image",

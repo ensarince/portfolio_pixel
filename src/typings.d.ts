@@ -31,6 +31,7 @@ export interface Skill extends SanityBody{
     image: Image
     progress: number
     title: string
+    domain?: string
 }
 
 
@@ -39,6 +40,7 @@ export interface Technology extends SanityBody{
     image: Image
     progress: number
     title: string
+    domain?: string
 }
 
 export interface Project extends SanityBody{
