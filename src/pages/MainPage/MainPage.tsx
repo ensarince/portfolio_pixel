@@ -230,15 +230,13 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
               </blockquote>
               <p className={styles.aboutBio}>
                 Full-stack developer based in Germany, building fast and thoughtful digital products.
-                I work across the stack — TypeScript, React, Node — and care about code that's clean and worth maintaining.
+                I work across the stack — TypeScript, React, Node (ever expanding with recent AI tools) — and care about code that's clean and worth maintaining.
                 Outside of work I'm usually on a rock face somewhere.
               </p>
               <div className={styles.aboutTags}>
                 <span>Developer</span>
                 <span className={styles.tagDot}>·</span>
                 <span>Climber</span>
-                <span className={styles.tagDot}>·</span>
-                <span>Writer</span>
               </div>
             </div>
             <div className={styles.aboutRight} data-reveal="right">
