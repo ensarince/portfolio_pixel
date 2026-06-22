@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { SocialIcon } from 'react-social-icons'
 import imageUrlBuilder from '@sanity/image-url'
 import Header from '../../components/Header'
-import AIChat from '../../components/AIChat'
+import Skill from '../../components/Skill'
 import { sanityClient } from '../../sanity'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { BlogPost, Project, Skill } from '../../typings'
@@ -270,22 +270,9 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
             <h2 className={styles.sectionTitle}>Skills & tools</h2>
           </div>
 
-          <div className={styles.skillsGrid} data-reveal>
+          <div className={styles.skillsTagGroup} data-reveal>
             {displaySkills.map(skill => (
-              <div key={skill._id} className={styles.skillItem}>
-                {skill.image && (
-                  <img
-                    src={urlFor(skill.image).width(48).height(48).url()}
-                    alt={skill.title}
-                    className={styles.skillIcon}
-                  />
-                )}
-                <span className={styles.skillName}>{skill.title}</span>
-                <div
-                  className={styles.skillBar}
-                  style={{ '--pct': `${skill.progress}%` } as React.CSSProperties}
-                />
-              </div>
+              <Skill skill={skill} key={skill._id} />
             ))}
             {displaySkills.length === 0 && (
               <span className={styles.emptyHint}>Loading skills…</span>

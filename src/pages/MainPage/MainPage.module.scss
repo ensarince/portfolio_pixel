@@ -670,60 +670,10 @@
 
 // ─── SKILLS ────────────────────────────────────────────────────────────────
 
-.skillsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1.25rem;
-}
-
-.skillItem {
+.skillsTagGroup {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.625rem;
-    padding: 1.25rem;
-    background: $fifth;
-    border-radius: 4px;
-    border: 1px solid rgba(28, 24, 20, 0.06);
-    transition: border-color 0.2s ease, transform 0.2s ease;
-
-    &:hover {
-        border-color: rgba(192, 66, 27, 0.2);
-        transform: translateY(-2px);
-    }
-}
-
-.skillIcon {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-}
-
-.skillName {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    color: $fourth;
-    letter-spacing: 0.04em;
-}
-
-.skillBar {
-    height: 2px;
-    background: rgba(28, 24, 20, 0.1);
-    border-radius: 1px;
-    position: relative;
-    overflow: hidden;
-
-    &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: var(--pct, 0%);
-        background: $secondary;
-        border-radius: 1px;
-        transition: width 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-    }
 }
 
 // ─── ELSEWHERE ─────────────────────────────────────────────────────────────
@@ -984,5 +934,5 @@
 
     .aboutExperience { flex-direction: column; gap: 1rem; }
     .expItem { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(237,232,220,0.07); padding-bottom: 1rem; }
-    .skillsGrid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    .skillsTagGroup { gap: 0.5rem; }
 }

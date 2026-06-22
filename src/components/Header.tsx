@@ -2,46 +2,32 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import styles from "./Header.module.scss"
 
+const NAV_ITEMS = [
+  { to: '/', label: 'Home' },
+  { to: '/about', label: 'About' },
+  { to: '/portfolio', label: 'Portfolio' },
+  { to: '/skills', label: 'Skills' },
+  { to: '/blog', label: 'Blog' },
+]
+
 type Props = {}
 
 export default function Header({}: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
+  const closeMenu = () => setIsMenuOpen(false)
 
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.header}>
         <div className={styles.navLinks}>
-          <Link to="/" onClick={closeMenu}>
-            <h4>Home</h4>
-          </Link>
-          <Link to="/about" onClick={closeMenu}>
-            <h4>About</h4>
-          </Link>
-          <Link to="/portfolio" onClick={closeMenu}>
-            <h4>Portfolio</h4>
-          </Link>
-          <Link to="/skills" onClick={closeMenu}>
-            <h4>Skills</h4>
-          </Link>
-          <Link to="/blog" onClick={closeMenu}>
-            <h4>Blog</h4>
-          </Link>
-          <Link to="/gallery" onClick={closeMenu}>
-            <h4>Gallery</h4>
-          </Link>
-          <Link to="/climbs" onClick={closeMenu}>
-            <h4>Climbs</h4>
-          </Link>
+          {NAV_ITEMS.map(({ to, label }) => (
+            <Link key={to} to={to} onClick={closeMenu}>
+              <h4>{label}</h4>
+            </Link>
+          ))}
         </div>
-        <button className={styles.hamburger} onClick={toggleMenu} aria-label="Toggle menu">
+        <button className={styles.hamburger} onClick={() => setIsMenuOpen(o => !o)} aria-label="Toggle menu">
           <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`}></span>
           <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`}></span>
           <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`}></span>
@@ -49,27 +35,11 @@ export default function Header({}: Props) {
       </div>
       {isMenuOpen && (
         <div className={styles.mobileMenu}>
-          <Link to="/" onClick={closeMenu}>
-            <h4>Home</h4>
-          </Link>
-          <Link to="/about" onClick={closeMenu}>
-            <h4>About</h4>
-          </Link>
-          <Link to="/portfolio" onClick={closeMenu}>
-            <h4>Portfolio</h4>
-          </Link>
-          <Link to="/skills" onClick={closeMenu}>
-            <h4>Skills</h4>
-          </Link>
-          <Link to="/blog" onClick={closeMenu}>
-            <h4>Blog</h4>
-          </Link>
-          <Link to="/gallery" onClick={closeMenu}>
-            <h4>Gallery</h4>
-          </Link>
-          <Link to="/climbs" onClick={closeMenu}>
-            <h4>Climbs</h4>
-          </Link>
+          {NAV_ITEMS.map(({ to, label }) => (
+            <Link key={to} to={to} onClick={closeMenu}>
+              <h4>{label}</h4>
+            </Link>
+          ))}
         </div>
       )}
     </div>

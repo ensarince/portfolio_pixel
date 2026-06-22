@@ -87,11 +87,13 @@ export default function Projects({ projects }: Props) {
           {filteredProjects?.map((project, i) => (
             <div key={project._id} className={styles.projectCard} style={{ animationDelay: `${i * 0.1}s` }}>
               <div className={styles.imageContainer}>
-                <img
-                  src={urlFor(project.image).url()!}
-                  alt={project.title}
-                  className={styles.projectImage}
-                />
+                {project.image && (
+                  <img
+                    src={urlFor(project.image).url()}
+                    alt={project.title}
+                    className={styles.projectImage}
+                  />
+                )}
                 <div className={styles.imageOverlay}>
                   <div className={styles.projectActions}>
                     {project.linkToBuild && (
@@ -163,11 +165,13 @@ export default function Projects({ projects }: Props) {
                 <div className={styles.technologies}>
                   {project?.technologies?.map(technology => (
                     <span key={technology._id} className={styles.techTag}>
-                      <img
-                        src={urlFor(technology.image)?.url()!}
-                        alt={technology.title}
-                        className={styles.techIcon}
-                      />
+                      {technology.image && (
+                        <img
+                          src={urlFor(technology.image).url()}
+                          alt={technology.title}
+                          className={styles.techIcon}
+                        />
+                      )}
                       {technology.title}
                     </span>
                   ))}
