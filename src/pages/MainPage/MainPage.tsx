@@ -6,7 +6,7 @@ import Header from '../../components/Header'
 import Skill from '../../components/Skill'
 import { sanityClient } from '../../sanity'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
-import { BlogPost, Project, Skill } from '../../typings'
+import { BlogPost, Project, Skill as SkillType } from '../../typings'
 import { SpotifyData } from '../../services/spotify'
 import img_1 from '../../assets/1.png'
 import CVFile from '../../assets/Ensar Ince_cv.pdf'
@@ -21,7 +21,7 @@ type Props = {
   nowPlaying: SpotifyData | null
   projects: Project[] | undefined
   posts: BlogPost[] | undefined
-  skills: Skill[] | undefined
+  skills: SkillType[] | undefined
 }
 
 function formatDate(dateStr: string) {
