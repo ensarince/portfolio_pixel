@@ -76,7 +76,7 @@ export default function ClimbDetail() {
               )}
             </div>
 
-            {climb.image && (
+            {climb.image?.asset && (
               <img
                 src={urlFor(climb.image).width(1200).height(675).url()}
                 alt={climb.title}
@@ -86,7 +86,21 @@ export default function ClimbDetail() {
 
             {climb.story && climb.story.length > 0 && (
               <div className={styles.narrative}>
-                <PortableText value={climb.story} />
+                <PortableText
+                  value={climb.story}
+                  components={{
+                    types: {
+                      image: ({ value }) =>
+                        value?.asset ? (
+                          <img
+                            src={urlFor(value).width(800).url()}
+                            alt={value.alt ?? ''}
+                            style={{ width: '100%', borderRadius: 2, margin: '1.5rem 0' }}
+                          />
+                        ) : null,
+                    },
+                  }}
+                />
               </div>
             )}
 
