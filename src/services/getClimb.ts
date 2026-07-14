@@ -1,8 +1,8 @@
 import { sanityClient } from "../sanity";
 import { Climb } from "../typings";
 
-export const getClimbs = async (): Promise<Climb[]> => {
-  const query = `*[_type == "climb"] | order(dateCompleted desc, _createdAt desc) {
+export const getClimb = async (id: string): Promise<Climb | null> => {
+  const query = `*[_type == "climb" && _id == $id][0] {
     _id,
     _createdAt,
     title,
@@ -12,7 +12,8 @@ export const getClimbs = async (): Promise<Climb[]> => {
     difficulty,
     category,
     description,
-    "hasSaga": defined(story) || defined(diaryEntries[0]),
+    story,
+    diaryEntries,
     dateCompleted,
     elevation,
     duration,
@@ -21,6 +22,6 @@ export const getClimbs = async (): Promise<Climb[]> => {
     firstAscent
   }`;
 
-  const climbs: Climb[] = await sanityClient.fetch(query);
-  return climbs;
+  const climb: Climb = await sanityClient.fetch(query, { id });
+  return climb ?? null;
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../../components/Header'
 import { Climb } from '../../typings'
 import styles from "./Climbs.module.scss"
@@ -197,6 +198,12 @@ export default function Climbs({ climbs }: Props) {
 
                                 {climb.description && (
                                     <p className={styles.climbDescription}>{climb.description}</p>
+                                )}
+
+                                {climb.hasSaga && (
+                                    <Link to={`/climbs/${climb._id}`} className={styles.sagaLink}>
+                                        Read the saga →
+                                    </Link>
                                 )}
 
                                 <div className={styles.climbDetails}>

@@ -4,6 +4,7 @@ import './App.scss'
 import Blog from './pages/Blog/Blog'
 import BlogPostPage from './pages/BlogPost/BlogPostPage'
 import Climbs from './pages/Climbs/Climbs'
+import ClimbDetail from './pages/ClimbDetail/ClimbDetail'
 import MainPage from './pages/MainPage/MainPage'
 import Projects from './pages/Projects/Projects'
 import Skills from './pages/Skills/Skills'
@@ -62,6 +63,7 @@ function App() {
             <Route path='/blog/:id' element={<BlogPostPage posts={posts} />} />
             <Route path='/gallery' element={<GalleryPage gallery={gallery} />} />
             <Route path='/climbs' element={<Climbs climbs={climbs} />} />
+            <Route path='/climbs/:id' element={<ClimbDetail />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,0 +1,244 @@
+@import "../../assets/variables";
+
+.page {
+    background: $primary;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 6vw 6rem;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $third;
+    text-decoration: none;
+    margin-bottom: 3rem;
+    transition: color 0.2s;
+
+    &:hover { color: $secondary; }
+}
+
+// ── Meta header ──────────────────────────────────────────────────────────────
+
+.meta {
+    border-bottom: 1px solid rgba(28, 24, 20, 0.12);
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.routeMeta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.grade {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: $primary;
+    background: $secondary;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+}
+
+.category {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $third;
+}
+
+.dot {
+    color: rgba(28, 24, 20, 0.2);
+}
+
+.location {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $third;
+}
+
+.title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    font-style: italic;
+    color: $fourth;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+}
+
+.dateRow {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $third;
+    opacity: 0.7;
+}
+
+// ── Hero image ────────────────────────────────────────────────────────────────
+
+.heroImage {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 2.5rem;
+}
+
+// ── Narrative (PortableText) ──────────────────────────────────────────────────
+
+.narrative {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: $fourth;
+    margin-bottom: 3.5rem;
+
+    p { margin: 0 0 1.25em; }
+
+    h2, h3 {
+        font-family: 'Fraunces', Georgia, serif;
+        font-style: italic;
+        color: $fourth;
+        margin: 2em 0 0.5em;
+    }
+
+    blockquote {
+        border-left: 3px solid $secondary;
+        margin: 1.5em 0;
+        padding: 0.25em 0 0.25em 1.25rem;
+        font-style: italic;
+        color: $third;
+    }
+
+    strong { font-weight: 600; color: $fourth; }
+
+    a { color: $secondary; text-underline-offset: 3px; }
+}
+
+// ── Diary timeline ────────────────────────────────────────────────────────────
+
+.diarySection {
+    border-top: 1px solid rgba(28, 24, 20, 0.12);
+    padding-top: 2.5rem;
+}
+
+.diaryHeading {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: $secondary;
+    margin: 0 0 2rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 1.5rem;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+        bottom: 0;
+        width: 1px;
+        background: rgba(28, 24, 20, 0.12);
+    }
+}
+
+.entry {
+    position: relative;
+    margin-bottom: 2rem;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: -1.5rem;
+        top: 0.45rem;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: $fifth;
+        border: 1.5px solid rgba(28, 24, 20, 0.25);
+    }
+}
+
+.entryHeader {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+
+.entryDate {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $secondary;
+}
+
+.entryNum {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $third;
+    opacity: 0.6;
+}
+
+.entryNote {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: $fourth;
+    margin: 0;
+    opacity: 0.85;
+}
+
+// ── Loading / empty ───────────────────────────────────────────────────────────
+
+.loading {
+    display: flex;
+    justify-content: center;
+    padding: 6rem 0;
+    color: $third;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.875rem;
+}
+
+.noSaga {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1rem;
+    color: $third;
+    font-style: italic;
+    padding: 2rem 0;
+}

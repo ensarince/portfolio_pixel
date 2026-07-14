@@ -91,6 +91,13 @@ export interface Gallery extends SanityBody{
     }[]
 }
 
+export interface DiaryEntry {
+    _key: string
+    sessionDate?: string
+    sessionNum?: number
+    note?: string
+}
+
 export interface Climb extends SanityBody{
     _type: "climb"
     title: string
@@ -100,6 +107,9 @@ export interface Climb extends SanityBody{
     difficulty: string
     category: "boulder" | "sport" | "trad" | "alpine";
     description?: string
+    story?: any[]
+    diaryEntries?: DiaryEntry[]
+    hasSaga?: boolean
     dateCompleted?: string
     elevation?: string
     duration?: string

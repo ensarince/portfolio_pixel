@@ -61,9 +61,52 @@ export default {
         },
         {
             name: "description",
-            title: "Description",
-            description: "Your experience, route description, or story",
+            title: "Short Description",
+            description: "One or two sentences shown in the card view",
             type: "text"
+        },
+        {
+            name: "story",
+            title: "Route Story / Narrative",
+            description: "Long-form reflective writing about this route — the full saga",
+            type: "blockContent"
+        },
+        {
+            name: "diaryEntries",
+            title: "Session Diary",
+            description: "Dated log entries tracking your progress on this route",
+            type: "array",
+            of: [
+                {
+                    type: "object",
+                    fields: [
+                        {
+                            name: "sessionDate",
+                            title: "Date",
+                            type: "string",
+                            description: "e.g. 'March 9th' or '2024-03-09'"
+                        },
+                        {
+                            name: "sessionNum",
+                            title: "Session #",
+                            type: "number",
+                            description: "Session count (optional)"
+                        },
+                        {
+                            name: "note",
+                            title: "Notes",
+                            type: "text",
+                            description: "What happened on this session — progress, beta, conditions"
+                        }
+                    ],
+                    preview: {
+                        select: {
+                            title: "sessionDate",
+                            subtitle: "note"
+                        }
+                    }
+                }
+            ]
         },
         {
             name: "dateCompleted",
