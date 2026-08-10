@@ -122,6 +122,10 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
                   style={{ transitionDelay: `${i * 0.07}s` }}
                   onMouseEnter={() => setHoveredProject(i)}
                   onMouseLeave={() => setHoveredProject(null)}
+                  onClick={() => project.linkToBuild
+                    ? window.open(project.linkToBuild, '_blank', 'noopener,noreferrer')
+                    : navigate('/portfolio')
+                  }
                 >
                   <span className={styles.projectNum}>{String(i + 1).padStart(2, '0')}</span>
                   <div className={styles.projectInfo}>
