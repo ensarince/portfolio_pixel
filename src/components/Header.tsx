@@ -9,37 +9,44 @@ const NAV_ITEMS = [
   { to: '/blog', label: 'Blog' },
 ]
 
-type Props = {}
-
-export default function Header({}: Props) {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-  const closeMenu = () => setIsMenuOpen(false)
+  const close = () => setIsMenuOpen(false)
 
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.header}>
-        <div className={styles.navLinks}>
+        <Link to="/" className={styles.logoLink} onClick={close}>
+          Ensar Ince
+        </Link>
+
+        <nav className={styles.navLinks}>
           {NAV_ITEMS.map(({ to, label }) => (
-            <Link key={to} to={to} onClick={closeMenu}>
-              <h4>{label}</h4>
+            <Link key={to} to={to} className={styles.navLink}>
+              {label}
             </Link>
           ))}
-        </div>
-        <button className={styles.hamburger} onClick={() => setIsMenuOpen(o => !o)} aria-label="Toggle menu">
-          <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`}></span>
-          <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`}></span>
-          <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`}></span>
+        </nav>
+
+        <button
+          className={styles.hamburger}
+          onClick={() => setIsMenuOpen(o => !o)}
+          aria-label="Toggle menu"
+        >
+          <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`} />
+          <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`} />
+          <span className={`${styles.bar} ${isMenuOpen ? styles.active : ''}`} />
         </button>
       </div>
+
       {isMenuOpen && (
-        <div className={styles.mobileMenu}>
+        <nav className={styles.mobileMenu}>
           {NAV_ITEMS.map(({ to, label }) => (
-            <Link key={to} to={to} onClick={closeMenu}>
-              <h4>{label}</h4>
+            <Link key={to} to={to} className={styles.mobileLink} onClick={close}>
+              {label}
             </Link>
           ))}
-        </div>
+        </nav>
       )}
     </div>
   )

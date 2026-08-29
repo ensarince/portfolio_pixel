@@ -1,107 +1,77 @@
-import React, { useState } from 'react'
-import styles from "./Gallery.module.scss"
-import Header from '../../components/Header';
-import { Gallery } from '../../typings';
+import { useState } from 'react'
+import Header from '../../components/Header'
+import { Gallery } from '../../typings'
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../../sanity'
-import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import styles from './Gallery.module.scss'
 
-type Props = {
-  gallery: Gallery[] | undefined
+type Props = { gallery: Gallery[] | undefined }
+
+const builder = imageUrlBuilder(sanityClient)
+function urlFor(source: any) {
+  return builder.image(source)
 }
 
-function GalleryPage({ gallery }: Props) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  
-  const builder = imageUrlBuilder(sanityClient)
+export default function GalleryPage({ gallery }: Props) {
+  const [selected, setSelected] = useState<string | null>(null)
 
-  function urlFor(source: SanityImageSource) {
-    return builder.image(source)
-  }
-
-  const handleImageClick = (imageUrl: string) => {
-    setSelectedImage(imageUrl);
-  }
-
-  const closeModal = () => {
-    setSelectedImage(null);
-  }
+  const allImages = (gallery ?? []).flatMap(doc =>
+    (doc.images ?? []).reduce<{ url: string; desc?: string }[]>((acc, item) => {
+      try {
+        const url = urlFor(item.image).url()
+        if (url) acc.push({ url, desc: item.description })
+      } catch {}
+      return acc
+    }, [])
+  )
 
   return (
     <>
       <Header />
-      
-      <div className={styles.container}>
-        <h1 className={styles.title}>Photo Gallery</h1>
-        
-        {gallery && gallery.length > 0 ? (
-          <div className={styles.gallery}>
-            {gallery.map((galleryDoc, galleryIndex) => (
-              <div key={galleryIndex}>
-                {galleryDoc.images && galleryDoc.images.map((imageItem, imageIndex) => {
-                  try {
-                    const imageUrl = urlFor(imageItem.image)?.url();
-                    return imageUrl ? (
-                      <div 
-                        key={`${galleryIndex}-${imageIndex}`} 
-                        className={styles.galleryItem}
-                        style={{'--delay': `${(galleryIndex * galleryDoc.images.length + imageIndex) * 0.1}s`} as React.CSSProperties}
-                        onClick={() => handleImageClick(imageUrl)}
-                      >
-                        <div className={styles.imageWrapper}>
-                          <img
-                            className={styles.galleryImage}
-                            src={imageUrl}
-                            alt={`Gallery image ${imageIndex + 1}`}
-                          />
-                          <div className={styles.imageOverlay}>
-                            <div className={styles.overlayContent}>
-                              {imageItem.description && (
-                                <h4 className={styles.imageTitle}>{imageItem.description}</h4>
-                              )}
-                              <div className={styles.viewFullSize}>
-                                Click to view full size
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : null;
-                  } catch (error) {
-                    console.error('Error processing image:', error, imageItem);
-                    return null;
-                  }
-                })}
-              </div>
-            ))}
+      <div className={styles.page}>
+        <div className={styles.container}>
+          <div className={styles.pageHead}>
+            <h1 className={styles.pageTitle}>Gallery</h1>
+            <p className={styles.pageSub}>{allImages.length} frame{allImages.length !== 1 ? 's' : ''}</p>
           </div>
-        ) : (
-          <div className={styles.emptyState}>
-            <div className={styles.emptyIcon}>📸</div>
-            <h2 className={styles.emptyTitle}>No photos yet</h2>
-            <p className={styles.emptyDescription}>
-              Gallery is currently empty. Photos will appear here once they're uploaded.
-            </p>
-          </div>
-        )}
 
-        {/* Modal for full-size image view */}
-        {selectedImage && (
-          <div className={styles.modal} onClick={closeModal}>
-            <button className={styles.closeButton} onClick={closeModal}>
-              ×
-            </button>
-            <img
-              className={styles.modalImage}
-              src={selectedImage}
-              alt="Full size view"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-        )}
+          {allImages.length > 0 ? (
+            <div className={styles.grid}>
+              {allImages.map((img, i) => (
+                <div
+                  key={i}
+                  className={styles.cell}
+                  onClick={() => setSelected(img.url)}
+                >
+                  <img
+                    src={img.url}
+                    alt={img.desc ?? `Frame ${i + 1}`}
+                    className={styles.photo}
+                    loading="lazy"
+                  />
+                  {img.desc && (
+                    <div className={styles.caption}>{img.desc}</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.empty}>No frames yet</div>
+          )}
+        </div>
       </div>
+
+      {selected && (
+        <div className={styles.lightbox} onClick={() => setSelected(null)}>
+          <button className={styles.close} onClick={() => setSelected(null)} aria-label="Close">×</button>
+          <img
+            src={selected}
+            alt="Full view"
+            className={styles.lightboxImg}
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   )
 }
-
-export default GalleryPage

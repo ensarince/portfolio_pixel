@@ -1,35 +1,35 @@
 @import "../assets/variables";
 
 .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.4rem 0.875rem;
-    background: $fifth;
-    border: 1px solid rgba(28, 24, 20, 0.1);
-    border-radius: 2px;
-    cursor: default;
-    transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3125rem 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(26,26,26,0.16);
+  border-radius: 0;
+  cursor: default;
+  transition: border-color 0.15s ease, background 0.15s ease;
 
-    &:hover {
-        border-color: rgba(192, 66, 27, 0.35);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(28, 24, 20, 0.07);
-    }
+  &:hover {
+    border-color: $accent;
+    background: rgba(217,64,0,0.05);
+  }
 }
 
 .icon {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-    flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 
 .label {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: $fourth;
-    letter-spacing: 0.01em;
-    white-space: nowrap;
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $ink;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }

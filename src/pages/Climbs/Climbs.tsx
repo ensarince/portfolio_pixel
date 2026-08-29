@@ -1,258 +1,89 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header'
 import { Climb } from '../../typings'
-import styles from "./Climbs.module.scss"
-import imageUrlBuilder from '@sanity/image-url'
-import { sanityClient } from '../../sanity'
+import styles from './Climbs.module.scss'
 
-type Props = {
-    climbs: Climb[] | undefined
-}
+type Props = { climbs: Climb[] | undefined }
+type Filter = 'all' | 'boulder' | 'sport' | 'trad' | 'featured'
 
-type FilterType = 'all' | 'boulder' | 'sport' | 'trad' | 'featured'
+const FILTERS: { key: Filter; label: string }[] = [
+  { key: 'all', label: 'All' },
+  { key: 'featured', label: 'Featured' },
+  { key: 'sport', label: 'Sport' },
+  { key: 'boulder', label: 'Boulder' },
+  { key: 'trad', label: 'Trad' },
+]
 
 export default function Climbs({ climbs }: Props) {
-    const [filteredClimbs, setFilteredClimbs] = useState<Climb[]>([])
-    const [activeFilter, setActiveFilter] = useState<FilterType>('all')
+  const [filtered, setFiltered] = useState<Climb[]>([])
+  const [active, setActive] = useState<Filter>('all')
 
-    const builder = imageUrlBuilder(sanityClient)
+  useEffect(() => {
+    if (!climbs) return
+    if (active === 'all') { setFiltered(climbs); return }
+    if (active === 'featured') { setFiltered(climbs.filter(c => c.featured)); return }
+    setFiltered(climbs.filter(c => c.category === active))
+  }, [climbs, active])
 
-    function urlFor(source: any) {
-        return builder.image(source)
-    }
+  return (
+    <>
+      <Header />
+      <div className={styles.page}>
+        <div className={styles.container}>
+          <div className={styles.pageHead}>
+            <h1 className={styles.pageTitle}>Climbs</h1>
+            <p className={styles.pageSub}>{filtered.length} route{filtered.length !== 1 ? 's' : ''} logged</p>
+          </div>
 
-    function getYouTubeId(url?: string) {
-        if (!url) return null
-        try {
-            const u = new URL(url)
-            // Handle shorts and normal watch URLs
-            // shorts: /shorts/{id}
-            const shortsMatch = u.pathname.match(/\/shorts\/([^/]+)/)
-            if (shortsMatch) return shortsMatch[1]
-            // watch: v param
-            const v = u.searchParams.get('v')
-            if (v) return v
-            // youtu.be/{id}
-            if (u.hostname.includes('youtu.be')) return u.pathname.replace('/', '')
-            return null
-        } catch {
-            return null
-        }
-    }
+          <div className={styles.filters}>
+            {FILTERS.map(f => (
+              <button
+                key={f.key}
+                className={`${styles.filterBtn} ${active === f.key ? styles.active : ''}`}
+                onClick={() => setActive(f.key)}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
 
-    function getYouTubeThumbnail(url?: string) {
-        const id = getYouTubeId(url)
-        if (!id) return null
-        return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
-    }
+          <div className={styles.routeTable}>
+            {filtered.map((climb, i) => (
+              <div
+                key={climb._id}
+                className={styles.routeRow}
+              >
+                <span className={styles.routeNum}>{String(i + 1).padStart(2, '0')}</span>
 
-    useEffect(() => {
-        if (!climbs) return
-
-        let filtered = climbs
-
-        switch (activeFilter) {
-            case 'featured':
-                filtered = climbs.filter(climb => climb.featured === true)
-                break
-            case 'all':
-                filtered = climbs
-                break
-            default:
-                filtered = climbs.filter(climb => climb.category === activeFilter)
-                break
-        }
-
-        setFilteredClimbs(filtered)
-    }, [climbs, activeFilter])
-
-    const getCategoryInfo = (category: string) => {
-        const categoryMap = {
-            boulder: { icon: '🪨', name: 'Bouldering', color: '#F97316', difficulty: 'French' },
-            sport: { icon: '🧗', name: 'Sport Climbing', color: '#3B82F6', difficulty: 'French' },
-            trad: { icon: '⚙️', name: 'Traditional', color: '#10B981', difficulty: 'French' },
-            alpine: { icon: '🏔️', name: 'Alpine/Mountaineering', color: '#8B5CF6', difficulty: 'Alpine' },
-        }
-        return categoryMap[category as keyof typeof categoryMap] || { icon: '🧗', name: category, color: '#6B7280', difficulty: '' }
-    }
-
-    const getDifficultyColor = (difficulty: string) => {
-        // Color coding based on difficulty level
-        if (difficulty.includes('V') && difficulty.includes('1')) return '#10B981' // V10+ = green
-        if (difficulty.includes('V') && parseInt(difficulty.replace('V', '')) >= 7) return '#F59E0B' // V7-9 = yellow
-        if (difficulty.includes('V') && parseInt(difficulty.replace('V', '')) >= 4) return '#EF4444' // V4-6 = red
-        if (difficulty.includes('5.1') && parseInt(difficulty.split('.')[1]) >= 12) return '#EF4444' // 5.12+ = red
-        if (difficulty.includes('5.1') && parseInt(difficulty.split('.')[1]) >= 10) return '#F59E0B' // 5.10-11 = yellow
-        return '#10B981' // Default green for easier grades
-    }
-
-    const filters = [
-        { key: 'all', label: 'All Climbs', icon: '🧗' },
-        { key: 'featured', label: 'Featured', icon: '⭐' },
-        { key: 'boulder', label: 'Bouldering', icon: '🪨' },
-        { key: 'sport', label: 'Sport', icon: '🧗' },
-        { key: 'trad', label: 'Traditional', icon: '⚙️' },
-    ]
-
-    const formatDate = (dateString?: string) => {
-        if (!dateString) return ''
-        return new Date(dateString).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        })
-    }
-
-    return (
-        <>
-            <Header />
-            <div className={styles.pageContainer}>
-                <div className={styles.header}>
-                    <h1 className={styles.title}>Routes I Climbed</h1>
+                <div className={styles.routeBody}>
+                  <p className={styles.routeName}>{climb.title}</p>
+                  <div className={styles.routeDetails}>
+                    {climb.location && (
+                      <span className={styles.routeLocation}>{climb.location}</span>
+                    )}
+                    {climb.description && (
+                      <span className={styles.routeDesc}>{climb.description}</span>
+                    )}
+                  </div>
+                  {climb.hasSaga && (
+                    <Link to={`/climbs/${climb._id}`} className={styles.sagaLink}>
+                      Read the saga →
+                    </Link>
+                  )}
                 </div>
 
-                <div className={styles.filterContainer}>
-                    {filters.map((filter) => (
-                        <button
-                            key={filter.key}
-                            onClick={() => setActiveFilter(filter.key as FilterType)}
-                            className={`${styles.filterButton} ${activeFilter === filter.key ? styles.active : ''}`}
-                        >
-                            <span className={styles.filterIcon}>{filter.icon}</span>
-                            {filter.label}
-                        </button>
-                    ))}
-                </div>
+                <span className={styles.routeGrade}>{climb.difficulty}</span>
+                <span className={styles.routeType} data-type={climb.category}>{climb.category}</span>
+              </div>
+            ))}
+          </div>
 
-                <div className={styles.resultsInfo}>
-                    <p>Showing {filteredClimbs.length} climb{filteredClimbs.length !== 1 ? 's' : ''}</p>
-                </div>
-
-                <div className={styles.climbsGrid}>
-                    {filteredClimbs?.map((climb, i) => (
-                        <div key={climb._id} className={styles.climbCard} style={{ animationDelay: `${i * 0.1}s` }}>
-                            <div className={styles.imageContainer}>
-                                {(['boulder','sport'].includes(climb.category) && getYouTubeThumbnail(climb.youtubeUrl)) ? (
-                                    <a href={climb.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                                        <img
-                                            src={getYouTubeThumbnail(climb.youtubeUrl) as string}
-                                            alt={climb.title}
-                                            className={styles.climbImage}
-                                        />
-                                    </a>
-                                ) : climb.image ? (
-                                    <img
-                                        src={urlFor(climb.image)?.url()!}
-                                        alt={climb.title}
-                                        className={styles.climbImage}
-                                    />
-                                ) : (
-                                    <div className={styles.climbImage} style={{display:'flex',alignItems:'center',justifyContent:'center',background:'#f3f4f6',color:'#6b7280'}}>
-                                        {getCategoryInfo(climb.category).icon} No media
-                                    </div>
-                                )}
-                                <div className={styles.imageOverlay}>
-                                    <div className={styles.overlayContent}>
-                                        {climb.firstAscent && (
-                                            <span className={styles.firstAscentBadge}>
-                                                🎯 First Ascent
-                                            </span>
-                                        )}
-                                        <div className={styles.difficultyBadge} style={{ backgroundColor: getDifficultyColor(climb.difficulty) }}>
-                                            {climb.difficulty}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={styles.climbContent}>
-                                <div className={styles.climbHeader}>
-                                    <h3 className={styles.climbTitle}>
-                                        {climb.title}
-                                    </h3>
-                                    <div className={styles.badges}>
-                                        {climb.featured && (
-                                            <span className={styles.featuredBadge}>⭐ Featured</span>
-                                        )}
-                                        {(['boulder','sport'].includes(climb.category) && climb.youtubeUrl) && (
-                                            <a className={styles.watchBadge} href={climb.youtubeUrl} target="_blank" rel="noopener noreferrer">
-                                                <span className={styles.youtubeIcon}>▶</span>
-                                                Watch
-                                            </a>
-                                        )}
-                                        <span
-                                            className={styles.categoryBadge}
-                                            style={{ backgroundColor: getCategoryInfo(climb.category).color + '20' }}
-                                        >
-                                            {getCategoryInfo(climb.category).icon} {getCategoryInfo(climb.category).name}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {climb.location && (
-                                    <div className={styles.location}>
-                                        📍 {climb.location}
-                                    </div>
-                                )}
-
-                                {climb.description && (
-                                    <p className={styles.climbDescription}>{climb.description}</p>
-                                )}
-
-                                {climb.hasSaga && (
-                                    <Link to={`/climbs/${climb._id}`} className={styles.sagaLink}>
-                                        Read the saga →
-                                    </Link>
-                                )}
-
-                                <div className={styles.climbDetails}>
-                                    {climb.dateCompleted && (
-                                        <div className={styles.detail}>
-                                            <strong>Completed:</strong> {formatDate(climb.dateCompleted)}
-                                        </div>
-                                    )}
-                                    {climb.duration && (
-                                        <div className={styles.detail}>
-                                            <strong>Duration:</strong> {climb.duration}
-                                        </div>
-                                    )}
-                                    {climb.elevation && (
-                                        <div className={styles.detail}>
-                                            <strong>Elevation:</strong> {climb.elevation}
-                                        </div>
-                                    )}
-                                    {climb.partners && (
-                                        <div className={styles.detail}>
-                                            <strong>Partners:</strong> {climb.partners}
-                                        </div>
-                                    )}
-                                </div>
-
-                                <div className={styles.gradeInfo}>
-                                    <span
-                                        className={styles.gradeBadge}
-                                        style={{ backgroundColor: getDifficultyColor(climb.difficulty) }}
-                                    >
-                                        {climb.difficulty}
-                                    </span>
-                                    <span className={styles.gradeSystem}>
-                                        {getCategoryInfo(climb.category).difficulty} Scale
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {filteredClimbs?.length === 0 && (
-                    <div className={styles.emptyState}>
-                        <div className={styles.emptyIcon}>🏔️</div>
-                        <h3>No climbs found</h3>
-                        <p>Looks like I haven't added anything yet.</p>
-                    </div>
-                )}
-            </div>
-        </>
-    )
+          {filtered.length === 0 && (
+            <div className={styles.empty}>No routes found</div>
+          )}
+        </div>
+      </div>
+    </>
+  )
 }

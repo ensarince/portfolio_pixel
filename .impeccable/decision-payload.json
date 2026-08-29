@@ -1,0 +1,99 @@
+{
+  "title": "Choose the visual world",
+  "question": "The roll assigned candidate 6 — The Programme. Keep it, take the pick or a challenger, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Programme",
+      "kicker": "THE ROLL",
+      "lineage": "European match-day programmes, 1965–1985",
+      "thesis": "Ensar's portfolio built as a football programme — the résumé as a match document, the developer-climber duality printed on the cover like a squad card.",
+      "palette": ["#1B3A2A", "#F0EDE8", "#141414", "#C94A1F"],
+      "materials": ["dense information bands", "Barlow Condensed 900 display", "photo panels with stat overlays", "newsprint-weight body sections"],
+      "viewport": "Full-height forest green opening field. Programme header in tracked small caps: 'ENSAR INCE · ISSUE 01 · SOFTWARE DEVELOPER'. Name at 12vw Barlow Condensed 900. Photo right with jersey-number overlay. Two actions bottom-left.",
+      "risk": "Reads as costume when the information density is not genuine — stat tables must contain real content, or the form collapses into decoration.",
+      "raised": [
+        {"from": "Versailles", "raise": "Each section descends into progressively more intimate territory — programme cover to match report to squad sheet to player notes."},
+        {"from": "Silk canopy", "raise": "One saturated colour field does structural work per major section boundary, not scattered accent touches."},
+        {"from": "Darkroom", "raise": "One near-black section breaks the density with a single white fact at stage-filling scale."},
+        {"from": "Civic bureau", "raise": "One moment of radical negative space: one large fact, the rest of the page empty."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "The Guidebook",
+      "kicker": "IMPECCABLE'S PICK",
+      "lineage": "Alpine climbing guidebooks — Panico Verlag, Rockfax, DAV guides",
+      "thesis": "The portfolio as a technical route guide — each project a graded climb, the bio a crag description, the skills page a topo diagram.",
+      "palette": ["#F5F2EC", "#1A1A1A", "#D94000", "#4A7C59"],
+      "materials": ["route-line overlays on photography", "topo diagrams", "precise technical notation", "matte paper ground"],
+      "viewport": "Clean paper ground. Left: large crag photo of Ensar with a route-line drawn over it, grade and name annotated. Right: technical brief — grade, style, location, first-ascent note, short description.",
+      "risk": "The most familiar form when the subject is a climber — strong association risk. Also where most runs on this brief land."
+    },
+    {
+      "id": "challenger-versailles",
+      "label": "Versailles Garden",
+      "verdict": "declined",
+      "lineage": "Gardens of Versailles — axial vistas, embroidered parterres, bosquets",
+      "palette": ["#3D5A2E", "#C8B97A", "#8B7355", "#F0ECE0"],
+      "materials": ["clipped hedge geometry", "engraved garden-plan capitals", "axial forced perspective"],
+      "viewport": "Palace-axis hero opening onto parterre sections below; navigation descends through increasingly private garden chambers.",
+      "case": "Recruiters do not identify with Versailles; the mechanism (persistence, system-reading) does not map to formal French gardens.",
+      "kept": "Spatial reveal and progressive depth — each scroll unveils a more private space.",
+      "risk": "Precious and abstract for a 30-second decision."
+    },
+    {
+      "id": "challenger-silk",
+      "label": "Silk Canopy",
+      "verdict": "declined",
+      "lineage": "Translucent silk banners crossing a sunlit courtyard — computational colour chords",
+      "palette": ["#2A1F6B", "#C9380A", "#D4A020", "#FFFFFF"],
+      "materials": ["translucent overlap zones", "tensioned silk lanes", "computed chord states"],
+      "viewport": "Horizontal translucent colour bands crossing a white field; overlap zones create deeper chord states as bands coincide.",
+      "case": "The colour-chord metaphor requires explanation before it reads; product clarity is low for a 30-second recruiter scan.",
+      "kept": "Bold colour commitment as structure — whole regions owned by colour, not scattered accent touches.",
+      "risk": "Abstract; the duality needs translation before it lands."
+    },
+    {
+      "id": "challenger-darkroom",
+      "label": "The Darkroom",
+      "verdict": "declined",
+      "lineage": "Photo darkroom — safelight, developing trays, silver gelatin prints",
+      "palette": ["#100C0A", "#8B1515", "#D4C8B8", "#F5F0E8"],
+      "materials": ["safelight red", "silver gelatin tone", "dark-to-light reveals"],
+      "viewport": "Near-black ground. Warm safelight glow at the horizon. White typography emerging from dark like a developing print.",
+      "case": "The darkroom metaphor requires explanation; audience identification is low outside photography circles.",
+      "kept": "Total tonal control and dark-to-light reveals — the patience of development.",
+      "risk": "Reads obscure and niche for a recruiter decision."
+    },
+    {
+      "id": "challenger-civic",
+      "label": "Civic Prospectus",
+      "verdict": "declined",
+      "lineage": "Late-modern civic bureau prospectus",
+      "palette": ["#F7F7FA", "#1B1547", "#6B5CE7", "#7FD8D0"],
+      "materials": ["bone white ground", "geometric grotesque", "teal-to-violet ribbon"],
+      "viewport": "Near-empty bone white. One dramatic teal-to-violet ribbon across the right bleed. Single violet CTA. Dark bench object sits in the light.",
+      "case": "The climbing-developer identity disappears into generic SaaS polish; loses on both audience identification and product clarity.",
+      "kept": "Radical spatial restraint — almost everything drops away and one element owns the stage.",
+      "risk": "Indistinguishable from a hundred polished tech portfolios."
+    }
+  ],
+  "reroll": {
+    "registers": ["safer", "bolder"]
+  },
+  "buildPath": {
+    "value": "code",
+    "toggle": false
+  },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "The developer portfolio the category always ships — hero name, project grid, skills list — executed at full craft.",
+    "palette": ["#FFFFFF", "#111111", "#2563EB"],
+    "materials": ["clean grid", "card layout", "blue primary CTA"],
+    "viewport": "Large name hero, CTA pair, scrolling project cards below. Familiar and effective.",
+    "risk": "Indistinguishable from the competition by design."
+  },
+  "steer": true
+}

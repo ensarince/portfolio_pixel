@@ -1,922 +1,727 @@
 @import "../../assets/variables";
 
-// ─── HERO ──────────────────────────────────────────────────────────────────
+// ── HERO ─────────────────────────────────────────────────────────────────────
 
 .hero {
-    min-height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem 6vw 3.5rem;
-    position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: stretch;
 }
 
-.heroInner {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 3rem;
-    padding-top: 1rem;
+.heroPhoto {
+  width: 42%;
+  background: $alpine;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.heroText {
-    flex: 1;
-    max-width: 720px;
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  opacity: 0.88;
+  mix-blend-mode: luminosity;
 }
 
-.heroEyebrow {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: $secondary;
-    margin: 0 0 1.5rem;
-    opacity: 0.8;
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+.routeLineSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.routePath {
+  stroke: $accent;
+  stroke-width: 1.5px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: drawRoute 2.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
+}
+
+.routeBolt {
+  fill: $accent;
+  opacity: 0;
+  transform-origin: center;
+  animation: boltAppear 0.3s ease forwards;
+}
+
+.boltLabel {
+  font-family: $font-display;
+  font-size: 7px;
+  font-weight: 700;
+  fill: rgba(255,255,255,0.80);
+  letter-spacing: 0.04em;
+}
+
+.heroContent {
+  flex: 1;
+  padding: 4rem 4rem 4rem 4.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $ground;
 }
 
 .heroName {
-    margin: 0 0 1.75rem;
-    line-height: 0.92;
-    letter-spacing: -0.04em;
-    animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  font-family: $font-display;
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: $ink;
+  margin: 0 0 1.75rem;
+  animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.2s both;
 }
 
-.heroNameLine {
-    display: block;
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: clamp(4.5rem, 9vw, 8.5rem);
-    font-weight: 700;
-    font-style: italic;
-    color: $fourth;
+.heroAnnotation {
+  border-top: 1px solid rgba(26,26,26,0.14);
+  border-bottom: 1px solid rgba(26,26,26,0.14);
+  padding: 1.25rem 0;
+  margin: 0 0 2.25rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1.5rem;
+  animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.35s both;
 }
 
-.heroBio {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.0625rem;
-    color: $third;
-    line-height: 1.75;
-    margin: 0 0 2.5rem;
-    max-width: 500px;
-    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+.annoKey {
+  font-family: $font-ui;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $accent;
+}
+
+.annoVal {
+  font-family: $font-ui;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $dim;
 }
 
 .heroCtas {
-    display: flex;
-    gap: 0.875rem;
-    align-items: center;
-    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.5s both;
 }
 
 .ctaPrimary {
-    padding: 0.7rem 1.75rem;
-    background: $fourth;
-    color: $primary;
-    border: none;
-    border-radius: 3px;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: $alpine;
+  border: 1px solid $alpine;
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+  transition: background 0.18s ease;
 
-    &:hover {
-        background: $secondary;
-        color: #fff;
-        transform: translateY(-1px);
-    }
+  &:hover { background: $alpine-deep; border-color: $alpine-deep; }
 }
 
 .ctaSecondary {
-    padding: 0.7rem 1.75rem;
-    background: transparent;
-    color: $fourth;
-    border: 1px solid rgba(28, 24, 20, 0.2);
-    border-radius: 3px;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-decoration: none;
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $ink;
+  background: transparent;
+  border: 1px solid rgba(26,26,26,0.22);
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
 
-    &:hover {
-        border-color: $secondary;
-        color: $secondary;
-        transform: translateY(-1px);
-    }
-}
-
-.heroImageWrap {
-    flex-shrink: 0;
-    width: 240px;
-    animation: fadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
-}
-
-.heroImage {
-    width: 240px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 4px;
-    filter: grayscale(15%) contrast(1.02);
-    display: block;
+  &:hover { border-color: $ink; }
 }
 
 .heroSocials {
-    display: flex;
-    gap: 0.125rem;
-    margin-top: 1rem;
-
-    a, div {
-        transition: opacity 0.2s ease, transform 0.2s ease;
-
-        &:hover {
-            opacity: 1 !important;
-            transform: translateY(-3px);
-        }
-    }
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 2.5rem;
+  animation: fadeUp 0.75s cubic-bezier(0.16,1,0.3,1) 0.6s both;
 }
 
-.heroScrollCue {
-    position: absolute;
-    bottom: 2.5rem;
-    right: 6vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.625rem;
+// ── SHARED SECTION STRUCTURE ──────────────────────────────────────────────────
 
-    span {
-        font-family: 'Syne', sans-serif;
-        font-size: 0.5rem;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: $third;
-        opacity: 0.4;
-        writing-mode: vertical-rl;
-    }
-}
-
-.scrollLine {
-    width: 1px;
-    height: 60px;
-    background: linear-gradient(to bottom, transparent, rgba(28, 24, 20, 0.25));
-    animation: scrollPulse 2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(1); }
-    50% { opacity: 0.8; transform: scaleY(0.7); }
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-// ─── SHARED SECTION STRUCTURE ──────────────────────────────────────────────
-
-.section,
-.sectionAlt,
-.sectionDark,
-.connectSection {
-    padding: 6rem 0;
-}
-
-.sectionAlt {
-    background: $fifth;
+.section {
+  padding: 5rem 0;
+  background: $ground;
 }
 
 .sectionDark {
-    background: #1C1814;
+  padding: 5rem 0;
+  background: $alpine;
 }
 
-.connectSection {
-    background: #1C1814;
+.sectionConnect {
+  padding: 5rem 0;
+  background: $ink;
 }
 
 .sectionInner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 6vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem;
 }
 
-.sectionHeader {
-    display: flex;
-    align-items: baseline;
-    gap: 1.25rem;
-    margin-bottom: 3.5rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid rgba(28, 24, 20, 0.1);
-}
-
-.sectionNum {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    color: $secondary;
-    opacity: 0.7;
+.sectionHead {
+  margin-bottom: 3rem;
 }
 
 .sectionTitle {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 2.75rem;
-    font-weight: 700;
-    font-style: italic;
-    color: $fourth;
-    margin: 0;
-    letter-spacing: -0.025em;
-    line-height: 1;
+  font-family: $font-display;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: $ink;
+  margin: 0;
+}
+
+.sectionTitleLight {
+  @extend .sectionTitle;
+  color: rgba(255,255,255,0.95);
+}
+
+.sectionRule {
+  width: 2.5rem;
+  height: 2px;
+  background: $accent;
+  margin-top: 0.75rem;
+}
+
+.sectionRuleLight {
+  @extend .sectionRule;
+  background: rgba(255,255,255,0.35);
+}
+
+// ── ROUTE LIST (projects) ─────────────────────────────────────────────────────
+
+.routeList {
+  border-top: 1px solid rgba(26,26,26,0.12);
+}
+
+.routeRow {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.375rem 0;
+  border-bottom: 1px solid rgba(26,26,26,0.08);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba(26,26,26,0.025);
+    .routeArrow { transform: translateX(5px); color: $accent; }
+    .routeName { color: $accent; }
+  }
+}
+
+.routeNum {
+  font-family: $font-display;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: $muted;
+}
+
+.routeInfo {
+  min-width: 0;
+}
+
+.routeName {
+  font-family: $font-display;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: $ink;
+  margin: 0 0 0.2rem;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.routeSummary {
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: $dim;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.routeTech {
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: $muted;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.routeArrow {
+  font-size: 0.875rem;
+  color: $muted;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.routePreview {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+
+  img {
+    width: 200px;
+    height: 128px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid rgba(26,26,26,0.14);
+  }
 }
 
 .sectionFooter {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(28, 24, 20, 0.08);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(26,26,26,0.08);
 }
 
 .viewAllLink {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.625rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: $fourth;
-    opacity: 0.55;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $dim;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.15s ease;
 
-    span { transition: transform 0.2s ease; }
-
-    &:hover {
-        opacity: 1;
-        color: $secondary;
-        span { transform: translateX(4px); }
-    }
+  &:hover { color: $accent; }
 }
 
-.emptyHint {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.75rem;
-    color: $third;
-    opacity: 0.4;
-    padding: 2rem 0;
-    letter-spacing: 0.06em;
-}
-
-// ─── WORK / PROJECTS ───────────────────────────────────────────────────────
-
-.projectList {
-    display: flex;
-    flex-direction: column;
-}
-
-.projectRow {
-    position: relative;
-    display: grid;
-    grid-template-columns: 2.5rem 1fr auto 1.5rem;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(28, 24, 20, 0.07);
-    cursor: pointer;
-    transition: background 0.2s ease;
-
-    &:first-child { border-top: 1px solid rgba(28, 24, 20, 0.07); }
-
-    &:hover {
-        .projectName { color: $secondary; }
-        .projectArrow { opacity: 1; transform: translateX(4px); color: $secondary; }
-    }
-}
-
-.projectNum {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5625rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: $secondary;
-    opacity: 0.5;
-    align-self: flex-start;
-    padding-top: 0.25rem;
-}
-
-.projectInfo { min-width: 0; }
-
-.projectName {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.4375rem;
-    font-weight: 600;
-    color: $fourth;
-    margin: 0 0 0.375rem;
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-    transition: color 0.2s ease;
-}
-
-.projectRole {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 0.875rem;
-    color: $third;
-    margin: 0;
-    line-height: 1.5;
-    opacity: 0.7;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.projectTech {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5625rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    color: $third;
-    opacity: 0.5;
-    text-align: right;
-    white-space: nowrap;
-    text-transform: uppercase;
-}
-
-.projectArrow {
-    font-size: 1rem;
-    color: $fourth;
-    opacity: 0.25;
-    transition: all 0.2s ease;
-}
-
-.projectPreview {
-    position: absolute;
-    right: 3rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 200px;
-    height: 130px;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(28, 24, 20, 0.2);
-    z-index: 10;
-    pointer-events: none;
-    animation: previewIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-@keyframes previewIn {
-    from { opacity: 0; transform: translateY(calc(-50% + 8px)); }
-    to { opacity: 1; transform: translateY(-50%); }
-}
-
-// ─── BLOG / WRITING ────────────────────────────────────────────────────────
+// ── WRITING ───────────────────────────────────────────────────────────────────
 
 .blogLayout {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 3rem;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
 }
 
 .featuredPost {
-    cursor: pointer;
-
-    &:hover {
-        .featuredPostTitle { color: $secondary; }
-        .readLink { color: $secondary; }
-    }
+  cursor: pointer;
+  &:hover .featuredPostTitle { color: $accent; }
 }
 
 .featuredPostImg {
-    overflow: hidden;
-    border-radius: 4px;
-    margin-bottom: 1.25rem;
-    aspect-ratio: 16/10;
-    background: $fifth;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  background: $surface;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: grayscale(10%);
-        transition: transform 0.6s ease, filter 0.3s ease;
-    }
-
-    &:hover img {
-        transform: scale(1.04);
-        filter: grayscale(0%);
-    }
-}
-
-.featuredPostMeta {
-    margin-bottom: 0.625rem;
+  img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  &:hover img { transform: scale(1.02); }
 }
 
 .postDate {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5625rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: $third;
-    opacity: 0.5;
+  font-family: $font-ui;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $muted;
+  display: block;
+  margin-bottom: 0.625rem;
 }
 
 .featuredPostTitle {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.625rem;
-    font-weight: 600;
-    color: $fourth;
-    margin: 0 0 0.875rem;
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-    transition: color 0.2s ease;
+  font-family: $font-display;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: $ink;
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+  transition: color 0.15s ease;
 }
 
 .featuredPostExcerpt {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 0.9375rem;
-    color: $third;
-    line-height: 1.8;
-    margin: 0 0 1rem;
-    opacity: 0.75;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  font-family: $font-body;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $dim;
+  margin: 0 0 1rem;
 }
 
 .readLink {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5625rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: $fourth;
-    opacity: 0.6;
-    transition: all 0.2s ease;
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $accent;
 }
 
 .morePostsList {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding-top: 0.5rem;
+  border-top: 1px solid rgba(26,26,26,0.10);
 }
 
 .postItem {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.125rem 0;
-    border-bottom: 1px solid rgba(28, 24, 20, 0.07);
-    cursor: pointer;
-    transition: background 0.15s ease;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.125rem 0;
+  border-bottom: 1px solid rgba(26,26,26,0.08);
+  cursor: pointer;
 
-    &:first-child { border-top: 1px solid rgba(28, 24, 20, 0.07); }
-
-    &:hover {
-        .postItemTitle { color: $secondary; }
-        .postItemArrow { opacity: 1; transform: translateX(4px); color: $secondary; }
-    }
+  &:hover .postItemTitle { color: $accent; }
 }
 
 .postItemNum {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: $secondary;
-    opacity: 0.4;
-    flex-shrink: 0;
+  font-family: $font-display;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: $muted;
 }
 
-.postItemText { flex: 1; min-width: 0; }
-
 .postItemTitle {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.0625rem;
-    font-weight: 600;
-    color: $fourth;
-    margin: 0 0 0.25rem;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    transition: color 0.2s ease;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  font-family: $font-display;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: $ink;
+  margin: 0 0 0.2rem;
+  transition: color 0.15s ease;
 }
 
 .postItemDate {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: $third;
-    opacity: 0.4;
+  font-family: $font-ui;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $muted;
+  display: block;
 }
 
 .postItemArrow {
-    font-size: 0.875rem;
-    color: $fourth;
-    opacity: 0.2;
-    flex-shrink: 0;
-    transition: all 0.2s ease;
+  font-size: 0.875rem;
+  color: $muted;
 }
 
-// ─── ABOUT (DARK) ──────────────────────────────────────────────────────────
+// ── ABOUT (dark alpine section) ───────────────────────────────────────────────
 
 .aboutLayout {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 4rem;
-    align-items: start;
-}
-
-.aboutLeft {
-    .sectionNumLight {
-        font-family: 'Syne', sans-serif;
-        font-size: 0.6rem;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        color: $secondary;
-        opacity: 0.6;
-        display: block;
-        margin-bottom: 2rem;
-    }
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 5rem;
+  align-items: center;
 }
 
 .pullQuote {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: clamp(1.375rem, 2.5vw, 2rem);
-    font-style: italic;
-    font-weight: 400;
-    color: #EDE8DC;
-    line-height: 1.45;
-    margin: 0 0 1.5rem;
-    padding: 0;
-    border: none;
-    letter-spacing: -0.01em;
+  font-family: $font-display;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.2;
+  margin: 0 0 1.75rem;
+  font-style: normal;
 }
 
 .aboutBio {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 0.9375rem;
-    line-height: 1.85;
-    color: rgba(155, 143, 122, 0.8);
-    margin: 0 0 1.75rem;
+  font-family: $font-body;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 1.75rem;
 }
 
 .aboutTags {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    margin-bottom: 2rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(237, 232, 220, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.50);
 }
 
-.tagDot { opacity: 0.3; }
-
-.viewAllLinkLight {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.625rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(237, 232, 220, 0.45);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    span { transition: transform 0.2s ease; }
-
-    &:hover {
-        color: $secondary;
-        span { transform: translateX(4px); }
-    }
-}
-
-.aboutRight {}
+.tagDot { color: rgba(255,255,255,0.25); }
 
 .aboutImageWrap {
-    position: relative;
-    border-radius: 2px;
-    overflow: hidden;
-    aspect-ratio: 3 / 4;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
 }
 
 .aboutImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    opacity: 0.85;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.80;
+  mix-blend-mode: luminosity;
+  display: block;
 }
 
-.expLabel {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5625rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(155, 143, 122, 0.6);
-}
-
-// ─── SKILLS ────────────────────────────────────────────────────────────────
+// ── SKILLS ────────────────────────────────────────────────────────────────────
 
 .skillsTagGroup {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.625rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-// ─── ELSEWHERE ─────────────────────────────────────────────────────────────
+// ── ELSEWHERE ─────────────────────────────────────────────────────────────────
 
 .elsewhereGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(26,26,26,0.10);
+  border: 1px solid rgba(26,26,26,0.10);
 }
 
 .elsewhereCard {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 2rem 2rem 1.75rem;
-    background: $fifth;
-    border-radius: 4px;
-    border: 1px solid rgba(28, 24, 20, 0.07);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
+  background: $ground;
+  padding: 2.5rem 2rem;
+  display: block;
+  cursor: pointer;
+  transition: background 0.18s ease;
 
-    &:hover {
-        border-color: rgba(192, 66, 27, 0.2);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 32px rgba(28, 24, 20, 0.1);
-        .elsewhereArrow { opacity: 1; transform: translateX(4px); color: $secondary; }
-    }
+  &:hover {
+    background: rgba(26,26,26,0.03);
+    .elsewhereArrow { transform: translateX(4px); color: $accent; }
+  }
 }
 
 .elsewhereLabel {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-style: italic;
-    color: $fourth;
-    letter-spacing: -0.01em;
+  font-family: $font-display;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: $ink;
+  display: block;
+  margin-bottom: 0.75rem;
 }
 
 .elsewhereDesc {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 0.875rem;
-    color: $third;
-    line-height: 1.65;
-    margin: 0;
-    opacity: 0.7;
-    flex: 1;
+  font-family: $font-ui;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: $dim;
+  margin: 0 0 1.5rem;
 }
 
 .elsewhereArrow {
-    font-size: 1rem;
-    color: $fourth;
-    opacity: 0.25;
-    align-self: flex-end;
-    transition: all 0.2s ease;
+  font-size: 0.875rem;
+  color: $muted;
+  display: block;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-// ─── CONNECT ───────────────────────────────────────────────────────────────
+// ── CONNECT ───────────────────────────────────────────────────────────────────
 
 .connectLayout {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
 }
 
-.connectLeft { }
-
-.connectEyebrow {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: $secondary;
-    opacity: 0.7;
-    margin: 0 0 1.25rem;
+.connectLabel {
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.40);
+  display: block;
+  margin-bottom: 0.75rem;
 }
 
 .connectHeading {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 700;
-    font-style: italic;
-    color: #EDE8DC;
-    margin: 0 0 1.5rem;
-    letter-spacing: -0.03em;
-    line-height: 1;
+  font-family: $font-display;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: #fff;
+  margin: 0 0 1rem;
 }
 
 .connectEmail {
-    display: block;
-    font-family: 'Lora', Georgia, serif;
-    font-size: 1.1875rem;
-    color: rgba(237, 232, 220, 0.6);
-    margin-bottom: 2rem;
-    transition: color 0.2s ease;
-    cursor: pointer;
+  font-family: $font-ui;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  display: block;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: color 0.15s;
 
-    &:hover { color: $secondary; }
+  &:hover { color: rgba(255,255,255,0.90); }
 }
 
 .connectSocials {
-    display: flex;
-    gap: 0.625rem;
-
-    div {
-        transition: opacity 0.2s ease, transform 0.2s ease;
-        opacity: 0.5;
-
-        &:hover {
-            opacity: 1;
-            transform: translateY(-3px);
-        }
-    }
+  display: flex;
+  gap: 0.5rem;
 }
 
-.connectRight {}
-
 .nowPlaying {
-    display: flex;
-    align-items: center;
-    gap: 1.125rem;
-    padding: 1.25rem 1.5rem;
-    background: rgba(237, 232, 220, 0.04);
-    border: 1px solid rgba(237, 232, 220, 0.08);
-    border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 1.25rem;
 }
 
 .albumArt {
-    width: 56px;
-    height: 56px;
-    border-radius: 3px;
-    object-fit: cover;
-    flex-shrink: 0;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
-.trackInfo { flex: 1; min-width: 0; }
-
 .liveChip {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #5FAF8A;
-    margin-bottom: 0.375rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: $font-ui;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 0.4rem;
 }
 
 .liveDot {
-    width: 5px;
-    height: 5px;
-    background: #5FAF8A;
-    border-radius: 50%;
-    animation: livePulse 2s infinite;
-}
-
-@keyframes livePulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.3; transform: scale(0.6); }
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: $accent;
+  animation: pulse 1.8s infinite;
+  flex-shrink: 0;
 }
 
 .trackName {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: rgba(237, 232, 220, 0.9);
-    margin: 0 0 0.25rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  font-family: $font-ui;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.88);
+  margin: 0 0 0.15rem;
 }
 
 .artistName {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.75rem;
-    color: rgba(155, 143, 122, 0.7);
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
 }
 
 .noTrack {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 2rem;
-    border: 1px solid rgba(237, 232, 220, 0.07);
-    border-radius: 4px;
-    text-align: center;
-
-    p {
-        font-family: 'Syne', sans-serif;
-        font-size: 0.6875rem;
-        color: rgba(155, 143, 122, 0.5);
-        margin: 0;
-        letter-spacing: 0.04em;
-    }
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 1.25rem;
+  font-family: $font-ui;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.35);
 }
 
-.noTrackIcon {
-    font-size: 1.5rem;
-    opacity: 0.4;
-    display: block;
+.noTrackIcon { font-size: 1.25rem; }
+
+// ── EMPTY / LOADING ───────────────────────────────────────────────────────────
+
+.emptyHint {
+  font-family: $font-ui;
+  font-size: 0.8125rem;
+  color: $muted;
+  padding: 2rem 0;
 }
 
-// ─── RESPONSIVE ────────────────────────────────────────────────────────────
+// ── ANIMATIONS ────────────────────────────────────────────────────────────────
 
-@media screen and (max-width: $md) {
-    .hero { padding: 3rem 4vw 4rem; }
-    .heroInner { gap: 2rem; }
-    .heroImageWrap { width: 180px; }
-    .heroImage { width: 180px; height: 220px; }
-
-    .sectionInner { padding: 0 4vw; }
-    .section, .sectionAlt, .sectionDark, .connectSection { padding: 4.5rem 0; }
-    .sectionTitle { font-size: 2.25rem; }
-
-    .blogLayout { grid-template-columns: 1fr; gap: 2rem; }
-    .aboutLayout { grid-template-columns: 1fr; gap: 2rem; }
-    .connectLayout { grid-template-columns: 1fr; gap: 2.5rem; }
-
-    .projectRow {
-        grid-template-columns: 2rem 1fr 1.5rem;
-        .projectTech { display: none; }
-    }
-
-    .pullQuote { font-size: 1.375rem; }
-    .aboutImageWrap { aspect-ratio: 4 / 3; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-@media screen and (max-width: $sm) {
-    .hero { padding: 2rem 5vw 3rem; }
-    .heroInner { flex-direction: column-reverse; gap: 1.5rem; padding-top: 1rem; }
-    .heroImageWrap { width: 120px; align-self: flex-end; }
-    .heroImage { width: 120px; height: 150px; }
-    .heroNameLine { font-size: clamp(3.5rem, 14vw, 4.5rem); }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
 
-    .sectionInner { padding: 0 5vw; }
-    .section, .sectionAlt, .sectionDark, .connectSection { padding: 3.5rem 0; }
-    .sectionTitle { font-size: 2rem; }
+// ── RESPONSIVE ────────────────────────────────────────────────────────────────
 
-    .projectRow { grid-template-columns: 2rem 1fr 1.5rem; gap: 0.75rem; }
-    .projectName { font-size: 1.125rem; }
-    .projectPreview { display: none; }
+@media (max-width: 1024px) {
+  .heroContent { padding: 3.5rem 3rem 3.5rem 3.5rem; }
+  .sectionInner { padding: 0 2.5rem; }
+  .aboutLayout { gap: 3rem; }
+  .blogLayout { gap: 2rem; }
+  .connectLayout { gap: 3rem; }
+}
 
-    .blogLayout { gap: 1.5rem; }
-    .elsewhereGrid { grid-template-columns: 1fr; }
+@media (max-width: 768px) {
+  .hero { flex-direction: column; min-height: auto; }
+  .heroPhoto { width: 100%; height: 50vh; min-height: 300px; }
+  .heroContent { padding: 2.5rem 1.5rem; }
+  .heroName { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .sectionInner { padding: 0 1.5rem; }
+  .section, .sectionDark, .sectionConnect { padding: 3.5rem 0; }
+  .blogLayout { grid-template-columns: 1fr; }
+  .aboutLayout { grid-template-columns: 1fr; gap: 2rem; }
+  .aboutImageWrap { aspect-ratio: 4/3; max-width: 360px; }
+  .connectLayout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .elsewhereGrid { grid-template-columns: 1fr; }
+  .routeRow { grid-template-columns: 2rem 1fr 1.5rem; }
+  .routeTech { display: none; }
+}
 
-    .skillsTagGroup { gap: 0.5rem; }
+@media (max-width: #{$sm}) {
+  .sectionInner { padding: 0 1rem; }
+  .heroContent { padding: 2rem 1rem; }
+  .section, .sectionDark, .sectionConnect { padding: 2.5rem 0; }
 }

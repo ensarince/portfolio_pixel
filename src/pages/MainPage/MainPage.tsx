@@ -27,12 +27,8 @@ type Props = {
 
 function formatDate(dateStr: string) {
   try {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      year: 'numeric', month: 'long'
-    })
-  } catch {
-    return ''
-  }
+    return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
+  } catch { return '' }
 }
 
 export default function MainPage({ nowPlaying, projects, posts, skills }: Props) {
@@ -57,69 +53,89 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
   const recentPosts = posts ? [...posts].slice(0, 4) : []
   const featuredPost = recentPosts[0]
   const morePosts = recentPosts.slice(1, 4)
-
-  const displaySkills = skills ? skills.slice(0, 14) : []
+  const displaySkills = skills ? skills.slice(0, 16) : []
 
   return (
     <>
       <Header />
-    {/*   <AIChat /> */}
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <div className={styles.heroText}>
-            <p className={styles.heroEyebrow}>Software developer & rock climber</p>
-            <h1 className={styles.heroName}>
-              <span className={styles.heroNameLine}>Ensar</span>
-              <span className={styles.heroNameLine}>Ince.</span>
-            </h1>
-            <p className={styles.heroBio}>
-              I build digital products that are fast, thoughtful, and worth using.
-              Based in Germany. Open to opportunities.
-            </p>
-            <div className={styles.heroCtas}>
-              <button className={styles.ctaPrimary} onClick={handleDownloadCV}>
-                Download CV
-              </button>
-              <a href="#work" className={styles.ctaSecondary}>
-                See my work
-              </a>
-            </div>
-            <div className={styles.heroSocials}>
-              <SocialIcon fgColor='#1C1814' bgColor='transparent' style={{ width: 36, height: 36, opacity: 0.45 }} url='mailto:ensrnce@gmail.com' />
-              <SocialIcon fgColor='#1C1814' bgColor='transparent' style={{ width: 36, height: 36, opacity: 0.45 }} url='https://github.com/ensarince' target='_blank' rel='noopener noreferrer' />
-              <SocialIcon fgColor='#1C1814' bgColor='transparent' style={{ width: 36, height: 36, opacity: 0.45 }} url='https://www.linkedin.com/in/ensar-ince-67a580155/' target='_blank' rel='noopener noreferrer' />
-              <SocialIcon fgColor='#1C1814' bgColor='transparent' style={{ width: 36, height: 36, opacity: 0.45 }} url='https://www.instagram.com/rakionrocks' target='_blank' rel='noopener noreferrer' />
-              <SocialIcon fgColor='#1C1814' bgColor='transparent' style={{ width: 36, height: 36, opacity: 0.45 }} url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g' target='_blank' rel='noopener noreferrer' />
-            </div>
-          </div>
-          <div className={styles.heroImageWrap}>
-            <img src={img_1} alt="Ensar Ince" className={styles.heroImage} />
-          </div>
+        <div className={styles.heroPhoto}>
+          <img src={img_1} alt="Ensar Ince" className={styles.heroImg} />
+          {/* Route-line SVG drawn over the portrait */}
+          <svg
+            className={styles.routeLineSvg}
+            viewBox="0 0 100 140"
+            preserveAspectRatio="xMidYMid slice"
+            aria-hidden="true"
+          >
+            <path
+              className={styles.routePath}
+              d="M 52 138 C 44 124 60 110 50 96 C 42 85 56 74 48 62 C 40 52 58 40 50 28 C 44 18 55 9 50 2"
+            />
+            <circle className={styles.routeBolt} cx="50" cy="96" r="2.5" style={{ animationDelay: '2s' }} />
+            <circle className={styles.routeBolt} cx="48" cy="62" r="2.5" style={{ animationDelay: '2.4s' }} />
+            <circle className={styles.routeBolt} cx="50" cy="28" r="2.5" style={{ animationDelay: '2.8s' }} />
+            <text className={styles.boltLabel} x="54" y="97.5" style={{ animationDelay: '2.1s', opacity: 0, animation: 'boltAppear 0.3s ease 2.1s forwards' }}>DE</text>
+            <text className={styles.boltLabel} x="52" y="63.5" style={{ animationDelay: '2.5s', opacity: 0, animation: 'boltAppear 0.3s ease 2.5s forwards' }}>→</text>
+          </svg>
         </div>
-        <div className={styles.heroScrollCue}>
-          <span>scroll</span>
-          <div className={styles.scrollLine}></div>
+
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroName}>
+            Ensar<br />Ince.
+          </h1>
+
+          <div className={styles.heroAnnotation}>
+            <span className={styles.annoKey}>Grade</span>
+            <span className={styles.annoVal}>Full-stack Developer</span>
+
+            <span className={styles.annoKey}>Location</span>
+            <span className={styles.annoVal}>Saarbrücken, Germany</span>
+
+            <span className={styles.annoKey}>Style</span>
+            <span className={styles.annoVal}>TypeScript · React · Node</span>
+
+            <span className={styles.annoKey}>Status</span>
+            <span className={styles.annoVal}>Open to new routes</span>
+          </div>
+
+          <div className={styles.heroCtas}>
+            <button className={styles.ctaPrimary} onClick={handleDownloadCV}>
+              Download CV
+            </button>
+            <a href="#work" className={styles.ctaSecondary}>
+              See my work
+            </a>
+          </div>
+
+          <div className={styles.heroSocials}>
+            <SocialIcon fgColor='#3D6B4F' bgColor='transparent' style={{ width: 32, height: 32, opacity: 0.50 }} url='mailto:ensrnce@gmail.com' />
+            <SocialIcon fgColor='#3D6B4F' bgColor='transparent' style={{ width: 32, height: 32, opacity: 0.50 }} url='https://github.com/ensarince' target='_blank' rel='noopener noreferrer' />
+            <SocialIcon fgColor='#3D6B4F' bgColor='transparent' style={{ width: 32, height: 32, opacity: 0.50 }} url='https://www.linkedin.com/in/ensar-ince-67a580155/' target='_blank' rel='noopener noreferrer' />
+            <SocialIcon fgColor='#3D6B4F' bgColor='transparent' style={{ width: 32, height: 32, opacity: 0.50 }} url='https://www.instagram.com/rakionrocks' target='_blank' rel='noopener noreferrer' />
+            <SocialIcon fgColor='#3D6B4F' bgColor='transparent' style={{ width: 32, height: 32, opacity: 0.50 }} url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g' target='_blank' rel='noopener noreferrer' />
+          </div>
         </div>
       </section>
 
-      {/* ── WORK ─────────────────────────────────────────────── */}
+      {/* ── SELECTED ROUTES ──────────────────────────────────── */}
       <section className={styles.section} id="work">
         <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader} data-reveal>
-            <span className={styles.sectionNum}>01</span>
-            <h2 className={styles.sectionTitle}>Selected work</h2>
+          <div className={styles.sectionHead} data-reveal>
+            <h2 className={styles.sectionTitle}>Selected Routes</h2>
+            <div className={styles.sectionRule} />
           </div>
 
           {featuredProjects.length > 0 ? (
-            <div className={styles.projectList}>
+            <div className={styles.routeList}>
               {featuredProjects.map((project, i) => (
                 <div
                   key={project._id}
-                  className={styles.projectRow}
+                  className={styles.routeRow}
                   data-reveal
-                  style={{ transitionDelay: `${i * 0.07}s` }}
+                  style={{ transitionDelay: `${i * 0.06}s` }}
                   onMouseEnter={() => setHoveredProject(i)}
                   onMouseLeave={() => setHoveredProject(null)}
                   onClick={() => project.linkToBuild
@@ -127,19 +143,19 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
                     : navigate('/portfolio')
                   }
                 >
-                  <span className={styles.projectNum}>{String(i + 1).padStart(2, '0')}</span>
-                  <div className={styles.projectInfo}>
-                    <h3 className={styles.projectName}>{project.title}</h3>
-                    <p className={styles.projectRole}>{project.summary}</p>
+                  <span className={styles.routeNum}>{String(i + 1).padStart(2, '0')}</span>
+                  <div className={styles.routeInfo}>
+                    <p className={styles.routeName}>{project.title}</p>
+                    <p className={styles.routeSummary}>{project.summary}</p>
                   </div>
-                  <div className={styles.projectTech}>
+                  <span className={styles.routeTech}>
                     {project.technologies?.slice(0, 3).map(t => t.title).join(' · ')}
-                  </div>
-                  <div className={styles.projectArrow}>→</div>
-                  {project.image && hoveredProject === i && (
-                    <div className={styles.projectPreview}>
+                  </span>
+                  <span className={styles.routeArrow}>→</span>
+                  {project.image?.asset && hoveredProject === i && (
+                    <div className={styles.routePreview}>
                       <img
-                        src={urlFor(project.image).width(320).height(200).url()}
+                        src={urlFor(project.image).width(400).height(256).url()}
                         alt={project.title}
                       />
                     </div>
@@ -148,23 +164,23 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
               ))}
             </div>
           ) : (
-            <div className={styles.emptyHint}>Loading projects…</div>
+            <p className={styles.emptyHint}>Loading projects…</p>
           )}
 
           <div className={styles.sectionFooter} data-reveal>
             <Link to="/portfolio" className={styles.viewAllLink}>
-              View all work <span>→</span>
+              All routes →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── WRITING ──────────────────────────────────────────── */}
-      <section className={styles.sectionAlt} id="writing">
+      {/* ── FIELD NOTES ──────────────────────────────────────── */}
+      <section className={styles.section} id="writing" style={{ background: 'var(--bg-2)' }}>
         <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader} data-reveal>
-            <span className={styles.sectionNum}>02</span>
-            <h2 className={styles.sectionTitle}>Writing</h2>
+          <div className={styles.sectionHead} data-reveal>
+            <h2 className={styles.sectionTitle}>Field Notes</h2>
+            <div className={styles.sectionRule} />
           </div>
 
           {recentPosts.length > 0 && featuredPost && (
@@ -182,26 +198,23 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
                     />
                   </div>
                 )}
-                <div className={styles.featuredPostMeta}>
-                  <span className={styles.postDate}>{formatDate(featuredPost._createdAt)}</span>
-                </div>
+                <span className={styles.postDate}>{formatDate(featuredPost._createdAt)}</span>
                 <h3 className={styles.featuredPostTitle}>{featuredPost.title}</h3>
                 <p className={styles.featuredPostExcerpt}>{featuredPost.summary}</p>
-                <span className={styles.readLink}>Read article →</span>
+                <span className={styles.readLink}>Read →</span>
               </div>
 
-              <div className={styles.morePostsList}>
+              <div className={styles.morePostsList} data-reveal>
                 {morePosts.map((post, i) => (
                   <div
                     key={post._id}
                     className={styles.postItem}
-                    data-reveal
-                    style={{ transitionDelay: `${i * 0.08}s` }}
+                    style={{ transitionDelay: `${i * 0.07}s` }}
                     onClick={() => navigate(`/blog/${post._id}`)}
                   >
-                    <div className={styles.postItemNum}>{String(i + 2).padStart(2, '0')}</div>
-                    <div className={styles.postItemText}>
-                      <h4 className={styles.postItemTitle}>{post.title}</h4>
+                    <span className={styles.postItemNum}>{String(i + 2).padStart(2, '0')}</span>
+                    <div>
+                      <p className={styles.postItemTitle}>{post.title}</p>
                       <span className={styles.postItemDate}>{formatDate(post._createdAt)}</span>
                     </div>
                     <span className={styles.postItemArrow}>→</span>
@@ -211,13 +224,11 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
             </div>
           )}
 
-          {recentPosts.length === 0 && (
-            <div className={styles.emptyHint}>Loading articles…</div>
-          )}
+          {recentPosts.length === 0 && <p className={styles.emptyHint}>Loading articles…</p>}
 
           <div className={styles.sectionFooter} data-reveal>
             <Link to="/blog" className={styles.viewAllLink}>
-              Read all articles <span>→</span>
+              All field notes →
             </Link>
           </div>
         </div>
@@ -227,14 +238,14 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
       <section className={styles.sectionDark} id="about">
         <div className={styles.sectionInner}>
           <div className={styles.aboutLayout}>
-            <div className={styles.aboutLeft} data-reveal="left">
-              <span className={styles.sectionNumLight}>03</span>
+            <div data-reveal="left">
               <blockquote className={styles.pullQuote}>
                 "I build things that are fast, honest, and worth the user's time."
               </blockquote>
               <p className={styles.aboutBio}>
-                Full-stack developer based in Germany, building fast and thoughtful digital products.
-                I work across the stack — TypeScript, React, Node (ever expanding with recent AI tools) — and care about code that's clean and worth maintaining.
+                Full-stack developer based in Germany. I work across the stack —
+                TypeScript, React, Node (ever expanding with recent AI tools) —
+                and care about code that's clean and worth maintaining.
                 Outside of work I'm usually on a rock face somewhere.
               </p>
               <div className={styles.aboutTags}>
@@ -243,7 +254,7 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
                 <span>Climber</span>
               </div>
             </div>
-            <div className={styles.aboutRight} data-reveal="right">
+            <div data-reveal="right">
               <div className={styles.aboutImageWrap}>
                 <img src={img_2} alt="Ensar Ince" className={styles.aboutImage} />
               </div>
@@ -252,37 +263,35 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
         </div>
       </section>
 
-      {/* ── SKILLS ───────────────────────────────────────────── */}
+      {/* ── TOOLS ────────────────────────────────────────────── */}
       <section className={styles.section} id="skills">
         <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader} data-reveal>
-            <span className={styles.sectionNum}>04</span>
-            <h2 className={styles.sectionTitle}>Skills & tools</h2>
+          <div className={styles.sectionHead} data-reveal>
+            <h2 className={styles.sectionTitle}>Tools & Stack</h2>
+            <div className={styles.sectionRule} />
           </div>
 
           <div className={styles.skillsTagGroup} data-reveal>
             {displaySkills.map(skill => (
               <Skill skill={skill} key={skill._id} />
             ))}
-            {displaySkills.length === 0 && (
-              <span className={styles.emptyHint}>Loading skills…</span>
-            )}
+            {displaySkills.length === 0 && <p className={styles.emptyHint}>Loading…</p>}
           </div>
 
           <div className={styles.sectionFooter} data-reveal>
             <Link to="/skills" className={styles.viewAllLink}>
-              All skills <span>→</span>
+              Full gear list →
             </Link>
           </div>
         </div>
       </section>
 
       {/* ── ELSEWHERE ────────────────────────────────────────── */}
-      <section className={styles.section} id="elsewhere">
+      <section className={styles.section} id="elsewhere" style={{ paddingTop: '0' }}>
         <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader} data-reveal>
-            <span className={styles.sectionNum}>05</span>
+          <div className={styles.sectionHead} data-reveal>
             <h2 className={styles.sectionTitle}>Elsewhere</h2>
+            <div className={styles.sectionRule} />
           </div>
           <div className={styles.elsewhereGrid} data-reveal>
             <Link to="/gallery" className={styles.elsewhereCard}>
@@ -300,25 +309,25 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
       </section>
 
       {/* ── CONNECT ──────────────────────────────────────────── */}
-      <section className={styles.connectSection} id="connect">
+      <section className={styles.sectionConnect} id="connect">
         <div className={styles.sectionInner}>
           <div className={styles.connectLayout}>
-            <div className={styles.connectLeft} data-reveal>
-              <p className={styles.connectEyebrow}>06 — Let's talk</p>
+            <div data-reveal>
+              <span className={styles.connectLabel}>Let's talk</span>
               <h2 className={styles.connectHeading}>Get in touch.</h2>
               <a href="mailto:ensrnce@gmail.com" className={styles.connectEmail}>
                 ensrnce@gmail.com
               </a>
               <div className={styles.connectSocials}>
-                <SocialIcon fgColor='#EDE8DC' bgColor='rgba(237,232,220,0.08)' style={{ width: 38, height: 38 }} url='mailto:ensrnce@gmail.com' />
-                <SocialIcon fgColor='#EDE8DC' bgColor='rgba(237,232,220,0.08)' style={{ width: 38, height: 38 }} url='https://github.com/ensarince' target='_blank' rel='noopener noreferrer' />
-                <SocialIcon fgColor='#EDE8DC' bgColor='rgba(237,232,220,0.08)' style={{ width: 38, height: 38 }} url='https://www.linkedin.com/in/ensar-ince-67a580155/' target='_blank' rel='noopener noreferrer' />
-                <SocialIcon fgColor='#EDE8DC' bgColor='rgba(237,232,220,0.08)' style={{ width: 38, height: 38 }} url='https://www.instagram.com/rakionrocks' target='_blank' rel='noopener noreferrer' />
-                <SocialIcon fgColor='#EDE8DC' bgColor='rgba(237,232,220,0.08)' style={{ width: 38, height: 38 }} url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g' target='_blank' rel='noopener noreferrer' />
+                <SocialIcon fgColor='rgba(255,255,255,0.65)' bgColor='rgba(255,255,255,0.07)' style={{ width: 36, height: 36 }} url='mailto:ensrnce@gmail.com' />
+                <SocialIcon fgColor='rgba(255,255,255,0.65)' bgColor='rgba(255,255,255,0.07)' style={{ width: 36, height: 36 }} url='https://github.com/ensarince' target='_blank' rel='noopener noreferrer' />
+                <SocialIcon fgColor='rgba(255,255,255,0.65)' bgColor='rgba(255,255,255,0.07)' style={{ width: 36, height: 36 }} url='https://www.linkedin.com/in/ensar-ince-67a580155/' target='_blank' rel='noopener noreferrer' />
+                <SocialIcon fgColor='rgba(255,255,255,0.65)' bgColor='rgba(255,255,255,0.07)' style={{ width: 36, height: 36 }} url='https://www.instagram.com/rakionrocks' target='_blank' rel='noopener noreferrer' />
+                <SocialIcon fgColor='rgba(255,255,255,0.65)' bgColor='rgba(255,255,255,0.07)' style={{ width: 36, height: 36 }} url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g' target='_blank' rel='noopener noreferrer' />
               </div>
             </div>
 
-            <div className={styles.connectRight} data-reveal="right">
+            <div data-reveal="right">
               {nowPlaying ? (
                 <div className={styles.nowPlaying}>
                   <img
@@ -326,9 +335,9 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
                     alt={nowPlaying.item?.album.name}
                     className={styles.albumArt}
                   />
-                  <div className={styles.trackInfo}>
+                  <div>
                     <div className={styles.liveChip}>
-                      <span className={styles.liveDot}></span>
+                      <span className={styles.liveDot} />
                       now playing
                     </div>
                     <p className={styles.trackName}>{nowPlaying.item?.name}</p>
@@ -338,7 +347,7 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
               ) : (
                 <div className={styles.noTrack}>
                   <span className={styles.noTrackIcon}>🎧</span>
-                  <p>Nothing playing right now.</p>
+                  <p style={{ margin: 0 }}>Nothing playing right now.</p>
                 </div>
               )}
             </div>

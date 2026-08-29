@@ -1,11 +1,28 @@
-// _variables.scss — Warm Stone Design System
+// _variables.scss — Guidebook · Alpine edition
 
-$primary: #F4EFE6;      // warm parchment background
-$secondary: #C0421B;    // burnt terracotta accent
-$third: #7A6E62;        // warm muted text
-$fourth: #1C1814;       // deep warm charcoal (primary text)
-$fifth: #EDE8DF;        // card / elevated surface
-$gold: #B07D29;         // warm gold accent
+// New palette
+$ground:  #F0EDE5;      // cool matte paper
+$ink:     #1A1A1A;      // near-black
+$accent:  #D94000;      // route-line orange-red
+$alpine:  #3D6B4F;      // deep forest green
+$alpine-deep: #2A5039;  // darker alpine (hover / depth)
+$dim:     #6A6258;      // secondary text
+$muted:   #9A938C;      // very muted
+$surface: #E8E4DC;      // elevated surface
+$rule:    rgba(26,26,26,0.10);
+$gold:    #B07D29;      // retained for any legacy use
+
+// Legacy aliases — kept so un-rewritten files don't break;
+// remove as each module is updated
+$primary:   $ground;
+$secondary: $accent;
+$third:     $dim;
+$fourth:    $ink;
+$fifth:     $surface;
+
+$font-display: 'Barlow Condensed', sans-serif;
+$font-ui:      'Barlow', sans-serif;
+$font-body:    'Source Serif 4', Georgia, serif;
 
 $xs: 320px;
 $sm: 481px;
@@ -14,14 +31,21 @@ $lg: 1025px;
 $xl: 1201px;
 
 :export {
-    primary: $primary;
-    secondary: $secondary;
-    third: $third;
-    fourth: $fourth;
-    fifth: $fifth;
-    xs: $xs;
-    sm: $sm;
-    md: $md;
-    lg: $lg;
-    xl: $xl;
+  ground:  $ground;
+  ink:     $ink;
+  accent:  $accent;
+  alpine:  $alpine;
+  dim:     $dim;
+  surface: $surface;
+  xs: $xs;
+  sm: $sm;
+  md: $md;
+  lg: $lg;
+  xl: $xl;
+  // legacy
+  primary:   $ground;
+  secondary: $accent;
+  third:     $dim;
+  fourth:    $ink;
+  fifth:     $surface;
 }

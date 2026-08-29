@@ -1,245 +1,145 @@
 @import "../../assets/variables";
 
+.page {
+  background: $ground;
+  min-height: 100vh;
+}
+
 .container {
-    padding: 3rem 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    min-height: calc(100vh - 120px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 4rem 6rem;
 }
 
-.title {
-    text-align: center;
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 3.25rem;
-    font-weight: 700;
-    font-style: italic;
-    color: $fourth;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.025em;
-    line-height: 1;
+.pageHead {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(26,26,26,0.12);
+  padding-bottom: 2rem;
 }
 
-.subtitle {
-    text-align: center;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.6875rem;
-    color: $third;
-    margin-bottom: 3rem;
-    letter-spacing: 0.08em;
-    opacity: 0.5;
-    text-transform: uppercase;
+.pageTitle {
+  font-family: $font-display;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: $ink;
+  margin: 0 0 0.5rem;
 }
 
-.gallery {
-    columns: 3;
-    column-gap: 1.25rem;
-    margin-bottom: 2rem;
+.pageSub {
+  font-family: $font-ui;
+  font-size: 0.8125rem;
+  color: $dim;
+  margin: 0;
 }
 
-.galleryItem {
-    background: $fifth;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 1.25rem;
-    break-inside: avoid;
-    border: 1px solid rgba(28, 24, 20, 0.07);
-    cursor: pointer;
-    position: relative;
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: var(--delay, 0s);
-    opacity: 0;
-    transform: translateY(16px);
-    transition: border-color 0.2s ease, transform 0.2s ease;
+// Masonry grid
+.grid {
+  columns: 3;
+  column-gap: 1rem;
 }
 
-.galleryItem:hover {
-    transform: translateY(-4px);
-    border-color: rgba(192, 66, 27, 0.18);
-    z-index: 10;
+.cell {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background: $surface;
+
+  &:hover .photo {
+    transform: scale(1.03);
+    filter: brightness(0.88);
+  }
+
+  &:hover .caption {
+    opacity: 1;
+  }
 }
 
-@keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
+.photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease, filter 0.3s ease;
+  filter: brightness(0.97);
 }
 
-.imageWrapper {
-    position: relative;
-    overflow: hidden;
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1rem;
+  background: rgba(26,26,26,0.75);
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgba(240,237,229,0.88);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
-.galleryImage {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s ease;
-    filter: grayscale(10%);
+.empty {
+  padding: 5rem 0;
+  text-align: center;
+  font-family: $font-display;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $muted;
 }
 
-.galleryItem:hover .galleryImage {
-    transform: scale(1.05);
-    filter: grayscale(0%);
+// Lightbox
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,26,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 2rem;
 }
 
-.imageOverlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(28, 24, 20, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.lightboxImg {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  display: block;
 }
 
-.galleryItem:hover .imageOverlay { opacity: 1; }
+.close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(240,237,229,0.07);
+  border: 1px solid rgba(240,237,229,0.12);
+  color: rgba(240,237,229,0.55);
+  font-family: $font-ui;
+  font-size: 1.375rem;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
 
-.overlayContent {
-    text-align: center;
-    color: $fourth;
-    transform: translateY(12px);
-    transition: transform 0.3s ease;
-    padding: 1rem;
+  &:hover {
+    background: rgba(240,237,229,0.13);
+    color: $ground;
+  }
 }
 
-.galleryItem:hover .overlayContent { transform: translateY(0); }
-
-.imageTitle {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0 0 0.75rem;
-    letter-spacing: -0.01em;
-    color: #EDE8DC;
+@media (max-width: 900px) {
+  .container { padding: 2.5rem 1.5rem 4rem; }
+  .grid { columns: 2; }
 }
 
-.imageTags {
-    display: flex;
-    gap: 0.375rem;
-    justify-content: center;
-    margin-bottom: 0.75rem;
-    flex-wrap: wrap;
-}
-
-.imageTag {
-    background: rgba(237, 232, 220, 0.1);
-    padding: 0.25rem 0.625rem;
-    border-radius: 2px;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 1px solid rgba(237, 232, 220, 0.15);
-    color: rgba(237, 232, 220, 0.8);
-}
-
-.viewFullSize {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.5625rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(237, 232, 220, 0.4);
-}
-
-.emptyState {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 50vh;
-    text-align: center;
-}
-
-.emptyIcon {
-    width: 64px;
-    height: 64px;
-    background: rgba(28, 24, 20, 0.05);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.75rem;
-    border: 1px solid rgba(28, 24, 20, 0.08);
-    opacity: 0.6;
-}
-
-.emptyTitle {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: $fourth;
-    margin: 0 0 0.5rem;
-    letter-spacing: -0.01em;
-}
-
-.emptyDescription {
-    font-family: 'Lora', Georgia, serif;
-    font-size: 0.9375rem;
-    color: $third;
-    margin: 0;
-    max-width: 380px;
-    opacity: 0.65;
-}
-
-// Modal
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(28, 24, 20, 0.95);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    padding: 2rem;
-    backdrop-filter: blur(8px);
-}
-
-.modalImage {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
-}
-
-.closeButton {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    background: rgba(237, 232, 220, 0.07);
-    border: 1px solid rgba(237, 232, 220, 0.12);
-    color: rgba(237, 232, 220, 0.55);
-    font-family: 'Syne', sans-serif;
-    font-size: 1.25rem;
-    width: 38px;
-    height: 38px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.15s ease;
-
-    &:hover {
-        background: rgba(237, 232, 220, 0.13);
-        color: #EDE8DC;
-    }
-}
-
-@media screen and (max-width: $md) {
-    .container { padding: 2rem 1rem; }
-    .title { font-size: 2.5rem; }
-    .gallery { columns: 2; column-gap: 1rem; }
-    .galleryItem { margin-bottom: 1rem; }
-}
-
-@media screen and (max-width: $sm) {
-    .container { padding: 1rem; }
-    .gallery { columns: 1; }
-    .title { font-size: 2rem; }
-    .galleryItem { margin-bottom: 1rem; }
-    .modal { padding: 1rem; }
-    .closeButton { top: 1rem; right: 1rem; }
+@media (max-width: #{$sm}) {
+  .container { padding: 2rem 1rem 3rem; }
+  .grid { columns: 1; }
 }

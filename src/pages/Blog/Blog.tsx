@@ -1,128 +1,93 @@
-import React, {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../../components/Header'
-import { BlogPost, Category } from '../../typings'
-import styles from "./Blog.module.scss"
-import imageUrlBuilder from '@sanity/image-url'
-import { sanityClient } from '../../sanity'
-import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+import { BlogPost } from '../../typings'
+import styles from './Blog.module.scss'
 import { useNavigate } from 'react-router-dom'
 
-type Props = {
-  posts: BlogPost[] | undefined
+type Props = { posts: BlogPost[] | undefined }
+
+type Filter = 'all' | 'climbing' | 'coding' | 'other'
+
+const FILTERS: { key: Filter; label: string }[] = [
+  { key: 'all', label: 'All' },
+  { key: 'climbing', label: 'Climbing' },
+  { key: 'coding', label: 'Coding' },
+  { key: 'other', label: 'Other' },
+]
+
+const CAT_MAP: Record<string, string> = {
+  '91e45e40-f3a0-4488-85e9-fb87eafac059': 'climbing',
+  '807d499a-f06d-4ef5-a1e9-c4413d9be7eb': 'coding',
+  '85ab035c-ede8-4700-8c9b-c9eddf6199d5': 'other',
 }
 
-export default function Blog({posts}: Props) {
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[] | undefined>([]);
-  const [categories, setCategories] = useState<Category[] | any>([]);
-  const [activeFilter, setActiveFilter] = useState<string>('all');
+function formatDate(str: string) {
+  try {
+    return new Date(str).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  } catch { return '' }
+}
+
+export default function Blog({ posts }: Props) {
+  const [filtered, setFiltered] = useState<BlogPost[]>([])
+  const [active, setActive] = useState<Filter>('all')
   const navigate = useNavigate()
 
-  const filterPosts = (preferredCategory: string | undefined, filterName: string): void => {
-    if (filterName === 'all') {
-      setFilteredPosts(posts);
-    } else {
-      const filtered = posts?.filter(post => post.categories[0]._ref === preferredCategory);
-      setFilteredPosts(filtered);
-    }
-    setActiveFilter(filterName);
-  };
-
-  const builder = imageUrlBuilder(sanityClient)
-  
-  function urlFor(source: SanityImageSource) {
-    return builder.image(source)
-  }
-
   useEffect(() => {
-    const categoryRefs = posts?.map((post) => post.categories[0]._ref);
-    if (categoryRefs) {
-      Promise.all(categoryRefs.map((ref) => sanityClient.fetch(`*[_id == "${ref}"][0].title`)))
-        .then((titles) => setCategories(titles.map((title, index) => ({_id: categoryRefs[index], title}))));
-    }
-  }, [posts]);
+    if (!posts) return
+    if (active === 'all') { setFiltered(posts); return }
+    setFiltered(posts.filter(p => CAT_MAP[p.categories?.[0]?._ref] === active))
+  }, [posts, active])
 
-  useEffect(() => {
-    setFilteredPosts(posts)
-  }, [posts])
-  
   return (
     <>
       <Header />
-      <div className={styles.pageContainer}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Blog & Articles</h1>
-        </div>
-
-        <div className={styles.filterContainer}>
-          <button 
-            onClick={() => filterPosts(undefined, 'all')} 
-            className={`${styles.categoryButton} ${activeFilter === 'all' ? styles.active : ''}`}
-          >
-            All Posts
-          </button>
-          <button 
-            onClick={() => filterPosts('91e45e40-f3a0-4488-85e9-fb87eafac059', 'climbing')} 
-            className={`${styles.categoryButton} ${activeFilter === 'climbing' ? styles.active : ''}`}
-          >
-            🧗‍♂️ Climbing
-          </button>
-          <button 
-            onClick={() => filterPosts('807d499a-f06d-4ef5-a1e9-c4413d9be7eb', 'coding')} 
-            className={`${styles.categoryButton} ${activeFilter === 'coding' ? styles.active : ''}`}
-          >
-            💻 Coding
-          </button>
-          <button 
-            onClick={() => filterPosts("85ab035c-ede8-4700-8c9b-c9eddf6199d5", 'other')} 
-            className={`${styles.categoryButton} ${activeFilter === 'other' ? styles.active : ''}`}
-          >
-            📝 Other
-          </button>
-        </div>
-
+      <div className={styles.page}>
         <div className={styles.container}>
-          {filteredPosts?.map((item, index) => {
-            const category = categories.find((category: any) => category._id === item.categories[0]._ref)?.title;
+          <div className={styles.pageHead}>
+            <h1 className={styles.pageTitle}>Field Notes</h1>
+            <p className={styles.pageSub}>{filtered.length} note{filtered.length !== 1 ? 's' : ''}</p>
+          </div>
 
-            return (
-              <article 
-                onClick={() => navigate(`/blog/${item._id}`)} 
-                key={item._id} 
-                className={styles.post}
-                style={{'--delay': `${index * 0.1}s`} as React.CSSProperties}
+          <div className={styles.filters}>
+            {FILTERS.map(f => (
+              <button
+                key={f.key}
+                className={`${styles.filterBtn} ${active === f.key ? styles.active : ''}`}
+                onClick={() => setActive(f.key)}
               >
-                <div className={styles.imageContainer}>
-                  <img
-                    className={styles.postImage}
-                    src={urlFor(item?.mainImage)?.url()}
-                    alt={item.title}
-                  />
-                </div>
-                
-                <div className={styles.postContent}>
-                  <div className={styles.postMeta}>
-                    <span className={styles.postCategory}>{category}</span>
-                    <span className={styles.postDate}>
-                      {new Date(item._createdAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                      })}
-                    </span>
+                {f.label}
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.postList}>
+            {filtered.map((post, i) => {
+              const catKey = CAT_MAP[post.categories?.[0]?._ref] ?? 'other'
+              const isFirst = i === 0 && active === 'all'
+              return (
+                <div
+                  key={post._id}
+                  className={isFirst ? styles.postRowFeatured : styles.postRow}
+                  onClick={() => navigate(`/blog/${post._id}`)}
+                >
+                  <span className={styles.postNum}>{String(i + 1).padStart(2, '0')}</span>
+                  <div className={styles.postBody}>
+                    <div className={styles.postMeta}>
+                      <span className={styles.postCategory} data-cat={catKey}>{catKey}</span>
+                      <span className={styles.postDate}>{formatDate(post._createdAt)}</span>
+                    </div>
+                    <p className={styles.postTitle}>{post.title}</p>
+                    {post.summary && <p className={styles.postSummary}>{post.summary}</p>}
                   </div>
-                  
-                  <h3 className={styles.postTitle}>{item.title}</h3>
-                  <p className={styles.postSummary}>{item.summary}</p>
-                  
-                  <div className={styles.readMore}>
-                    Read Article →
-                  </div>
+                  <span className={styles.postArrow}>→</span>
                 </div>
-              </article>
-            );
-          })}
+              )
+            })}
+          </div>
+
+          {filtered.length === 0 && <div className={styles.empty}>No field notes yet</div>}
         </div>
       </div>
     </>
-  );
+  )
 }
