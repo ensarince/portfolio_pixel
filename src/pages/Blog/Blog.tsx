@@ -44,8 +44,8 @@ export default function Blog({ posts }: Props) {
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.pageHead}>
-            <h1 className={styles.pageTitle}>Field Notes</h1>
-            <p className={styles.pageSub}>{filtered.length} note{filtered.length !== 1 ? 's' : ''}</p>
+            <h1 className={styles.pageTitle}>Blog</h1>
+            <p className={styles.pageSub}>{filtered.length} post{filtered.length !== 1 ? 's' : ''}</p>
           </div>
 
           <div className={styles.filters}>

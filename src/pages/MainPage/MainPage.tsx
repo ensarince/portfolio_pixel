@@ -77,8 +77,6 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
             <circle className={styles.routeBolt} cx="50" cy="96" r="2.5" style={{ animationDelay: '2s' }} />
             <circle className={styles.routeBolt} cx="48" cy="62" r="2.5" style={{ animationDelay: '2.4s' }} />
             <circle className={styles.routeBolt} cx="50" cy="28" r="2.5" style={{ animationDelay: '2.8s' }} />
-            <text className={styles.boltLabel} x="54" y="97.5" style={{ animationDelay: '2.1s', opacity: 0, animation: 'boltAppear 0.3s ease 2.1s forwards' }}>DE</text>
-            <text className={styles.boltLabel} x="52" y="63.5" style={{ animationDelay: '2.5s', opacity: 0, animation: 'boltAppear 0.3s ease 2.5s forwards' }}>→</text>
           </svg>
         </div>
 
@@ -88,17 +86,17 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
           </h1>
 
           <div className={styles.heroAnnotation}>
-            <span className={styles.annoKey}>Grade</span>
+            <span className={styles.annoKey}>Role</span>
             <span className={styles.annoVal}>Full-stack Developer</span>
 
-            <span className={styles.annoKey}>Location</span>
+            <span className={styles.annoKey}>Based in</span>
             <span className={styles.annoVal}>Saarbrücken, Germany</span>
 
-            <span className={styles.annoKey}>Style</span>
+            <span className={styles.annoKey}>Stack</span>
             <span className={styles.annoVal}>TypeScript · React · Node</span>
 
-            <span className={styles.annoKey}>Status</span>
-            <span className={styles.annoVal}>Open to new routes</span>
+            <span className={styles.annoKey}>Available</span>
+            <span className={styles.annoVal}>Open to new opportunities</span>
           </div>
 
           <div className={styles.heroCtas}>
@@ -124,7 +122,7 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
       <section className={styles.section} id="work">
         <div className={styles.sectionInner}>
           <div className={styles.sectionHead} data-reveal>
-            <h2 className={styles.sectionTitle}>Selected Routes</h2>
+            <h2 className={styles.sectionTitle}>Selected Work</h2>
             <div className={styles.sectionRule} />
           </div>
 
@@ -169,7 +167,7 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
 
           <div className={styles.sectionFooter} data-reveal>
             <Link to="/portfolio" className={styles.viewAllLink}>
-              All routes →
+              All projects →
             </Link>
           </div>
         </div>
@@ -179,7 +177,7 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
       <section className={styles.section} id="writing" style={{ background: 'var(--bg-2)' }}>
         <div className={styles.sectionInner}>
           <div className={styles.sectionHead} data-reveal>
-            <h2 className={styles.sectionTitle}>Field Notes</h2>
+            <h2 className={styles.sectionTitle}>Blog</h2>
             <div className={styles.sectionRule} />
           </div>
 
@@ -228,7 +226,7 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
 
           <div className={styles.sectionFooter} data-reveal>
             <Link to="/blog" className={styles.viewAllLink}>
-              All field notes →
+              All posts →
             </Link>
           </div>
         </div>
@@ -280,7 +278,7 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
 
           <div className={styles.sectionFooter} data-reveal>
             <Link to="/skills" className={styles.viewAllLink}>
-              Full gear list →
+              See all skills →
             </Link>
           </div>
         </div>
