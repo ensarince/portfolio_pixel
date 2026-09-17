@@ -58,6 +58,96 @@
   gap: 0.75rem;
 }
 
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.tabBtn {
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(26,26,26,0.15);
+  background: transparent;
+  color: $dim;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover { border-color: $ink; color: $ink; }
+  &.tabActive { background: $alpine; border-color: $alpine; color: $ground; }
+}
+
+.ideasWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ideaForm {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ideaList {
+  display: flex;
+  flex-direction: column;
+}
+
+.ideaRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(26,26,26,0.08);
+
+  &[data-done="true"] {
+    .ideaText { text-decoration: line-through; color: $muted; }
+  }
+
+  &:hover .ideaDelete { opacity: 1; }
+}
+
+.ideaCheck {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: $alpine;
+  flex-shrink: 0;
+}
+
+.ideaText {
+  font-family: $font-body;
+  font-size: 0.9375rem;
+  color: $ink;
+  line-height: 1.5;
+}
+
+.ideaDate {
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  color: $muted;
+  white-space: nowrap;
+}
+
+.ideaDelete {
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  background: none;
+  border: none;
+  color: $muted;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+
+  &:hover { color: $accent; }
+}
+
 .postList {
   display: flex;
   flex-direction: column;

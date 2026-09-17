@@ -22,7 +22,10 @@ function fmtLong(str: string) {
 
 export default function Blog({ posts }: Props) {
   const [active, setActive] = useState<Filter>('all')
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
   const navigate = useNavigate()
+
+  const toggle = (key: string) => setCollapsed(prev => ({ ...prev, [key]: !prev[key] }))
 
   const filtered = useMemo(() => {
     if (!posts) return []
@@ -96,30 +99,51 @@ export default function Blog({ posts }: Props) {
             <div className={styles.empty}>No posts yet.</div>
           )}
 
-          {years.map(year => (
-            <div key={year} className={styles.yearBlock}>
-              <div className={styles.yearLabel}>{year}</div>
-              {Object.keys(grouped[year]).map(Number).sort((a, b) => b - a).map(month => (
-                <div key={month} className={styles.monthBlock}>
-                  <div className={styles.monthLabel}>{MONTH_NAMES[month]}</div>
-                  {grouped[year][month].map(post => (
-                    <div key={post.id} className={styles.postRow} onClick={() => navigate(`/blog/${post.id}`)}>
-                      <span className={styles.postDay}>{new Date(post.created_at).getDate()}</span>
-                      <div className={styles.postInfo}>
-                        <span className={styles.postTitle}>{post.title}</span>
-                        {post.summary && <span className={styles.postSummary}>{post.summary}</span>}
-                      </div>
-                      <span className={styles.postCat} data-cat={post.category}>{post.category}</span>
-                      {post.cover_image_url && (
-                        <img src={post.cover_image_url} alt={post.title} className={styles.rowThumb} />
-                      )}
-                      <span className={styles.postArrow}>→</span>
+          {years.map(year => {
+            const yearKey = `y${year}`
+            const yearCollapsed = collapsed[yearKey]
+            const yearCount = Object.values(grouped[year]).reduce((n, arr) => n + arr.length, 0)
+
+            return (
+              <div key={year} className={styles.yearBlock}>
+                <button className={styles.yearLabel} onClick={() => toggle(yearKey)}>
+                  <span className={styles.chevron} data-collapsed={yearCollapsed}>▾</span>
+                  {year}
+                  <span className={styles.groupCount}>{yearCount}</span>
+                </button>
+
+                {!yearCollapsed && Object.keys(grouped[year]).map(Number).sort((a, b) => b - a).map(month => {
+                  const monthKey = `m${year}-${month}`
+                  const monthCollapsed = collapsed[monthKey]
+
+                  return (
+                    <div key={month} className={styles.monthBlock}>
+                      <button className={styles.monthLabel} onClick={() => toggle(monthKey)}>
+                        <span className={styles.chevron} data-collapsed={monthCollapsed}>▾</span>
+                        {MONTH_NAMES[month]}
+                        <span className={styles.groupCount}>{grouped[year][month].length}</span>
+                      </button>
+
+                      {!monthCollapsed && grouped[year][month].map(post => (
+                        <div key={post.id} className={styles.postRow} onClick={() => navigate(`/blog/${post.id}`)}>
+                          <span className={styles.postDay}>{new Date(post.created_at).getDate()}</span>
+                          <div className={styles.postInfo}>
+                            <span className={styles.postTitle}>{post.title}</span>
+                            {post.summary && <span className={styles.postSummary}>{post.summary}</span>}
+                          </div>
+                          <span className={styles.postCat} data-cat={post.category}>{post.category}</span>
+                          {post.cover_image_url && (
+                            <img src={post.cover_image_url} alt={post.title} className={styles.rowThumb} />
+                          )}
+                          <span className={styles.postArrow}>→</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          ))}
+                  )
+                })}
+              </div>
+            )
+          })}
         </div>
       </div>
     </>

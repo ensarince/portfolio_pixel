@@ -40,6 +40,14 @@ const Caption = Node.create({
 })
 
 type View = 'login' | 'list' | 'editor'
+type ListTab = 'posts' | 'ideas'
+
+type Idea = {
+  id: string
+  text: string
+  done: boolean
+  created_at: string
+}
 
 export default function Admin({ onPostsChange }: { onPostsChange: () => void }) {
   const [view, setView] = useState<View>('login')
@@ -49,6 +57,9 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState<SupabasePost[]>([])
   const [editingPost, setEditingPost] = useState<SupabasePost | null>(null)
+  const [listTab, setListTab] = useState<ListTab>('posts')
+  const [ideas, setIdeas] = useState<Idea[]>([])
+  const [newIdea, setNewIdea] = useState('')
 
   const [title, setTitle] = useState('')
   const titleRef = useRef('')
@@ -78,6 +89,7 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
       if (data.session) {
         setView('list')
         fetchPosts()
+        fetchIdeas()
       }
     })
   }, [])
@@ -85,6 +97,29 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
   async function fetchPosts() {
     const { data } = await supabase.from('posts').select('*').order('created_at', { ascending: false })
     setPosts(data ?? [])
+  }
+
+  async function fetchIdeas() {
+    const { data } = await supabase.from('notes').select('*').order('created_at', { ascending: false })
+    setIdeas(data ?? [])
+  }
+
+  async function addIdea(e: React.FormEvent) {
+    e.preventDefault()
+    if (!newIdea.trim()) return
+    await supabase.from('notes').insert({ text: newIdea.trim() })
+    setNewIdea('')
+    fetchIdeas()
+  }
+
+  async function toggleIdea(idea: Idea) {
+    await supabase.from('notes').update({ done: !idea.done }).eq('id', idea.id)
+    fetchIdeas()
+  }
+
+  async function deleteIdea(id: string) {
+    await supabase.from('notes').delete().eq('id', id)
+    fetchIdeas()
   }
 
   async function handleLogin(e: React.FormEvent) {
@@ -96,6 +131,7 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
     if (error) { setAuthError(error.message); return }
     setView('list')
     fetchPosts()
+    fetchIdeas()
   }
 
   async function handleLogout() {
@@ -214,32 +250,82 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.listHead}>
-            <h1 className={styles.pageTitle}>Posts</h1>
+            <h1 className={styles.pageTitle}>{listTab === 'posts' ? 'Posts' : 'Ideas'}</h1>
             <div className={styles.listActions}>
-              <button className={styles.btnPrimary} onClick={openNewPost}>New post</button>
+              {listTab === 'posts' && <button className={styles.btnPrimary} onClick={openNewPost}>New post</button>}
               <button className={styles.btnGhost} onClick={handleLogout}>Sign out</button>
             </div>
           </div>
-          <div className={styles.postList}>
-            {posts.map(post => (
-              <div key={post.id} className={styles.postRow}>
-                <div className={styles.postInfo}>
-                  <span className={styles.postTitle}>{post.title}</span>
-                  <span className={styles.postMeta}>
-                    <span className={styles.postCat} data-cat={post.category}>{post.category}</span>
-                    <span>{new Date(post.created_at).toLocaleDateString()}</span>
-                    {post.pinned && <span className={styles.pinnedBadge}>Pinned</span>}
-                    {!post.published && <span className={styles.draftBadge}>Draft</span>}
-                  </span>
-                </div>
-                <div className={styles.rowActions}>
-                  <button className={styles.btnGhost} onClick={() => openEditPost(post)}>Edit</button>
-                  <button className={styles.btnDanger} onClick={() => handleDelete(post.id)}>Delete</button>
-                </div>
-              </div>
-            ))}
-            {posts.length === 0 && <p className={styles.empty}>No posts yet.</p>}
+
+          <div className={styles.tabs}>
+            <button
+              className={`${styles.tabBtn} ${listTab === 'posts' ? styles.tabActive : ''}`}
+              onClick={() => setListTab('posts')}
+            >
+              Posts ({posts.length})
+            </button>
+            <button
+              className={`${styles.tabBtn} ${listTab === 'ideas' ? styles.tabActive : ''}`}
+              onClick={() => setListTab('ideas')}
+            >
+              Ideas ({ideas.filter(i => !i.done).length})
+            </button>
           </div>
+
+          {listTab === 'posts' && (
+            <div className={styles.postList}>
+              {posts.map(post => (
+                <div key={post.id} className={styles.postRow}>
+                  <div className={styles.postInfo}>
+                    <span className={styles.postTitle}>{post.title}</span>
+                    <span className={styles.postMeta}>
+                      <span className={styles.postCat} data-cat={post.category}>{post.category}</span>
+                      <span>{new Date(post.created_at).toLocaleDateString()}</span>
+                      {post.pinned && <span className={styles.pinnedBadge}>Pinned</span>}
+                      {!post.published && <span className={styles.draftBadge}>Draft</span>}
+                    </span>
+                  </div>
+                  <div className={styles.rowActions}>
+                    <button className={styles.btnGhost} onClick={() => openEditPost(post)}>Edit</button>
+                    <button className={styles.btnDanger} onClick={() => handleDelete(post.id)}>Delete</button>
+                  </div>
+                </div>
+              ))}
+              {posts.length === 0 && <p className={styles.empty}>No posts yet.</p>}
+            </div>
+          )}
+
+          {listTab === 'ideas' && (
+            <div className={styles.ideasWrap}>
+              <form onSubmit={addIdea} className={styles.ideaForm}>
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="New idea — what do you want to write about?"
+                  value={newIdea}
+                  onChange={e => setNewIdea(e.target.value)}
+                />
+                <button className={styles.btnPrimary} type="submit">Add</button>
+              </form>
+
+              <div className={styles.ideaList}>
+                {ideas.map(idea => (
+                  <div key={idea.id} className={styles.ideaRow} data-done={idea.done}>
+                    <input
+                      type="checkbox"
+                      className={styles.ideaCheck}
+                      checked={idea.done}
+                      onChange={() => toggleIdea(idea)}
+                    />
+                    <span className={styles.ideaText}>{idea.text}</span>
+                    <span className={styles.ideaDate}>{new Date(idea.created_at).toLocaleDateString()}</span>
+                    <button className={styles.ideaDelete} onClick={() => deleteIdea(idea.id)} title="Delete">✕</button>
+                  </div>
+                ))}
+                {ideas.length === 0 && <p className={styles.empty}>No ideas yet. Write one above.</p>}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     )
