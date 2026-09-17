@@ -1,8 +1,37 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useEditor, EditorContent } from '@tiptap/react'
+import { Node, mergeAttributes } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
+import { TextStyle } from '@tiptap/extension-text-style'
+import { Color } from '@tiptap/extension-color'
+
+const ResizableImage = Image.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      width: {
+        default: '100%',
+        parseHTML: el => el.getAttribute('data-width') || '100%',
+        renderHTML: attrs => ({
+          'data-width': attrs.width,
+          style: `width: ${attrs.width}; max-width: 100%; height: auto; display: block; margin: 1.5em auto;`,
+        }),
+      },
+    }
+  },
+})
+
+const Caption = Node.create({
+  name: 'caption',
+  group: 'block',
+  content: 'inline*',
+  parseHTML() { return [{ tag: 'p[data-caption]' }] },
+  renderHTML({ HTMLAttributes }) {
+    return ['p', mergeAttributes(HTMLAttributes, { 'data-caption': '' }), 0]
+  },
+})
 import Header from '../../components/Header'
 import { SupabasePost } from '../../typings'
 import styles from './BlogPostPage.module.scss'
@@ -18,7 +47,7 @@ function formatDate(str?: string) {
 
 function PostContent({ content }: { content: any }) {
   const editor = useEditor({
-    extensions: [StarterKit, Image],
+    extensions: [StarterKit, ResizableImage, TextStyle, Color, Caption],
     content,
     editable: false,
   })

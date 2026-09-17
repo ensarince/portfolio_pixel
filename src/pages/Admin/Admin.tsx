@@ -1,12 +1,43 @@
 import { useState, useEffect, useRef } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
+import { Node, mergeAttributes } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
+import { TextStyle } from '@tiptap/extension-text-style'
+import { Color } from '@tiptap/extension-color'
 import { supabase } from '../../lib/supabase'
 import { SupabasePost } from '../../typings'
 import styles from './Admin.module.scss'
+
+// Image extension with resizable width attribute
+const ResizableImage = Image.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      width: {
+        default: '100%',
+        parseHTML: el => el.getAttribute('data-width') || '100%',
+        renderHTML: attrs => ({
+          'data-width': attrs.width,
+          style: `width: ${attrs.width}; max-width: 100%; height: auto; display: block; margin: 1.5em auto;`,
+        }),
+      },
+    }
+  },
+})
+
+// Caption node (italic dim text, centered, below images)
+const Caption = Node.create({
+  name: 'caption',
+  group: 'block',
+  content: 'inline*',
+  parseHTML() { return [{ tag: 'p[data-caption]' }] },
+  renderHTML({ HTMLAttributes }) {
+    return ['p', mergeAttributes(HTMLAttributes, { 'data-caption': '' }), 0]
+  },
+})
 
 type View = 'login' | 'list' | 'editor'
 
@@ -32,9 +63,12 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Image,
+      ResizableImage,
       Link.configure({ openOnClick: false }),
       Placeholder.configure({ placeholder: 'Write your post here…' }),
+      TextStyle,
+      Color,
+      Caption,
     ],
     content: '',
   })
@@ -157,32 +191,18 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
     fetchPosts()
   }
 
+  const imageActive = editor?.isActive('image')
+
   if (view === 'login') {
     return (
       <div className={styles.page}>
         <div className={styles.loginBox}>
           <h1 className={styles.loginTitle}>Admin</h1>
           <form onSubmit={handleLogin} className={styles.loginForm}>
-            <input
-              className={styles.input}
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            />
+            <input className={styles.input} type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
+            <input className={styles.input} type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
             {authError && <p className={styles.error}>{authError}</p>}
-            <button className={styles.btnPrimary} type="submit" disabled={loading}>
-              {loading ? 'Signing in…' : 'Sign in'}
-            </button>
+            <button className={styles.btnPrimary} type="submit" disabled={loading}>{loading ? 'Signing in…' : 'Sign in'}</button>
           </form>
         </div>
       </div>
@@ -200,7 +220,6 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
               <button className={styles.btnGhost} onClick={handleLogout}>Sign out</button>
             </div>
           </div>
-
           <div className={styles.postList}>
             {posts.map(post => (
               <div key={post.id} className={styles.postRow}>
@@ -209,6 +228,7 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
                   <span className={styles.postMeta}>
                     <span className={styles.postCat} data-cat={post.category}>{post.category}</span>
                     <span>{new Date(post.created_at).toLocaleDateString()}</span>
+                    {post.pinned && <span className={styles.pinnedBadge}>Pinned</span>}
                     {!post.published && <span className={styles.draftBadge}>Draft</span>}
                   </span>
                 </div>
@@ -256,44 +276,76 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
               <option value="climbing">Climbing</option>
               <option value="coding">Coding</option>
             </select>
-
             <label className={styles.uploadBtn}>
               {uploadingImage ? 'Uploading…' : coverImageUrl ? 'Change cover' : 'Upload cover image'}
               <input type="file" accept="image/*" onChange={handleUploadCover} style={{ display: 'none' }} />
             </label>
-
             {coverImageUrl && <img src={coverImageUrl} alt="Cover" className={styles.coverThumb} />}
           </div>
 
           <div className={styles.row}>
-            <input
-              type="date"
-              className={styles.input}
-              value={postDate}
-              onChange={e => setPostDate(e.target.value)}
-              style={{ width: 'auto' }}
-            />
+            <input type="date" className={styles.input} value={postDate} onChange={e => setPostDate(e.target.value)} style={{ width: 'auto' }} />
             <label className={styles.pinToggle}>
-              <input
-                type="checkbox"
-                checked={pinned}
-                onChange={e => setPinned(e.target.checked)}
-              />
+              <input type="checkbox" checked={pinned} onChange={e => setPinned(e.target.checked)} />
               Pin this post
             </label>
           </div>
 
+          {/* Toolbar */}
           <div className={styles.editorToolbar}>
-            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleBold().run()} data-active={editor?.isActive('bold')}>B</button>
+            {/* Text formatting */}
+            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleBold().run()} data-active={editor?.isActive('bold')}><strong>B</strong></button>
             <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleItalic().run()} data-active={editor?.isActive('italic')} style={{ fontStyle: 'italic' }}>I</button>
+            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleStrike().run()} data-active={editor?.isActive('strike')} style={{ textDecoration: 'line-through' }}>S</button>
+
+            <span className={styles.toolSep} />
+
+            {/* Headings */}
             <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} data-active={editor?.isActive('heading', { level: 2 })}>H2</button>
             <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleHeading({ level: 3 }).run()} data-active={editor?.isActive('heading', { level: 3 })}>H3</button>
-            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleBulletList().run()} data-active={editor?.isActive('bulletList')}>List</button>
-            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleBlockquote().run()} data-active={editor?.isActive('blockquote')}>"</button>
+
+            <span className={styles.toolSep} />
+
+            {/* Lists + quote */}
+            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleBulletList().run()} data-active={editor?.isActive('bulletList')}>• List</button>
+            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleOrderedList().run()} data-active={editor?.isActive('orderedList')}>1. List</button>
+            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleBlockquote().run()} data-active={editor?.isActive('blockquote')}>"Quote</button>
+
+            <span className={styles.toolSep} />
+
+            {/* Color */}
+            <label className={styles.colorPickerLabel} title="Text color">
+              <input
+                type="color"
+                className={styles.colorPicker}
+                defaultValue="#1A1A1A"
+                onChange={e => editor?.chain().focus().setColor(e.target.value).run()}
+              />
+              <span style={{ borderBottom: `3px solid ${editor?.getAttributes('textStyle').color || '#1A1A1A'}` }}>A</span>
+            </label>
+            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().unsetColor().run()} title="Remove color">✕ Color</button>
+
+            <span className={styles.toolSep} />
+
+            {/* Caption */}
+            <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().toggleNode('caption', 'paragraph').run()} data-active={editor?.isActive('caption')}>Caption</button>
+
+            {/* Image upload */}
             <label className={styles.toolBtn}>
-              {uploadingImage ? '…' : 'Image'}
+              {uploadingImage ? '…' : '+ Image'}
               <input type="file" accept="image/*" onChange={handleUploadInlineImage} style={{ display: 'none' }} />
             </label>
+
+            {/* Image resize — only when image is selected */}
+            {imageActive && (
+              <>
+                <span className={styles.toolSep} />
+                <span className={styles.toolHint}>Size:</span>
+                <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().updateAttributes('image', { width: '30%' }).run()}>S</button>
+                <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().updateAttributes('image', { width: '60%' }).run()}>M</button>
+                <button type="button" className={styles.toolBtn} onClick={() => editor?.chain().focus().updateAttributes('image', { width: '100%' }).run()}>Full</button>
+              </>
+            )}
           </div>
 
           <div className={styles.editorWrap}>
@@ -301,12 +353,8 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
           </div>
 
           <div className={styles.saveRow}>
-            <button type="button" className={styles.btnGhost} onClick={() => handleSave(false)} disabled={saving}>
-              {saving ? 'Saving…' : 'Save draft'}
-            </button>
-            <button type="button" className={styles.btnPrimary} onClick={() => handleSave(true)} disabled={saving}>
-              {saving ? 'Publishing…' : 'Publish'}
-            </button>
+            <button type="button" className={styles.btnGhost} onClick={() => handleSave(false)} disabled={saving}>{saving ? 'Saving…' : 'Save draft'}</button>
+            <button type="button" className={styles.btnPrimary} onClick={() => handleSave(true)} disabled={saving}>{saving ? 'Publishing…' : 'Publish'}</button>
           </div>
         </div>
       </div>

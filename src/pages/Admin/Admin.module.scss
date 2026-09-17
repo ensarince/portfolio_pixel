@@ -237,6 +237,7 @@
   display: flex;
   gap: 0.25rem;
   flex-wrap: wrap;
+  align-items: center;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid rgba(26,26,26,0.10);
 }
@@ -262,29 +263,102 @@
   }
 }
 
+.toolSep {
+  width: 1px;
+  height: 20px;
+  background: rgba(26,26,26,0.12);
+  margin: 0 0.15rem;
+  flex-shrink: 0;
+}
+
+.toolHint {
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  color: $muted;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.colorPickerLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid rgba(26,26,26,0.12);
+  transition: all 0.12s;
+
+  span {
+    font-family: $font-ui;
+    font-size: 0.875rem;
+    font-weight: 900;
+    color: $ink;
+    padding-bottom: 1px;
+  }
+
+  &:hover { border-color: $ink; }
+}
+
+.colorPicker {
+  width: 18px;
+  height: 18px;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+
+  &::-webkit-color-swatch-wrapper { padding: 0; }
+  &::-webkit-color-swatch { border: 1px solid rgba(26,26,26,0.2); }
+}
+
+.pinnedBadge {
+  background: rgba(61, 107, 79, 0.1);
+  color: $alpine;
+  border: 1px solid rgba(61, 107, 79, 0.2);
+  padding: 0.1rem 0.4rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .editorWrap {
   border: 1px solid rgba(26,26,26,0.12);
-  min-height: 400px;
+  min-height: 600px;
   background: white;
-  padding: 1.5rem;
+  padding: 2rem 2.5rem;
 
   :global(.ProseMirror) {
     outline: none;
     font-family: $font-body;
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 1.0625rem;
+    line-height: 1.85;
     color: $ink;
-    min-height: 350px;
+    min-height: 560px;
 
-    p { margin: 0 0 1em; }
+    p { margin: 0 0 1.1em; }
     h2 { font-family: $font-display; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: $ink; margin: 1.5em 0 0.5em; }
     h3 { font-family: $font-display; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; color: $ink; margin: 1.25em 0 0.4em; }
-    ul { padding-left: 1.5em; margin: 0 0 1em; }
+    ul, ol { padding-left: 1.5em; margin: 0 0 1em; }
     li { margin-bottom: 0.25em; }
     blockquote { border-left: 2px solid $accent; padding-left: 1em; margin: 1.5em 0; color: $dim; font-style: italic; }
-    img { max-width: 100%; height: auto; display: block; margin: 1.5em 0; }
+    img { max-width: 100%; height: auto; display: block; margin: 1.5em auto; }
     strong { font-weight: 700; }
     em { font-style: italic; }
+    s { text-decoration: line-through; }
+
+    p[data-caption] {
+      font-family: $font-ui;
+      font-size: 0.8125rem;
+      color: $muted;
+      font-style: italic;
+      text-align: center;
+      margin-top: -0.5em;
+      margin-bottom: 1.5em;
+    }
 
     p.is-editor-empty:first-child::before {
       content: attr(data-placeholder);
@@ -297,7 +371,7 @@
 }
 
 .editor {
-  min-height: 350px;
+  min-height: 560px;
 }
 
 .saveRow {

@@ -109,7 +109,18 @@
     blockquote { border-left: 2px solid $accent; padding-left: 1.25em; margin: 2em 0; color: $dim; font-style: italic; }
     img { max-width: 100%; height: auto; display: block; margin: 2em 0; }
     strong { font-weight: 700; }
+    s { text-decoration: line-through; }
     a { color: $accent; text-underline-offset: 3px; &:hover { text-decoration: underline; } }
+
+    p[data-caption] {
+      font-family: $font-ui;
+      font-size: 0.8125rem;
+      color: $muted;
+      font-style: italic;
+      text-align: center;
+      margin-top: -1em;
+      margin-bottom: 2em;
+    }
   }
 }
 
