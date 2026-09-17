@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
@@ -20,6 +20,7 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
   const [editingPost, setEditingPost] = useState<SupabasePost | null>(null)
 
   const [title, setTitle] = useState('')
+  const titleRef = useRef('')
   const [summary, setSummary] = useState('')
   const [category, setCategory] = useState<'climbing' | 'coding' | 'other'>('other')
   const [coverImageUrl, setCoverImageUrl] = useState('')
@@ -69,6 +70,7 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
   function openNewPost() {
     setEditingPost(null)
     setTitle('')
+    titleRef.current = ''
     setSummary('')
     setCategory('other')
     setCoverImageUrl('')
@@ -79,6 +81,7 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
   function openEditPost(post: SupabasePost) {
     setEditingPost(post)
     setTitle(post.title)
+    titleRef.current = post.title
     setSummary(post.summary ?? '')
     setCategory(post.category)
     setCoverImageUrl(post.cover_image_url ?? '')
@@ -113,11 +116,12 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
   }
 
   async function handleSave(publish: boolean) {
-    if (!title.trim()) { alert('Title is required'); return }
+    const currentTitle = titleRef.current || title
+    if (!currentTitle.trim()) { alert('Title is required'); return }
     setSaving(true)
     const content = editor?.getJSON() ?? {}
     const payload = {
-      title: title.trim(),
+      title: currentTitle.trim(),
       summary: summary.trim() || null,
       content,
       category,
@@ -227,7 +231,7 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
             type="text"
             placeholder="Post title"
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={e => { setTitle(e.target.value); titleRef.current = e.target.value }}
           />
 
           <input
