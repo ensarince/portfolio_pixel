@@ -16,8 +16,8 @@ const FILTERS: { key: Filter; label: string }[] = [
 
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
-function formatDay(str: string) {
-  try { return new Date(str).getDate() } catch { return '' }
+function fmtLong(str: string) {
+  try { return new Date(str).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) } catch { return '' }
 }
 
 export default function Blog({ posts }: Props) {
@@ -30,9 +30,12 @@ export default function Blog({ posts }: Props) {
     return posts.filter(p => p.category === active)
   }, [posts, active])
 
+  const pinnedPosts = useMemo(() => filtered.filter(p => p.pinned), [filtered])
+  const regularPosts = useMemo(() => filtered.filter(p => !p.pinned), [filtered])
+
   const grouped = useMemo(() => {
     const byYear: Record<number, Record<number, SupabasePost[]>> = {}
-    filtered.forEach(post => {
+    regularPosts.forEach(post => {
       const d = new Date(post.created_at)
       const y = d.getFullYear()
       const m = d.getMonth()
@@ -41,7 +44,7 @@ export default function Blog({ posts }: Props) {
       byYear[y][m].push(post)
     })
     return byYear
-  }, [filtered])
+  }, [regularPosts])
 
   const years = Object.keys(grouped).map(Number).sort((a, b) => b - a)
 
@@ -67,7 +70,29 @@ export default function Blog({ posts }: Props) {
             ))}
           </div>
 
-          {years.length === 0 && (
+          {pinnedPosts.length > 0 && (
+            <div className={styles.pinnedSection}>
+              <div className={styles.pinnedLabel}>Pinned</div>
+              {pinnedPosts.map(post => (
+                <div key={post.id} className={styles.pinnedRow} onClick={() => navigate(`/blog/${post.id}`)}>
+                  {post.cover_image_url && (
+                    <img src={post.cover_image_url} alt={post.title} className={styles.pinnedCover} />
+                  )}
+                  <div className={styles.pinnedInfo}>
+                    <p className={styles.pinnedTitle}>{post.title}</p>
+                    {post.summary && <p className={styles.pinnedSummary}>{post.summary}</p>}
+                    <div className={styles.pinnedMeta}>
+                      <span className={styles.postCat} data-cat={post.category}>{post.category}</span>
+                      <span className={styles.pinnedDate}>{fmtLong(post.created_at)}</span>
+                    </div>
+                  </div>
+                  <span className={styles.postArrow}>→</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {years.length === 0 && pinnedPosts.length === 0 && (
             <div className={styles.empty}>No posts yet.</div>
           )}
 
@@ -78,17 +103,16 @@ export default function Blog({ posts }: Props) {
                 <div key={month} className={styles.monthBlock}>
                   <div className={styles.monthLabel}>{MONTH_NAMES[month]}</div>
                   {grouped[year][month].map(post => (
-                    <div
-                      key={post.id}
-                      className={styles.postRow}
-                      onClick={() => navigate(`/blog/${post.id}`)}
-                    >
-                      <span className={styles.postDay}>{formatDay(post.created_at)}</span>
+                    <div key={post.id} className={styles.postRow} onClick={() => navigate(`/blog/${post.id}`)}>
+                      <span className={styles.postDay}>{new Date(post.created_at).getDate()}</span>
                       <div className={styles.postInfo}>
                         <span className={styles.postTitle}>{post.title}</span>
                         {post.summary && <span className={styles.postSummary}>{post.summary}</span>}
                       </div>
                       <span className={styles.postCat} data-cat={post.category}>{post.category}</span>
+                      {post.cover_image_url && (
+                        <img src={post.cover_image_url} alt={post.title} className={styles.rowThumb} />
+                      )}
                       <span className={styles.postArrow}>→</span>
                     </div>
                   ))}

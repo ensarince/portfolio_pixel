@@ -24,6 +24,8 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
   const [summary, setSummary] = useState('')
   const [category, setCategory] = useState<'climbing' | 'coding' | 'other'>('other')
   const [coverImageUrl, setCoverImageUrl] = useState('')
+  const [pinned, setPinned] = useState(false)
+  const [postDate, setPostDate] = useState(() => new Date().toISOString().split('T')[0])
   const [saving, setSaving] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
 
@@ -74,6 +76,8 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
     setSummary('')
     setCategory('other')
     setCoverImageUrl('')
+    setPinned(false)
+    setPostDate(new Date().toISOString().split('T')[0])
     editor?.commands.setContent('')
     setView('editor')
   }
@@ -85,6 +89,8 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
     setSummary(post.summary ?? '')
     setCategory(post.category)
     setCoverImageUrl(post.cover_image_url ?? '')
+    setPinned(post.pinned ?? false)
+    setPostDate(post.created_at.split('T')[0])
     editor?.commands.setContent(post.content ?? '')
     setView('editor')
   }
@@ -127,6 +133,8 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
       category,
       cover_image_url: coverImageUrl || null,
       published: publish,
+      pinned,
+      created_at: new Date(postDate).toISOString(),
       updated_at: new Date().toISOString(),
     }
 
@@ -255,6 +263,24 @@ export default function Admin({ onPostsChange }: { onPostsChange: () => void }) 
             </label>
 
             {coverImageUrl && <img src={coverImageUrl} alt="Cover" className={styles.coverThumb} />}
+          </div>
+
+          <div className={styles.row}>
+            <input
+              type="date"
+              className={styles.input}
+              value={postDate}
+              onChange={e => setPostDate(e.target.value)}
+              style={{ width: 'auto' }}
+            />
+            <label className={styles.pinToggle}>
+              <input
+                type="checkbox"
+                checked={pinned}
+                onChange={e => setPinned(e.target.checked)}
+              />
+              Pin this post
+            </label>
           </div>
 
           <div className={styles.editorToolbar}>

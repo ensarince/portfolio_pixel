@@ -220,6 +220,19 @@
   object-fit: cover;
 }
 
+.pinToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: $font-ui;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $dim;
+  cursor: pointer;
+
+  input[type="checkbox"] { cursor: pointer; width: 14px; height: 14px; accent-color: $accent; }
+}
+
 .editorToolbar {
   display: flex;
   gap: 0.25rem;

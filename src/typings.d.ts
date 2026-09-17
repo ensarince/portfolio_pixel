@@ -92,6 +92,7 @@ export interface SupabasePost {
   category: 'climbing' | 'coding' | 'other'
   cover_image_url?: string
   published: boolean
+  pinned: boolean
   created_at: string
   updated_at: string
 }

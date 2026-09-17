@@ -6,6 +6,7 @@ export default async function getBlogPosts(): Promise<{ posts: SupabasePost[] }>
     .from('posts')
     .select('*')
     .eq('published', true)
+    .order('pinned', { ascending: false })
     .order('created_at', { ascending: false })
 
   if (error) {
