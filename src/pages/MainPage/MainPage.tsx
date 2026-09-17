@@ -7,7 +7,6 @@ import Skill from '../../components/Skill'
 import { sanityClient } from '../../sanity'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { SupabasePost, Project, Skill as SkillType } from '../../typings'
-import { SpotifyData } from '../../services/spotify'
 import img_1 from '../../assets/1.png'
 import img_2 from '../../assets/2.jpg'
 import CVFile from '../../assets/Ensar Ince_cv.pdf'
@@ -19,7 +18,6 @@ function urlFor(source: any) {
 }
 
 type Props = {
-  nowPlaying: SpotifyData | null
   projects: Project[] | undefined
   posts: SupabasePost[] | undefined
   skills: SkillType[] | undefined
@@ -31,7 +29,7 @@ function formatDate(dateStr: string) {
   } catch { return '' }
 }
 
-export default function MainPage({ nowPlaying, projects, posts, skills }: Props) {
+export default function MainPage({ projects, posts, skills }: Props) {
   const navigate = useNavigate()
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)
 
@@ -323,31 +321,6 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
                 <SocialIcon fgColor='rgba(255,255,255,0.65)' bgColor='rgba(255,255,255,0.07)' style={{ width: 36, height: 36 }} url='https://www.instagram.com/rakionrocks' target='_blank' rel='noopener noreferrer' />
                 <SocialIcon fgColor='rgba(255,255,255,0.65)' bgColor='rgba(255,255,255,0.07)' style={{ width: 36, height: 36 }} url='https://www.youtube.com/channel/UCQ-mC4AvDdFi8BufERuzV1g' target='_blank' rel='noopener noreferrer' />
               </div>
-            </div>
-
-            <div data-reveal="right">
-              {nowPlaying ? (
-                <div className={styles.nowPlaying}>
-                  <img
-                    src={nowPlaying.item?.album.images[0]?.url}
-                    alt={nowPlaying.item?.album.name}
-                    className={styles.albumArt}
-                  />
-                  <div>
-                    <div className={styles.liveChip}>
-                      <span className={styles.liveDot} />
-                      now playing
-                    </div>
-                    <p className={styles.trackName}>{nowPlaying.item?.name}</p>
-                    <p className={styles.artistName}>{nowPlaying.item?.album.artists[0]?.name}</p>
-                  </div>
-                </div>
-              ) : (
-                <div className={styles.noTrack}>
-                  <span className={styles.noTrackIcon}>🎧</span>
-                  <p style={{ margin: 0 }}>Nothing playing right now.</p>
-                </div>
-              )}
             </div>
           </div>
         </div>

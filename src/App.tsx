@@ -13,13 +13,11 @@ import getBlogPosts from './services/getBlog'
 import { getClimbs } from './services/getClimbs'
 import getProjects from './services/getProjects'
 import getSkills from './services/getSkills'
-import { getNowPlaying, SpotifyData } from './services/spotify'
 import { SupabasePost, Climb, Gallery, Project, Skill } from './typings'
 import getGallery from './services/getGallery'
 import GalleryPage from './pages/GalleryPage/GalleryPage'
 
 function App() {
-  const [nowPlaying, setNowPlaying] = useState<SpotifyData | null>(null)
   const [posts, setPosts] = useState<SupabasePost[]>()
   const [projects, setProjects] = useState<Project[]>()
   const [skills, setSkills] = useState<Skill[]>()
@@ -38,14 +36,6 @@ function App() {
     getClimbs().then((data: any) => setClimbs(data))
   }, [])
 
-  useEffect(() => {
-    const intervalId = setInterval(async () => {
-      const data = await getNowPlaying()
-      setNowPlaying(data)
-    }, 5000)
-    return () => clearInterval(intervalId)
-  }, [])
-
   return (
     <div className="app-container">
       <BrowserRouter>
@@ -55,7 +45,6 @@ function App() {
               path='/'
               element={
                 <MainPage
-                  nowPlaying={nowPlaying}
                   projects={projects}
                   posts={posts}
                   skills={skills}
