@@ -1,0 +1,378 @@
+@import "../../assets/variables";
+
+.page {
+  background: $ground;
+  min-height: 100vh;
+  padding-top: 2rem;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+}
+
+.loginBox {
+  max-width: 380px;
+  margin: 8rem auto 0;
+  padding: 3rem 2.5rem;
+  border: 1px solid rgba(26,26,26,0.12);
+  background: $surface;
+}
+
+.loginTitle {
+  font-family: $font-display;
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: $ink;
+  margin: 0 0 2rem;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.listHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(26,26,26,0.12);
+}
+
+.pageTitle {
+  font-family: $font-display;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: $ink;
+  margin: 0;
+}
+
+.listActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.postRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(26,26,26,0.08);
+  gap: 1rem;
+}
+
+.postInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.postTitle {
+  font-family: $font-ui;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $ink;
+}
+
+.postMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  color: $dim;
+}
+
+.postCat {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+  color: $alpine;
+  &[data-cat="climbing"] { color: $accent; }
+  &[data-cat="other"] { color: $dim; }
+}
+
+.draftBadge {
+  background: rgba(217, 64, 0, 0.1);
+  color: $accent;
+  border: 1px solid rgba(217, 64, 0, 0.2);
+  padding: 0.1rem 0.4rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rowActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.editorHead {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.editorHeading {
+  font-family: $font-display;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: $ink;
+  margin: 0;
+}
+
+.editorForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.titleInput {
+  font-family: $font-display;
+  font-size: 1.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: $ink;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(26,26,26,0.15);
+  padding: 0.25rem 0;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus { border-bottom-color: $accent; }
+  &::placeholder { color: $muted; }
+}
+
+.input {
+  font-family: $font-body;
+  font-size: 0.9375rem;
+  color: $ink;
+  background: $surface;
+  border: 1px solid rgba(26,26,26,0.12);
+  padding: 0.6rem 0.85rem;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus { border-color: $accent; }
+  &::placeholder { color: $muted; }
+}
+
+.select {
+  font-family: $font-ui;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $ink;
+  background: $surface;
+  border: 1px solid rgba(26,26,26,0.12);
+  padding: 0.6rem 0.85rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.uploadBtn {
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: $dim;
+  border: 1px solid rgba(26,26,26,0.15);
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-block;
+
+  &:hover { border-color: $ink; color: $ink; }
+}
+
+.coverThumb {
+  height: 40px;
+  width: auto;
+  object-fit: cover;
+}
+
+.editorToolbar {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(26,26,26,0.10);
+}
+
+.toolBtn {
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $dim;
+  background: transparent;
+  border: 1px solid rgba(26,26,26,0.12);
+  padding: 0.3rem 0.65rem;
+  cursor: pointer;
+  transition: all 0.12s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover, &[data-active="true"] {
+    background: $ink;
+    color: $ground;
+    border-color: $ink;
+  }
+}
+
+.editorWrap {
+  border: 1px solid rgba(26,26,26,0.12);
+  min-height: 400px;
+  background: white;
+  padding: 1.5rem;
+
+  :global(.ProseMirror) {
+    outline: none;
+    font-family: $font-body;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: $ink;
+    min-height: 350px;
+
+    p { margin: 0 0 1em; }
+    h2 { font-family: $font-display; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: $ink; margin: 1.5em 0 0.5em; }
+    h3 { font-family: $font-display; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; color: $ink; margin: 1.25em 0 0.4em; }
+    ul { padding-left: 1.5em; margin: 0 0 1em; }
+    li { margin-bottom: 0.25em; }
+    blockquote { border-left: 2px solid $accent; padding-left: 1em; margin: 1.5em 0; color: $dim; font-style: italic; }
+    img { max-width: 100%; height: auto; display: block; margin: 1.5em 0; }
+    strong { font-weight: 700; }
+    em { font-style: italic; }
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      float: left;
+      color: $muted;
+      pointer-events: none;
+      height: 0;
+    }
+  }
+}
+
+.editor {
+  min-height: 350px;
+}
+
+.saveRow {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(26,26,26,0.10);
+}
+
+.btnPrimary {
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: $ink;
+  color: $ground;
+  border: 1px solid $ink;
+  padding: 0.55rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover:not(:disabled) { background: $accent; border-color: $accent; }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+}
+
+.btnGhost {
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: $dim;
+  border: 1px solid rgba(26,26,26,0.15);
+  padding: 0.55rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover:not(:disabled) { border-color: $ink; color: $ink; }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+}
+
+.btnDanger {
+  font-family: $font-ui;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: $accent;
+  border: 1px solid rgba(217, 64, 0, 0.2);
+  padding: 0.55rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover { background: rgba(217, 64, 0, 0.07); border-color: $accent; }
+}
+
+.back {
+  font-family: $font-ui;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: $dim;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s;
+
+  &:hover { color: $ink; }
+}
+
+.error {
+  font-family: $font-ui;
+  font-size: 0.8125rem;
+  color: $accent;
+  margin: 0;
+}
+
+.empty {
+  font-family: $font-body;
+  color: $dim;
+  padding: 2rem 0;
+}
+
+@media (max-width: 600px) {
+  .container { padding: 2rem 1rem 4rem; }
+  .listHead { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}

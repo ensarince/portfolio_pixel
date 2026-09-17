@@ -8,25 +8,30 @@ import ClimbDetail from './pages/ClimbDetail/ClimbDetail'
 import MainPage from './pages/MainPage/MainPage'
 import Projects from './pages/Projects/Projects'
 import Skills from './pages/Skills/Skills'
+import Admin from './pages/Admin/Admin'
 import getBlogPosts from './services/getBlog'
 import { getClimbs } from './services/getClimbs'
 import getProjects from './services/getProjects'
 import getSkills from './services/getSkills'
 import { getNowPlaying, SpotifyData } from './services/spotify'
-import { BlogPost, Climb, Gallery, Project, Skill } from './typings'
+import { SupabasePost, Climb, Gallery, Project, Skill } from './typings'
 import getGallery from './services/getGallery'
 import GalleryPage from './pages/GalleryPage/GalleryPage'
 
 function App() {
   const [nowPlaying, setNowPlaying] = useState<SpotifyData | null>(null)
-  const [posts, setPosts] = useState<BlogPost[]>()
+  const [posts, setPosts] = useState<SupabasePost[]>()
   const [projects, setProjects] = useState<Project[]>()
   const [skills, setSkills] = useState<Skill[]>()
   const [gallery, setGallery] = useState<Gallery[]>()
   const [climbs, setClimbs] = useState<Climb[]>()
 
+  const refreshPosts = () => {
+    getBlogPosts().then((data) => setPosts(data.posts))
+  }
+
   useEffect(() => {
-    getBlogPosts().then((data: any) => setPosts(data.posts))
+    refreshPosts()
     getProjects().then((data: any) => setProjects(data.projects))
     getSkills().then((data: any) => setSkills(data.skills))
     getGallery().then((data: any) => setGallery(data.gallery))
@@ -64,6 +69,7 @@ function App() {
             <Route path='/gallery' element={<GalleryPage gallery={gallery} />} />
             <Route path='/climbs' element={<Climbs climbs={climbs} />} />
             <Route path='/climbs/:id' element={<ClimbDetail />} />
+            <Route path='/admin' element={<Admin onPostsChange={refreshPosts} />} />
           </Routes>
         </div>
       </BrowserRouter>

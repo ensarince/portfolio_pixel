@@ -84,6 +84,18 @@ export interface BlogPost extends SanityBody{
     categories: Category[]
 }
 
+export interface SupabasePost {
+  id: string
+  title: string
+  summary?: string
+  content: any
+  category: 'climbing' | 'coding' | 'other'
+  cover_image_url?: string
+  published: boolean
+  created_at: string
+  updated_at: string
+}
+
 export interface Gallery extends SanityBody{
     images: {
         image: Image;

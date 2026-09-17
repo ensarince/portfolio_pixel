@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import Header from '../../components/Header'
-import { BlogPost } from '../../typings'
+import { SupabasePost } from '../../typings'
 import styles from './Blog.module.scss'
 import { useNavigate } from 'react-router-dom'
 
-type Props = { posts: BlogPost[] | undefined }
-
+type Props = { posts: SupabasePost[] | undefined }
 type Filter = 'all' | 'climbing' | 'coding' | 'other'
 
 const FILTERS: { key: Filter; label: string }[] = [
@@ -15,28 +14,36 @@ const FILTERS: { key: Filter; label: string }[] = [
   { key: 'other', label: 'Other' },
 ]
 
-const CAT_MAP: Record<string, string> = {
-  '91e45e40-f3a0-4488-85e9-fb87eafac059': 'climbing',
-  '807d499a-f06d-4ef5-a1e9-c4413d9be7eb': 'coding',
-  '85ab035c-ede8-4700-8c9b-c9eddf6199d5': 'other',
-}
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
-function formatDate(str: string) {
-  try {
-    return new Date(str).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-  } catch { return '' }
+function formatDay(str: string) {
+  try { return new Date(str).getDate() } catch { return '' }
 }
 
 export default function Blog({ posts }: Props) {
-  const [filtered, setFiltered] = useState<BlogPost[]>([])
   const [active, setActive] = useState<Filter>('all')
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!posts) return
-    if (active === 'all') { setFiltered(posts); return }
-    setFiltered(posts.filter(p => CAT_MAP[p.categories?.[0]?._ref] === active))
+  const filtered = useMemo(() => {
+    if (!posts) return []
+    if (active === 'all') return posts
+    return posts.filter(p => p.category === active)
   }, [posts, active])
+
+  const grouped = useMemo(() => {
+    const byYear: Record<number, Record<number, SupabasePost[]>> = {}
+    filtered.forEach(post => {
+      const d = new Date(post.created_at)
+      const y = d.getFullYear()
+      const m = d.getMonth()
+      if (!byYear[y]) byYear[y] = {}
+      if (!byYear[y][m]) byYear[y][m] = []
+      byYear[y][m].push(post)
+    })
+    return byYear
+  }, [filtered])
+
+  const years = Object.keys(grouped).map(Number).sort((a, b) => b - a)
 
   return (
     <>
@@ -60,32 +67,35 @@ export default function Blog({ posts }: Props) {
             ))}
           </div>
 
-          <div className={styles.postList}>
-            {filtered.map((post, i) => {
-              const catKey = CAT_MAP[post.categories?.[0]?._ref] ?? 'other'
-              const isFirst = i === 0 && active === 'all'
-              return (
-                <div
-                  key={post._id}
-                  className={isFirst ? styles.postRowFeatured : styles.postRow}
-                  onClick={() => navigate(`/blog/${post._id}`)}
-                >
-                  <span className={styles.postNum}>{String(i + 1).padStart(2, '0')}</span>
-                  <div className={styles.postBody}>
-                    <div className={styles.postMeta}>
-                      <span className={styles.postCategory} data-cat={catKey}>{catKey}</span>
-                      <span className={styles.postDate}>{formatDate(post._createdAt)}</span>
-                    </div>
-                    <p className={styles.postTitle}>{post.title}</p>
-                    {post.summary && <p className={styles.postSummary}>{post.summary}</p>}
-                  </div>
-                  <span className={styles.postArrow}>→</span>
-                </div>
-              )
-            })}
-          </div>
+          {years.length === 0 && (
+            <div className={styles.empty}>No posts yet.</div>
+          )}
 
-          {filtered.length === 0 && <div className={styles.empty}>No field notes yet</div>}
+          {years.map(year => (
+            <div key={year} className={styles.yearBlock}>
+              <div className={styles.yearLabel}>{year}</div>
+              {Object.keys(grouped[year]).map(Number).sort((a, b) => b - a).map(month => (
+                <div key={month} className={styles.monthBlock}>
+                  <div className={styles.monthLabel}>{MONTH_NAMES[month]}</div>
+                  {grouped[year][month].map(post => (
+                    <div
+                      key={post.id}
+                      className={styles.postRow}
+                      onClick={() => navigate(`/blog/${post.id}`)}
+                    >
+                      <span className={styles.postDay}>{formatDay(post.created_at)}</span>
+                      <div className={styles.postInfo}>
+                        <span className={styles.postTitle}>{post.title}</span>
+                        {post.summary && <span className={styles.postSummary}>{post.summary}</span>}
+                      </div>
+                      <span className={styles.postCat} data-cat={post.category}>{post.category}</span>
+                      <span className={styles.postArrow}>→</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </>

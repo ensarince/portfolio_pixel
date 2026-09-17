@@ -43,13 +43,15 @@
 
 .postCategory {
   font-family: $font-ui;
-  font-size: 0.5625rem;
+  font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.9);
-  background: $alpine;
-  padding: 0.2rem 0.5rem;
+  color: $alpine;
+
+  &[data-cat="climbing"] { color: $accent; }
+  &[data-cat="coding"] { color: $alpine; }
+  &[data-cat="other"] { color: $dim; }
 }
 
 .postDate {
@@ -92,44 +94,22 @@
   line-height: 1.8;
   color: $ink;
 
-  p { margin: 0 0 1.3em; }
-
-  h2, h3 {
-    font-family: $font-display;
-    font-weight: 700;
-    text-transform: uppercase;
+  :global(.ProseMirror) {
+    outline: none;
+    font-family: $font-body;
+    font-size: 1.0625rem;
+    line-height: 1.85;
     color: $ink;
-    margin: 2em 0 0.5em;
-  }
 
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 1.125rem; }
-
-  blockquote {
-    border-left: 2px solid $accent;
-    margin: 1.5em 0;
-    padding: 0.25em 0 0.25em 1.25rem;
-    font-style: italic;
-    color: $dim;
-  }
-
-  strong { font-weight: 600; }
-
-  a {
-    color: $accent;
-    text-underline-offset: 3px;
-    &:hover { text-decoration: underline; }
-  }
-
-  img {
-    width: 100%;
-    border-radius: 0;
-    margin: 1.5rem 0;
-  }
-
-  ul, ol {
-    padding-left: 1.5em;
-    li { margin-bottom: 0.4em; }
+    p { margin: 0 0 1.25em; }
+    h2 { font-family: $font-display; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin: 2em 0 0.6em; }
+    h3 { font-family: $font-display; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; margin: 1.5em 0 0.5em; }
+    ul { padding-left: 1.5em; margin: 0 0 1.25em; }
+    li { margin-bottom: 0.3em; }
+    blockquote { border-left: 2px solid $accent; padding-left: 1.25em; margin: 2em 0; color: $dim; font-style: italic; }
+    img { max-width: 100%; height: auto; display: block; margin: 2em 0; }
+    strong { font-weight: 700; }
+    a { color: $accent; text-underline-offset: 3px; &:hover { text-decoration: underline; } }
   }
 }
 

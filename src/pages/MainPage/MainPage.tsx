@@ -6,7 +6,7 @@ import Header from '../../components/Header'
 import Skill from '../../components/Skill'
 import { sanityClient } from '../../sanity'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
-import { BlogPost, Project, Skill as SkillType } from '../../typings'
+import { SupabasePost, Project, Skill as SkillType } from '../../typings'
 import { SpotifyData } from '../../services/spotify'
 import img_1 from '../../assets/1.png'
 import img_2 from '../../assets/2.jpg'
@@ -21,7 +21,7 @@ function urlFor(source: any) {
 type Props = {
   nowPlaying: SpotifyData | null
   projects: Project[] | undefined
-  posts: BlogPost[] | undefined
+  posts: SupabasePost[] | undefined
   skills: SkillType[] | undefined
 }
 
@@ -186,17 +186,17 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
               <div
                 className={styles.featuredPost}
                 data-reveal
-                onClick={() => navigate(`/blog/${featuredPost._id}`)}
+                onClick={() => navigate(`/blog/${featuredPost.id}`)}
               >
-                {featuredPost.image && (
+                {featuredPost.cover_image_url && (
                   <div className={styles.featuredPostImg}>
                     <img
-                      src={urlFor(featuredPost.image).width(700).height(420).url()}
+                      src={featuredPost.cover_image_url}
                       alt={featuredPost.title}
                     />
                   </div>
                 )}
-                <span className={styles.postDate}>{formatDate(featuredPost._createdAt)}</span>
+                <span className={styles.postDate}>{formatDate(featuredPost.created_at)}</span>
                 <h3 className={styles.featuredPostTitle}>{featuredPost.title}</h3>
                 <p className={styles.featuredPostExcerpt}>{featuredPost.summary}</p>
                 <span className={styles.readLink}>Read →</span>
@@ -205,15 +205,15 @@ export default function MainPage({ nowPlaying, projects, posts, skills }: Props)
               <div className={styles.morePostsList} data-reveal>
                 {morePosts.map((post, i) => (
                   <div
-                    key={post._id}
+                    key={post.id}
                     className={styles.postItem}
                     style={{ transitionDelay: `${i * 0.07}s` }}
-                    onClick={() => navigate(`/blog/${post._id}`)}
+                    onClick={() => navigate(`/blog/${post.id}`)}
                   >
                     <span className={styles.postItemNum}>{String(i + 2).padStart(2, '0')}</span>
                     <div>
                       <p className={styles.postItemTitle}>{post.title}</p>
-                      <span className={styles.postItemDate}>{formatDate(post._createdAt)}</span>
+                      <span className={styles.postItemDate}>{formatDate(post.created_at)}</span>
                     </div>
                     <span className={styles.postItemArrow}>→</span>
                   </div>

@@ -1,15 +1,16 @@
-import { groq } from "next-sanity";
-import { sanityClient } from "../sanity";
-import { BlogPost } from "../typings";
+import { supabase } from '../lib/supabase'
+import { SupabasePost } from '../typings'
 
-const query = groq`
-  *[_type == "post"] | order(_createdAt desc)
-`;
-type Data = {
-    posts: BlogPost[]
-}
+export default async function getBlogPosts(): Promise<{ posts: SupabasePost[] }> {
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .eq('published', true)
+    .order('created_at', { ascending: false })
 
-export default async function getBlogPosts(): Promise<Data> {
-  const posts = await sanityClient.fetch(query);
-  return { posts };
+  if (error) {
+    console.error('Supabase blog fetch error:', error)
+    return { posts: [] }
+  }
+  return { posts: data ?? [] }
 }
