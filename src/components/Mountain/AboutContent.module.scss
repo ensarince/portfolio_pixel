@@ -1,70 +1,5 @@
 @import '../../assets/_variables.scss';
 
-.scrim {
-  position: fixed;
-  inset: 0;
-  background: rgba(26, 26, 26, 0.45);
-  z-index: 200;
-  display: flex;
-  justify-content: flex-end;
-  animation: fade 0.22s ease;
-}
-
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.panel {
-  position: relative;
-  width: min(620px, 100%);
-  height: 100%;
-  background: $ground;
-  box-shadow: -18px 0 48px rgba(26, 26, 26, 0.22);
-  overflow-y: auto;
-  animation: slide 0.34s cubic-bezier(0.16, 1, 0.3, 1);
-
-  &::-webkit-scrollbar { width: 3px; }
-  &::-webkit-scrollbar-track { background: transparent; }
-  &::-webkit-scrollbar-thumb { background: rgba(61, 107, 79, 0.3); }
-  &::-webkit-scrollbar-thumb:hover { background: rgba(61, 107, 79, 0.55); }
-}
-
-@keyframes slide {
-  from { transform: translateX(28px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-.close {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: 1px solid rgba(26, 26, 26, 0.18);
-  background: rgba(240, 237, 229, 0.86);
-  color: $dim;
-  cursor: pointer;
-  z-index: 2;
-  transition: border-color 0.18s, color 0.18s, background 0.18s;
-
-  &:hover { border-color: $ink; color: $ink; background: $ground; }
-
-  &:focus-visible {
-    outline: 2px solid $alpine;
-    outline-offset: 2px;
-  }
-}
-
-.closeIcon {
-  width: 14px;
-  height: 14px;
-}
-
 .inner {
   display: flex;
   flex-direction: column;
@@ -72,7 +7,7 @@
 
 .photo {
   width: 100%;
-  height: 260px;
+  height: 300px;
   object-fit: cover;
   display: block;
   filter: saturate(0.92);
@@ -80,12 +15,13 @@
 
 .body {
   padding: 2.5rem 3rem 4rem;
+  max-width: 44rem;
 }
 
 .heading {
   font-family: $font-display;
-  font-size: 2rem;
-  font-weight: 900;
+  font-size: 2.25rem;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: $ink;
@@ -94,10 +30,9 @@
 
 // Editorial pull quote — hanging opening mark, no rule, no left bar
 .quote {
-  position: relative;
   font-family: $font-body;
-  font-size: 1.375rem;
-  line-height: 1.45;
+  font-size: 1.5rem;
+  line-height: 1.42;
   font-style: italic;
   color: $ink;
   margin: 0 0 1.75rem;
@@ -108,7 +43,7 @@
 
 .bio {
   font-family: $font-body;
-  font-size: 1rem;
+  font-size: 1.0625rem;
   line-height: 1.8;
   color: $dim;
   margin: 0 0 2rem;
@@ -185,5 +120,5 @@
 
 @media (max-width: 620px) {
   .body { padding: 2rem 1.5rem 3rem; }
-  .photo { height: 190px; }
+  .photo { height: 200px; }
 }

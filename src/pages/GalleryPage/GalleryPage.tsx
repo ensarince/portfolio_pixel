@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Header from '../../components/Header'
 import { Gallery } from '../../typings'
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../../sanity'
@@ -27,7 +26,6 @@ export default function GalleryPage({ gallery }: Props) {
 
   return (
     <>
-      <Header />
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.pageHead}>

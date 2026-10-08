@@ -8,7 +8,7 @@
 .container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 4rem 6rem;
+  padding: 2.5rem 2.75rem 4.5rem;
 }
 
 .pageHead {
@@ -20,7 +20,7 @@
 .pageTitle {
   font-family: $font-display;
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 900;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: $ink;
@@ -92,7 +92,7 @@
 .routeNum {
   font-family: $font-display;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.06em;
   color: $muted;
 }
@@ -104,7 +104,7 @@
 .routeName {
   font-family: $font-display;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: $ink;
@@ -153,7 +153,7 @@
 .routeGrade {
   font-family: $font-display;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.9);
@@ -190,7 +190,7 @@
   text-align: center;
   font-family: $font-display;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
   color: $muted;
 }

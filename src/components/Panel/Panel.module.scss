@@ -1,0 +1,149 @@
+@import '../../assets/_variables.scss';
+
+.wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+
+// Only covers the terrain, never the rail — clicking the map dismisses the panel
+.scrim {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--rail-w);
+  border: none;
+  padding: 0;
+  background: rgba(26, 26, 26, 0.12);
+  cursor: pointer;
+  pointer-events: auto;
+  animation: scrimIn 0.3s ease both;
+}
+
+@keyframes scrimIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.panel {
+  position: relative;
+  pointer-events: auto;
+  // Leaves a strip of terrain between the rail and the panel
+  width: min(880px, calc(100vw - var(--rail-w) - 5rem));
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: $ground;
+  box-shadow: -22px 0 60px rgba(26, 26, 26, 0.26);
+  animation: panelIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes panelIn {
+  from { transform: translateX(42px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes bodyIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem 0.85rem 1.75rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.13);
+  background: $surface;
+}
+
+.barTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $dim;
+}
+
+.barIcon {
+  width: 15px;
+  height: 15px;
+  color: $accent;
+}
+
+.close {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(26, 26, 26, 0.18);
+  color: $dim;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.18s, color 0.18s, background 0.18s;
+
+  &:hover {
+    border-color: $ink;
+    color: $ink;
+    background: $ground;
+  }
+}
+
+.closeIcon {
+  width: 13px;
+  height: 13px;
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: bodyIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  &::-webkit-scrollbar { width: 3px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(61, 107, 79, 0.3); }
+  &::-webkit-scrollbar-thumb:hover { background: rgba(61, 107, 79, 0.55); }
+}
+
+@media (max-width: 900px) {
+  .wrap { z-index: 140; }
+
+  .panel {
+    width: 100%;
+    animation-name: panelInMobile;
+  }
+  .scrim { display: none; }
+
+  .bar {
+    padding: 0.75rem 0.85rem 0.75rem 1.25rem;
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+
+  // Thumb-sized close target
+  .close { width: 40px; height: 40px; }
+  .closeIcon { width: 15px; height: 15px; }
+
+  .body { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+@keyframes panelInMobile {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel, .scrim { animation: none; }
+}

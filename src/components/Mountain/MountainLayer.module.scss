@@ -1,0 +1,305 @@
+@import '../../assets/_variables.scss';
+
+// The scene occupies everything right of the rail, so the terrain never sits
+// under the navigation and the two never fight for contrast.
+.canvasLayer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--rail-w);
+  background: $ground;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  background: $ground;
+}
+
+// ── Rail ──────────────────────────────────────────────────────────────────────
+
+.rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--rail-w);
+  z-index: 130;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 1.5rem 1.75rem;
+  background: $surface;
+  box-shadow:
+    1px 0 0 rgba(26, 26, 26, 0.09),
+    10px 0 32px rgba(26, 26, 26, 0.05);
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar { width: 3px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(61, 107, 79, 0.28); }
+}
+
+.identity {
+  flex-shrink: 0;
+}
+
+.portraitBtn {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  margin-bottom: 1.1rem;
+
+  &:hover .portrait {
+    filter: saturate(1) contrast(1.02);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $alpine;
+    outline-offset: 3px;
+  }
+}
+
+.portrait {
+  width: 100%;
+  height: 132px;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  filter: saturate(0.82) contrast(0.98);
+  transition: filter 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.name {
+  font-family: $font-display;
+  font-size: 2.25rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.012em;
+  line-height: 0.95;
+  color: $ink;
+  margin: 0 0 0.5rem;
+}
+
+.nameLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.18s;
+
+  &:hover { color: $accent; }
+}
+
+.role {
+  font-family: $font-ui;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: $dim;
+  margin: 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(26, 26, 26, 0.16);
+  line-height: 1.5;
+}
+
+// ── Section list ──────────────────────────────────────────────────────────────
+
+.index {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.indexRow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 0.4rem 0.75rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.11);
+  color: $dim;
+  text-decoration: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  font-family: $font-ui;
+  box-sizing: border-box;
+  transition:
+    color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:first-child { border-top: 1px solid rgba(26, 26, 26, 0.11); }
+
+  &[data-active='true'],
+  &[data-current='true'] {
+    color: $accent;
+    border-bottom-color: rgba(217, 64, 0, 0.38);
+    .indexIcon { opacity: 1; }
+  }
+
+  &[data-active='true'] {
+    .indexIcon, .indexLabel { transform: translateX(0.5rem); }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $alpine;
+    outline-offset: 2px;
+  }
+}
+
+.indexIcon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  opacity: 0.72;
+  transition:
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.indexLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+// ── Rail footer ───────────────────────────────────────────────────────────────
+
+.railFooter {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(26, 26, 26, 0.11);
+}
+
+.cornerLink {
+  font-family: $font-ui;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $dim;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.18s;
+
+  &:hover { color: $accent; }
+
+  &:focus-visible {
+    outline: 2px solid $alpine;
+    outline-offset: 3px;
+  }
+}
+
+.socials {
+  display: flex;
+  gap: 0.15rem;
+  margin-top: 0.25rem;
+  margin-left: -4px;
+}
+
+// ── Drag hint ─────────────────────────────────────────────────────────────────
+
+.dragHint {
+  position: fixed;
+  bottom: 1.75rem;
+  left: calc(var(--rail-w) + 2rem);
+  z-index: 110;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.7rem;
+  background: rgba(240, 237, 229, 0.88);
+  font-family: $font-ui;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $dim;
+  animation: hintIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both;
+}
+
+.dragIcon {
+  width: 13px;
+  height: 13px;
+  color: $accent;
+}
+
+@keyframes hintIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ── Small screens ─────────────────────────────────────────────────────────────
+// No 3D here, so the rail stops being a margin and becomes the page itself.
+
+@media (max-width: 900px) {
+  .canvasLayer { display: none; }
+  .dragHint { display: none; }
+
+  .rail {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    padding: 2.5rem 1.25rem 2rem;
+    gap: 2.25rem;
+    box-shadow: none;
+    background: $ground;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .portraitBtn { margin-bottom: 0; flex-shrink: 0; }
+  .portrait { width: 72px; height: 94px; }
+  .name { font-size: clamp(2rem, 10vw, 2.75rem); margin-bottom: 0.4rem; }
+
+  // Comfortable thumb targets rather than desktop list density
+  .indexRow {
+    padding: 1.05rem 0.25rem;
+    min-height: 56px;
+  }
+
+  .indexLabel { font-size: 0.875rem; }
+  .indexIcon { width: 17px; height: 17px; }
+
+  .railFooter {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .socials { margin-top: 0; }
+}
+
+@media (max-width: 400px) {
+  .rail { padding: 2rem 1rem 1.75rem; }
+  .portrait { width: 60px; height: 80px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dragHint { animation: none; }
+}

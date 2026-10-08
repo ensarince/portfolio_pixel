@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { PortableText } from '@portabletext/react'
 import imageUrlBuilder from '@sanity/image-url'
-import Header from '../../components/Header'
 import { sanityClient } from '../../sanity'
 import { getClimb } from '../../services/getClimb'
 import { Climb } from '../../typings'
@@ -44,7 +43,6 @@ export default function ClimbDetail() {
 
   return (
     <div className={styles.page}>
-      <Header />
       <div className={styles.container}>
         <Link to="/climbs" className={styles.back}>← All climbs</Link>
 

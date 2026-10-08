@@ -1,4 +1,3 @@
-import Header from '../../components/Header'
 import Skill from '../../components/Skill'
 import { Technology } from '../../typings'
 import styles from './Skills.module.scss'
@@ -22,7 +21,6 @@ export default function Skills({ skills }: Props) {
 
   return (
     <>
-      <Header />
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.pageHead}>

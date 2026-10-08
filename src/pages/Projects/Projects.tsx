@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Header from '../../components/Header'
 import { Project } from '../../typings'
 import { useTickList } from '../../hooks/useTickList'
 import { CheckIcon } from '../../components/Mountain/icons'
@@ -37,7 +36,6 @@ export default function Projects({ projects }: Props) {
 
   return (
     <>
-      <Header />
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.pageHead}>

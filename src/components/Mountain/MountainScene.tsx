@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Html, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { ICONS, IconKey } from './icons'
@@ -185,13 +185,58 @@ function Marker({
   )
 }
 
+// Swings the focused marker to the front and slides the massif clear of an
+// open panel. Runs off the shared OrbitControls so user drags still win.
+function CameraDirector({ focus, panelPx }: { focus: string | null; panelPx: number }) {
+  const controls = useThree((s) => s.controls) as any
+  const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera
+  const size = useThree((s) => s.size)
+
+  useFrame(() => {
+    if (!controls) return
+
+    // Translate the panel's pixel width into world units, so the massif lands in
+    // the strip left uncovered no matter the viewport
+    let wantX = 0
+    if (focus && panelPx > 0 && size.width > 0) {
+      const dist = camera.position.distanceTo(controls.target)
+      const vH = 2 * dist * Math.tan((camera.fov * Math.PI) / 360)
+      const vW = vH * (size.width / size.height)
+      wantX = (panelPx / size.width) * vW * 0.5
+    }
+    controls.target.x += (wantX - controls.target.x) * 0.055
+
+    if (focus) {
+      const p = POINTS.find((q) => q.label === focus)
+      if (p) {
+        const want = Math.atan2(p.x, p.z)
+        const cur = controls.getAzimuthalAngle()
+        let d = want - cur
+        while (d > Math.PI) d -= Math.PI * 2
+        while (d < -Math.PI) d += Math.PI * 2
+        if (Math.abs(d) > 0.004) controls.setAzimuthalAngle(cur + d * 0.055)
+      }
+    }
+
+    controls.update()
+  })
+
+  return null
+}
+
 export default function MountainScene({
   activeLabel,
+  focus,
+  paused,
+  panelPx,
   onHover,
   onSelect,
   onDragStart,
 }: {
   activeLabel: string | null
+  focus: string | null
+  paused: boolean
+  panelPx: number
   onHover: (label: string | null) => void
   onSelect: (action: string) => void
   onDragStart: () => void
@@ -206,6 +251,7 @@ export default function MountainScene({
       dpr={[1, 1.75]}
       camera={{ position: [0, 4.2, 12.2], fov: 40 }}
       gl={{ antialias: true }}
+      frameloop={paused ? 'never' : 'always'}
     >
       <color attach="background" args={['#F0EDE5']} />
       <fog attach="fog" args={['#F0EDE5', 12, 25]} />
@@ -226,7 +272,10 @@ export default function MountainScene({
         />
       ))}
 
+      <CameraDirector focus={focus} panelPx={panelPx} />
+
       <OrbitControls
+        makeDefault
         target={[0, 1.7, 0]}
         enableZoom={false}
         enablePan={false}
@@ -235,7 +284,7 @@ export default function MountainScene({
         rotateSpeed={0.5}
         minPolarAngle={0.95}
         maxPolarAngle={1.46}
-        autoRotate={spinning}
+        autoRotate={spinning && !focus}
         autoRotateSpeed={0.32}
         onStart={() => {
           window.clearTimeout(resume.current)

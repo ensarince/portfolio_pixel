@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../../components/Header'
 import { Climb } from '../../typings'
 import styles from './Climbs.module.scss'
 
@@ -28,7 +27,6 @@ export default function Climbs({ climbs }: Props) {
 
   return (
     <>
-      <Header />
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.pageHead}>

@@ -23,7 +23,7 @@
 .loginTitle {
   font-family: $font-display;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 400;
   text-transform: uppercase;
   color: $ink;
   margin: 0 0 2rem;
@@ -47,7 +47,7 @@
 .pageTitle {
   font-family: $font-display;
   font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 900;
+  font-weight: 400;
   text-transform: uppercase;
   color: $ink;
   margin: 0;
@@ -223,7 +223,7 @@
 .editorHeading {
   font-family: $font-display;
   font-size: 1.5rem;
-  font-weight: 900;
+  font-weight: 400;
   text-transform: uppercase;
   color: $ink;
   margin: 0;
@@ -238,7 +238,7 @@
 .titleInput {
   font-family: $font-display;
   font-size: 1.75rem;
-  font-weight: 900;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: $ink;
@@ -430,8 +430,8 @@
     min-height: 560px;
 
     p { margin: 0 0 1.1em; }
-    h2 { font-family: $font-display; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: $ink; margin: 1.5em 0 0.5em; }
-    h3 { font-family: $font-display; font-size: 1.25rem; font-weight: 700; text-transform: uppercase; color: $ink; margin: 1.25em 0 0.4em; }
+    h2 { font-family: $font-display; font-size: 1.5rem; font-weight: 400; text-transform: uppercase; color: $ink; margin: 1.5em 0 0.5em; }
+    h3 { font-family: $font-display; font-size: 1.25rem; font-weight: 400; text-transform: uppercase; color: $ink; margin: 1.25em 0 0.4em; }
     ul, ol { padding-left: 1.5em; margin: 0 0 1em; }
     li { margin-bottom: 0.25em; }
     blockquote {

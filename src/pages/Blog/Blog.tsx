@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import Header from '../../components/Header'
 import { SupabasePost } from '../../typings'
 import styles from './Blog.module.scss'
 import { useNavigate } from 'react-router-dom'
@@ -53,7 +52,6 @@ export default function Blog({ posts }: Props) {
 
   return (
     <>
-      <Header />
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.pageHead}>

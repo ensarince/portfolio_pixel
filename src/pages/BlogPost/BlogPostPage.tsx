@@ -32,7 +32,6 @@ const Caption = Node.create({
     return ['p', mergeAttributes(HTMLAttributes, { 'data-caption': '' }), 0]
   },
 })
-import Header from '../../components/Header'
 import { SupabasePost } from '../../typings'
 import styles from './BlogPostPage.module.scss'
 
@@ -68,7 +67,6 @@ export default function BlogPostPage({ posts }: Props) {
 
   return (
     <>
-      <Header />
       <div className={styles.page}>
         <div className={styles.container}>
           <button className={styles.back} onClick={() => navigate('/blog')}>← Blog</button>

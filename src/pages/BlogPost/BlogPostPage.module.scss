@@ -63,7 +63,7 @@
 .postTitle {
   font-family: $font-display;
   font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 900;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: $ink;
@@ -102,8 +102,8 @@
     color: $ink;
 
     p { margin: 0 0 1.25em; }
-    h2 { font-family: $font-display; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin: 2em 0 0.6em; }
-    h3 { font-family: $font-display; font-size: 1.2rem; font-weight: 700; text-transform: uppercase; margin: 1.5em 0 0.5em; }
+    h2 { font-family: $font-display; font-size: 1.5rem; font-weight: 400; text-transform: uppercase; margin: 2em 0 0.6em; }
+    h3 { font-family: $font-display; font-size: 1.2rem; font-weight: 400; text-transform: uppercase; margin: 1.5em 0 0.5em; }
     ul { padding-left: 1.5em; margin: 0 0 1.25em; }
     li { margin-bottom: 0.3em; }
     blockquote {
@@ -167,7 +167,7 @@
   height: 50vh;
   font-family: $font-display;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
   color: $muted;
 }
