@@ -41,16 +41,7 @@ function App() {
       <BrowserRouter>
         <div className="content-area">
           <Routes>
-            <Route
-              path='/'
-              element={
-                <MainPage
-                  projects={projects}
-                  posts={posts}
-                  skills={skills}
-                />
-              }
-            />
+            <Route path='/' element={<MainPage />} />
             <Route path='/portfolio' element={<Projects projects={projects} />} />
             <Route path='/skills' element={<Skills skills={skills} />} />
             <Route path='/blog' element={<Blog posts={posts} />} />

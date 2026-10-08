@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import { Project } from '../../typings'
+import { useTickList } from '../../hooks/useTickList'
+import { CheckIcon } from '../../components/Mountain/icons'
 import styles from './Projects.module.scss'
 import imageUrlBuilder from '@sanity/image-url'
 import { sanityClient } from '../../sanity'
@@ -22,6 +24,9 @@ const builder = imageUrlBuilder(sanityClient)
 export default function Projects({ projects }: Props) {
   const [filtered, setFiltered] = useState<Project[]>([])
   const [active, setActive] = useState<FilterType>('all')
+  const { tick, isTicked } = useTickList()
+
+  const sentCount = filtered.filter(p => isTicked(p._id)).length
 
   useEffect(() => {
     if (!projects) return
@@ -37,7 +42,20 @@ export default function Projects({ projects }: Props) {
         <div className={styles.container}>
           <div className={styles.pageHead}>
             <h1 className={styles.pageTitle}>Portfolio</h1>
-            <p className={styles.pageSub}>{filtered.length} route{filtered.length !== 1 ? 's' : ''} logged</p>
+            <div className={styles.pageSubRow}>
+              <p className={styles.pageSub}>{filtered.length} route{filtered.length !== 1 ? 's' : ''} logged</p>
+              {filtered.length > 0 && (
+                <div className={styles.tickMeter}>
+                  <span className={styles.tickCount}>{sentCount} of {filtered.length} viewed</span>
+                  <span className={styles.tickBar}>
+                    <span
+                      className={styles.tickFill}
+                      style={{ transform: `scaleX(${sentCount / filtered.length})` }}
+                    />
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className={styles.filters}>
@@ -57,9 +75,17 @@ export default function Projects({ projects }: Props) {
               <div
                 key={project._id}
                 className={styles.routeRow}
-                onClick={() => project.linkToBuild && window.open(project.linkToBuild, '_blank', 'noopener,noreferrer')}
+                data-sent={isTicked(project._id)}
+                onClick={() => {
+                  tick(project._id)
+                  if (project.linkToBuild) window.open(project.linkToBuild, '_blank', 'noopener,noreferrer')
+                }}
               >
-                <span className={styles.routeNum}>{String(i + 1).padStart(2, '0')}</span>
+                <span className={styles.routeNum}>
+                  {isTicked(project._id)
+                    ? <CheckIcon className={styles.tickMark} />
+                    : String(i + 1).padStart(2, '0')}
+                </span>
 
                 <div className={styles.routeBody}>
                   <p className={styles.routeName}>{project.title}</p>

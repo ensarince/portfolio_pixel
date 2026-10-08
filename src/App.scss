@@ -88,6 +88,14 @@ a {
   cursor: pointer;
 }
 
+// Themed focus ring — browsers ship one that belongs to no design system
+:focus-visible {
+  outline: 2px solid var(--alpine);
+  outline-offset: 2px;
+}
+
+::placeholder { color: var(--text-3); }
+
 // Global route-line animation
 @keyframes drawRoute {
   from { stroke-dashoffset: 320; }
