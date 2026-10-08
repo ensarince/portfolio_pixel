@@ -41,7 +41,6 @@ export default function Projects({ projects }: Props) {
           <div className={styles.pageHead}>
             <h1 className={styles.pageTitle}>Portfolio</h1>
             <div className={styles.pageSubRow}>
-              <p className={styles.pageSub}>{filtered.length} route{filtered.length !== 1 ? 's' : ''} logged</p>
               {filtered.length > 0 && (
                 <div className={styles.tickMeter}>
                   <span className={styles.tickCount}>{sentCount} of {filtered.length} viewed</span>

@@ -56,7 +56,6 @@ export default function Blog({ posts }: Props) {
         <div className={styles.container}>
           <div className={styles.pageHead}>
             <h1 className={styles.pageTitle}>Blog</h1>
-            <p className={styles.pageSub}>{filtered.length} post{filtered.length !== 1 ? 's' : ''}</p>
           </div>
 
           <div className={styles.filters}>

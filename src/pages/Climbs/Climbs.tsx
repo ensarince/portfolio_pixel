@@ -31,7 +31,6 @@ export default function Climbs({ climbs }: Props) {
         <div className={styles.container}>
           <div className={styles.pageHead}>
             <h1 className={styles.pageTitle}>Climbs</h1>
-            <p className={styles.pageSub}>{filtered.length} route{filtered.length !== 1 ? 's' : ''} logged</p>
           </div>
 
           <div className={styles.filters}>

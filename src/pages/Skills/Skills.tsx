@@ -25,7 +25,6 @@ export default function Skills({ skills }: Props) {
         <div className={styles.container}>
           <div className={styles.pageHead}>
             <h1 className={styles.pageTitle}>Tools & Stack</h1>
-            <p className={styles.pageSub}>{(skills ?? []).length} tools in the rack</p>
           </div>
 
           <div className={styles.sections}>

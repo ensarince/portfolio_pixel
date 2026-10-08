@@ -30,7 +30,6 @@ export default function GalleryPage({ gallery }: Props) {
         <div className={styles.container}>
           <div className={styles.pageHead}>
             <h1 className={styles.pageTitle}>Gallery</h1>
-            <p className={styles.pageSub}>{allImages.length} frame{allImages.length !== 1 ? 's' : ''}</p>
           </div>
 
           {allImages.length > 0 ? (
