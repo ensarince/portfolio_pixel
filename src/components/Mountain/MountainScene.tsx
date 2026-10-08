@@ -63,6 +63,8 @@ export type Point = {
   action: string
   x: number
   z: number
+  /** Kept in the map but not offered yet — its route still resolves if visited */
+  hidden?: boolean
 }
 
 // Ordered by how fast a recruiter needs them: the hiring signal sits highest on
@@ -73,9 +75,11 @@ export const POINTS: Point[] = [
   { label: 'Skills', icon: 'skills', action: '/skills', x: 1.2, z: 0.7 },
   { label: 'About', icon: 'about', action: 'about', x: 1.55, z: -1.25 },
   { label: 'Blog', icon: 'blog', action: '/blog', x: -2.0, z: -0.6 },
-  { label: 'Climbs', icon: 'climbs', action: '/climbs', x: 0.3, z: -2.6 },
+  { label: 'Climbs', icon: 'climbs', action: '/climbs', x: 0.3, z: -2.6, hidden: true },
   { label: 'Gallery', icon: 'gallery', action: '/gallery', x: 0.55, z: 3.12 },
 ]
+
+export const VISIBLE_POINTS = POINTS.filter((p) => !p.hidden)
 
 function Terrain({ meshRef }: { meshRef: React.RefObject<THREE.Mesh> }) {
   const geometry = useMemo(() => {
@@ -261,7 +265,7 @@ export default function MountainScene({
       <directionalLight position={[-8, 3.5, -6]} intensity={0.34} color="#9FB6C9" />
 
       <Terrain meshRef={terrain} />
-      {POINTS.map((p) => (
+      {VISIBLE_POINTS.map((p) => (
         <Marker
           key={p.label}
           point={p}

@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { SocialIcon } from 'react-social-icons'
-import MountainScene, { POINTS } from './MountainScene'
+import MountainScene, { VISIBLE_POINTS } from './MountainScene'
 import { ICONS, DragIcon } from './icons'
 import portrait from '../../assets/1.png'
 import styles from './MountainLayer.module.scss'
@@ -109,7 +109,7 @@ export default function MountainLayer() {
         </header>
 
         <nav className={styles.index} aria-label="Sections">
-          {POINTS.map((p) => {
+          {VISIBLE_POINTS.map((p) => {
             const Icon = ICONS[p.icon]
             return (
               <Link
