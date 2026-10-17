@@ -76,7 +76,8 @@
 .routeRow {
   display: grid;
   grid-template-columns: 2.5rem 1fr auto auto;
-  align-items: center;
+  // Rows are as tall as their summary needs, so the fixed columns sit at the top
+  align-items: start;
   gap: 1.25rem;
   padding: 1.5rem 0;
   border-bottom: 1px solid rgba(26,26,26,0.07);
@@ -96,6 +97,7 @@
   font-weight: 400;
   letter-spacing: 0.06em;
   color: $muted;
+  padding-top: 0.55rem;
 }
 
 .routeBody {
@@ -115,19 +117,19 @@
 
 .routeMeta {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
 }
 
+// Reads in full — a clipped summary tells a recruiter nothing
 .routeDesc {
-  font-family: $font-ui;
-  font-size: 0.75rem;
+  font-family: $font-body;
+  font-size: 0.9375rem;
+  line-height: 1.6;
   color: $dim;
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 62ch;
 }
 
 .routeStack {
@@ -150,6 +152,7 @@
   background: $alpine;
   padding: 0.2rem 0.5rem;
   white-space: nowrap;
+  margin-top: 0.5rem;
 
   &[data-type="personal"]     { background: $alpine; }
   &[data-type="professional"] { background: $ink; }
@@ -160,6 +163,7 @@
 .routeArrow {
   font-size: 1rem;
   color: $muted;
+  padding-top: 0.3rem;
   transition: transform 0.2s, color 0.2s;
 }
 
