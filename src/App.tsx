@@ -74,7 +74,7 @@ function App() {
         <Route element={<PanelLayout />}>
           <Route path="/portfolio" element={<Projects projects={projects} />} />
           <Route path="/skills" element={<Skills skills={skills} />} />
-          <Route path="/about" element={<AboutContent />} />
+          <Route path="/about" element={<AboutContent skills={skills} />} />
           <Route path="/blog" element={<Blog posts={posts} />} />
           <Route path="/climbs" element={<Climbs climbs={climbs} />} />
           <Route path="/gallery" element={<GalleryPage gallery={gallery} />} />

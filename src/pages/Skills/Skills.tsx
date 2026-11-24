@@ -6,7 +6,8 @@ type Props = { skills: Technology[] | undefined }
 
 const DOMAIN_ORDER = ['Frontend', 'Backend', 'Languages', 'Database', 'DevOps', 'Mobile', 'Tools', 'Other']
 
-export default function Skills({ skills }: Props) {
+// Groups skills by domain, in DOMAIN_ORDER first, then any unknown domains
+export function groupSkillsByDomain(skills: Technology[] | undefined) {
   const grouped = (skills ?? []).reduce<Record<string, Technology[]>>((acc, skill) => {
     const domain = skill.domain || 'Other'
     if (!acc[domain]) acc[domain] = []
@@ -18,6 +19,11 @@ export default function Skills({ skills }: Props) {
     ...DOMAIN_ORDER.filter(d => grouped[d]),
     ...Object.keys(grouped).filter(d => !DOMAIN_ORDER.includes(d)),
   ]
+  return { grouped, domains }
+}
+
+export default function Skills({ skills }: Props) {
+  const { grouped, domains } = groupSkillsByDomain(skills)
 
   return (
     <>
