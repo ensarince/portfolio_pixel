@@ -10,7 +10,7 @@ import styles from './MountainLayer.module.scss'
 const PANEL_ROUTES: Record<string, string> = {
   '/portfolio': 'Work',
   '/skills': 'Skills',
-  '/about': 'About',
+  '/about': 'About & CV',
   '/blog': 'Blog',
   '/climbs': 'Climbs',
   '/gallery': 'Gallery',

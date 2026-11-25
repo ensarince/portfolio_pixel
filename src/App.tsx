@@ -23,7 +23,7 @@ import { SupabasePost, Climb, Gallery, Project, Skill } from './typings'
 const PANEL_META: Record<string, { label: string; icon: IconKey }> = {
   '/portfolio': { label: 'Work', icon: 'work' },
   '/skills': { label: 'Skills', icon: 'skills' },
-  '/about': { label: 'About', icon: 'about' },
+  '/about': { label: 'About & CV', icon: 'about' },
   '/blog': { label: 'Blog', icon: 'blog' },
   '/climbs': { label: 'Climbs', icon: 'climbs' },
   '/gallery': { label: 'Gallery', icon: 'gallery' },

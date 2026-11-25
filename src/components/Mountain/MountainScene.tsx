@@ -71,9 +71,9 @@ export type Point = {
 // the face and nearest the camera at rest, the personal work lower down.
 // Nothing is placed on the summit — it stays clear.
 export const POINTS: Point[] = [
+  { label: 'About & CV', icon: 'about', action: '/about', x: 1.55, z: -1.25 },
   { label: 'Work', icon: 'work', action: '/portfolio', x: -0.7, z: 1.05 },
   { label: 'Skills', icon: 'skills', action: '/skills', x: 1.2, z: 0.7 },
-  { label: 'About', icon: 'about', action: 'about', x: 1.55, z: -1.25 },
   { label: 'Blog', icon: 'blog', action: '/blog', x: -2.0, z: -0.6 },
   { label: 'Climbs', icon: 'climbs', action: '/climbs', x: 0.3, z: -2.6, hidden: true },
   { label: 'Gallery', icon: 'gallery', action: '/gallery', x: 0.55, z: 3.12 },
